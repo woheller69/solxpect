@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    app:cardBackgroundColor="@color/middlegrey"
+    app:cardCornerRadius="@dimen/card_margin"
+    app:cardElevation="@dimen/cardview_default_elevation"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="5"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/city_swipe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/ic_arrow_back_24px"
+                android:gravity="center"
+                android:text="@string/swipe_to_delete"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                tools:text="Swipe to delete" />
+
+            <TextView
+                android:id="@+id/city_overview_list_item_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="City"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/city_azimuth_angle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/edit_location_hint_azimuth"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/city_elevation_angle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/edit_location_hint_elevation"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/city_cells_max_power"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/edit_location_hint_cells_max_power"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/city_cells_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/edit_location_hint_cells_area"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/city_cells_efficiency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/edit_location_hint_cells_efficiency"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:visibility="visible" />
+
+
+            <TextView
+                android:id="@+id/city_diffuse_efficiency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/edit_location_hint_diffuse_efficiency"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/city_converter_power_limit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/edit_location_hint_converter_power_limit"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/city_converter_efficiency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/edit_location_hint_converter_efficiency"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

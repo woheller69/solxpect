@@ -1,0 +1,14 @@
+Weather and rain radar for any location - worldwide
+
+Weather data is provided via the free API from Open-Meteo.com and RainViewer.com.
+
+Features:
+- Current weather
+- Hourly forecasts for up to 16 days
+- Rain radar
+- Widget with optional GPS auto position update
+- No advertisement
+
+Minimum permissions:
+omWeather only requires the minimum amount of permission, namely only the INTERNET permission. This permission is necessary to make HTTP requests to remote servers for retrieving weather data.
+Optional: authorization for GPS.
