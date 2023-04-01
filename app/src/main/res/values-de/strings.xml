@@ -57,7 +57,7 @@
     <string name="next">Weiter</string>
     <string name="okay">OK</string>
     <string name="slide1_heading">Willkommen!</string>
-    <string name="slide1_text">solarCast prognostiziert den Ertrag Ihrer PV Anlage.</string>
+    <string name="slide1_text">solarCast prognostiziert den Ertrag Ihrer PV Anlage</string>
     <string name="slide2_text">Der Quellcode ist auf GitHub verfügbar. Weitere Informationen finden Sie auf der Über-Seite</string>
     <string name="card_error_content">Bitte versuchen Sie zu aktualisieren!</string>
     <string name="card_error_heading">Fehler beim Abrufen der Wetterdaten</string>

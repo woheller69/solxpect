@@ -1,1 +1,0 @@
-New option: Improve week icons by analyzing hourly forecasts between sunrise and sunset (experimental).

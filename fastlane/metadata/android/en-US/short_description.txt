@@ -1,1 +1,1 @@
-Weather and rain radar for any location - worldwide
+solarCast forecasts the output of your solar power plant
