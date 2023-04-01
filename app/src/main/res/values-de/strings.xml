@@ -123,7 +123,7 @@
     <string name="edit_location_hint_cells_max_power">Maximalleistung Zelle [W]</string>
     <string name="edit_location_hint_cells_efficiency">Wirkungsgrad Zelle [%]</string>
     <string name="edit_location_hint_cells_area">Fläche Zelle [m\u00b2]</string>
-    <string name="edit_location_hint_diffuse_efficiency">Effizenz diffus [%]</string>
+    <string name="edit_location_hint_diffuse_efficiency">Effizenz diffuse Strahlung [%]</string>
     <string name="edit_location_hint_converter_power_limit">Leistung Wechselrichter [W]</string>
     <string name="edit_location_hint_converter_efficiency">Effizienz Wechselrichter [%]</string>
     <string name="units_Wh">Wh</string>

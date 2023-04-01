@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.ItemTouchHelper;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -101,6 +103,18 @@ public class ManageLocationsActivity extends NavigationActivity {
                         editDiffuseEfficiency.setText(Float.toString(adapter.getCitytoWatch(position).getDiffuseEfficiency()));
                         editConverterPowerLimit.setText(Float.toString(adapter.getCitytoWatch(position).getConverterPowerLimit()));
                         editConverterEfficiency.setText(Float.toString(adapter.getCitytoWatch(position).getConverterEfficiency()));
+                        editElevation.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+                            @Override
+                            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+                            @Override
+                            public void afterTextChanged(Editable editable) {
+                                float elevation = Float.parseFloat(editElevation.getText().toString());
+                                editDiffuseEfficiency.setText(Float.toString(100-50 * elevation/90));
+                            }
+                        });
 
                         alert.setPositiveButton(getString(R.string.dialog_edit_change_button), (dialog, whichButton) -> {
                             adapter.updateCity(position, String.valueOf(editCity.getText()),

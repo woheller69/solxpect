@@ -125,7 +125,7 @@
     <string name="edit_location_hint_cells_max_power">Cells max power [W]</string>
     <string name="edit_location_hint_cells_efficiency">Cells efficiency [%]</string>
     <string name="edit_location_hint_cells_area">Cell area [m\u00b2]</string>
-    <string name="edit_location_hint_diffuse_efficiency">Diffuse efficiency [%]</string>
+    <string name="edit_location_hint_diffuse_efficiency">Diffuse radiation efficiency [%]</string>
     <string name="edit_location_hint_converter_power_limit">Converter power [W]</string>
     <string name="edit_location_hint_converter_efficiency">Converter efficiency [%]</string>
     <string name="units_Wh">Wh</string>

@@ -70,7 +70,7 @@ public class RecyclerOverviewListAdapter extends RecyclerView.Adapter<ItemViewHo
         holder.cellsArea.setText(context.getString(R.string.edit_location_hint_cells_area) +": "+ cities.get(position).getCellsArea());
         holder.diffuseEfficiency.setText(context.getString(R.string.edit_location_hint_diffuse_efficiency) +": "+ cities.get(position).getDiffuseEfficiency());
         holder.converterPowerLimit.setText(context.getString(R.string.edit_location_hint_converter_power_limit) +": "+ cities.get(position).getConverterPowerLimit());
-        holder.converterEfficiency.setText(context.getString(R.string.edit_location_hint_cells_efficiency) +": "+ cities.get(position).getConverterEfficiency());
+        holder.converterEfficiency.setText(context.getString(R.string.edit_location_hint_converter_efficiency) +": "+ cities.get(position).getConverterEfficiency());
 
     }
 
