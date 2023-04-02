@@ -10,9 +10,10 @@ solarCast forecasts the output of your solar power plant
 
 ## License
 
-This app - like the original app Privacy Friendly Weather - is licensed under the GPLv3.
+This app is licensed under the GPLv3.
 
-The app also uses:
+The app uses:
+- Parts from Privacy Friendly Weather (https://github.com/SecUSo/privacy-friendly-weather) which is licensed under the GPLv3
 - The weather data service is provided by [Open-Meteo](https://open-meteo.com/), under <a href='http://creativecommons.org/licenses/by/4.0/'>Attribution 4.0 International (CC BY 4.0)</a>
 - Icons from [Google Material Design Icons](https://material.io/resources/icons/) licensed under <a href='http://www.apache.org/licenses/LICENSE-2.0'>Apache License Version 2.0</a>
 - Material Components for Android (https://github.com/material-components/material-components-android) which is licensed under <a href='https://github.com/material-components/material-components-android/blob/master/LICENSE'>Apache License Version 2.0</a>

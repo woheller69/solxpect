@@ -118,8 +118,7 @@ public class RecyclerOverviewListAdapter extends RecyclerView.Adapter<ItemViewHo
     public CityToWatch getCitytoWatch(int position){
         return cities.get(position);
     }
-    public void updateCity(int position, String cityName, float latitude, float longitude, float azimuth, float elevation, float cellsMaxPower, float cellsArea, float cellsEfficiency, float diffuseEfficiency, float converterPowerLimit, float converterEfficiency) {
-        CityToWatch cityToWatch = cities.get(position);
+    public void updateCity(CityToWatch cityToWatch, String cityName, float latitude, float longitude, float azimuth, float elevation, float cellsMaxPower, float cellsArea, float cellsEfficiency, float diffuseEfficiency, float converterPowerLimit, float converterEfficiency) {
         cityToWatch.setCityName(cityName);
         cityToWatch.setLatitude(latitude);
         cityToWatch.setLongitude(longitude);
@@ -132,6 +131,6 @@ public class RecyclerOverviewListAdapter extends RecyclerView.Adapter<ItemViewHo
         cityToWatch.setConverterPowerLimit(converterPowerLimit);
         cityToWatch.setConverterEfficiency(converterEfficiency);
         database.updateCityToWatch(cityToWatch);
-        notifyItemChanged(position);
+        notifyDataSetChanged();
     }
 }

@@ -4,10 +4,8 @@
     <string name="about">Über</string>
     <string name="about_privacy_heading">Privatsphäre-Informationen</string>
     <string name="about_more_info">Mehr Informationen können gefunden werden auf:</string>
-    <string name="about_permission_internet_description">Zugriff auf alle Netzwerke: Diese Berechtigung "wird benötigt, um Wetter-Anfragen an Server zu stellen, die sich im Internet befinden. Ohne diese Berechtigung können keine Wetter-Daten bezogen werden. Optional: Berechtigung für GPS.</string>
     <string name="about_license_text">Diese App ist abgeleitet von Privacy Friendly Weather, entwickelt von der Forschungsgruppe SECUSO. Quelltext lizenziert unter GPLv3. Die App benutzt Icons von Google Material Design Icons, lizenziert unter Apache License Version 2.0, die Leaflet Bibliothek, lizenziert unter 2-clause BSD License, lizenziert unter der Apache License Version 2.0, AutoSuggestTextViewAPICall, lizenziert unter der Apache License Version 2.0, Solarpositioning (net.e175.klaus:solarpositioning), lizenziert unter MIT Lizenz und die WilliamChart Bibliothek (com.db.chart), lizenziert unter der Apache License Version 2.0</string>
     <string name="about_license">Lizenz</string>
-    <string name="about_permissions">Berechtigungen</string>
     <string name="about_privacy_answer">solarCast benötigt nur Zugang zum Internet. Es werden weder persönliche Daten gesammelt, noch wird Werbung angezeigt.</string>
     <string name="about_where_from">Woher kommen die Wetterinformationen?</string>
     <string name="about_where_from_answer">Die Wetterinformationen stammen von</string>
@@ -26,7 +24,7 @@
     <string name="error_convert_to_json">Die erhaltenen Wetterdaten entsprachen nicht dem erwarteten Format.</string>
     <string name="error_no_internet">Das Gerät ist nicht mit dem Internet verbunden!</string>
     <string name="error_fetch_forecast">Es ist ein Fehler beim Abrufen der Wettervorhersage aufgetreten, bitte versuchen Sie es erneut!</string>
-    <string name="error_no_city_selected">Sie haben keine Stadt ausgewählt. Wählen Sie \"Orte verwalten\" in der Navigation, um eine Stadt auszuwählen.</string>
+    <string name="error_no_city_selected">Sie haben keinen Ort ausgewählt. Wählen Sie \"Orte verwalten\" in der Navigation, um einen Ort auszuwählen.</string>
     <string name="dialog_add_add_button">Hinzufügen</string>
     <string name="dialog_add_close_button">Schließen</string>
     <string name="dialog_add_label">Ort, der hinzugefügt werden soll:</string>
@@ -61,7 +59,7 @@
     <string name="slide2_text">Der Quellcode ist auf GitHub verfügbar. Weitere Informationen finden Sie auf der Über-Seite</string>
     <string name="card_error_content">Bitte versuchen Sie zu aktualisieren!</string>
     <string name="card_error_heading">Fehler beim Abrufen der Wetterdaten</string>
-    <string name="long_press_text">Halten und ziehen Sie, um die Städte zu sortieren.</string>
+    <string name="long_press_text">Halten und ziehen Sie, um die Orte zu sortieren.</string>
     <string name="swipe_to_delete">Wischen Sie zum Löschen</string>
     <string name="infoProvider">Die Wetterinformationen stammen von Open-Meteo.com</string>
 
@@ -123,7 +121,7 @@
     <string name="edit_location_hint_cells_max_power">Maximalleistung Zelle [W]</string>
     <string name="edit_location_hint_cells_efficiency">Wirkungsgrad Zelle [%]</string>
     <string name="edit_location_hint_cells_area">Fläche Zelle [m\u00b2]</string>
-    <string name="edit_location_hint_diffuse_efficiency">Effizenz diffuse Strahlung [%]</string>
+    <string name="edit_location_hint_diffuse_efficiency">Effizienz diffuse Strahlung [%]</string>
     <string name="edit_location_hint_converter_power_limit">Leistung Wechselrichter [W]</string>
     <string name="edit_location_hint_converter_efficiency">Effizienz Wechselrichter [%]</string>
     <string name="units_Wh">Wh</string>

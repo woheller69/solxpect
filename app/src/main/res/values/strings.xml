@@ -22,7 +22,6 @@
     <string name="card_error_heading">Error fetching weather data</string>
     <string name="card_error_content">Please try to update!</string>
     <string name="about_privacy_heading">Privacy Info</string>
-    <string name="about_permission_internet_description">Connecting to the Network: This permission is needed because weather data is retrieved by making requests to servers on the Internet. Without this permission, no weather data can be received. Optional: authorization for GPS.</string>
     <string name="about">About</string>
     <string name="version_number" translatable="false">Version</string>
     <string name="about_license">License</string>
@@ -54,7 +53,7 @@
     <string name="error_convert_to_json">The retrieved weather data was not well-formed. </string>
     <string name="error_no_internet">Your Device is not connected to the Internet</string>
     <string name="error_fetch_forecast">Error while updating Forecast, please try again!</string>
-    <string name="error_no_city_selected">There is no city selected. To select a city go to \"Manage locations\".</string>
+    <string name="error_no_city_selected">There is no location selected. To select a location go to \"Manage locations\".</string>
     <string name="settings_interval_quarter">15 min</string>
     <string name="settings_interval_half">30 min</string>
     <string name="settings_interval_one">1 h</string>
@@ -68,7 +67,6 @@
     <string name="about_privacy_answer">solarCast only uses the permission \"Internet\" to retrieve weather data. It further does not include any tracking mechanisms or advertisement.</string>
     <string name="about_where_from">Where do the weather informations come from?</string>
     <string name="about_where_from_answer">Weather information is fetched from</string>
-    <string name="about_permissions">Permissions</string>
     <string name="long_press_text">Hold and drag to sort.</string>
     <string name="swipe_to_delete">Swipe to delete</string>
     <string name="settings_title_display_options">Display options</string>

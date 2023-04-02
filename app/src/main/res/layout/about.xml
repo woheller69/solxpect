@@ -98,23 +98,6 @@
         android:text="@string/about_license_text" />
 
     <TextView
-        android:id="@+id/textFieldPermissions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="@string/about_permissions"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:gravity="center_horizontal"
-        android:text="@string/about_permission_internet_description" />
-
-    <TextView
         android:id="@+id/textFieldPrivacy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

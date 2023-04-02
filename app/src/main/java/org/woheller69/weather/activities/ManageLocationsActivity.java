@@ -73,67 +73,8 @@ public class ManageLocationsActivity extends NavigationActivity {
                 new RecyclerItemClickListener(getBaseContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(context);
-
-                        LayoutInflater inflater = getLayoutInflater();
-                        View dialogView = inflater.inflate(R.layout.dialog_edit_location, null);
-
-                        alert.setTitle(getString(R.string.edit_location_title));
-                        alert.setView(dialogView);
-                        EditText editLatitude = (EditText) dialogView.findViewById(R.id.EditLocation_Lat);
-                        EditText editLongitude = (EditText) dialogView.findViewById(R.id.EditLocation_Lon);
-                        EditText editCity = (EditText) dialogView.findViewById(R.id.EditLocation_Name);
-                        EditText editAzimuth = (EditText) dialogView.findViewById(R.id.EditLocation_Azimuth);
-                        EditText editElevation = (EditText) dialogView.findViewById(R.id.EditLocation_Elevation);
-                        EditText editCellsMaxPower = (EditText) dialogView.findViewById(R.id.EditLocation_Cell_Max_Power);
-                        EditText editCellsArea = (EditText) dialogView.findViewById(R.id.EditLocation_Cells_Area);
-                        EditText editCellsEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Cell_Efficiency);
-                        EditText editDiffuseEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Diffuse_Efficiency);
-                        EditText editConverterPowerLimit = (EditText) dialogView.findViewById(R.id.EditLocation_Converter_Power_Limit);
-                        EditText editConverterEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Converter_Efficiency);
-
-                        editCity.setText(adapter.getCitytoWatch(position).getCityName());
-                        editLatitude.setText(Float.toString(adapter.getCitytoWatch(position).getLatitude()));
-                        editLongitude.setText(Float.toString(adapter.getCitytoWatch(position).getLongitude()));
-                        editAzimuth.setText(Float.toString(adapter.getCitytoWatch(position).getAzimuthAngle()));
-                        editElevation.setText(Float.toString(adapter.getCitytoWatch(position).getElevationAngle()));
-                        editCellsMaxPower.setText(Float.toString(adapter.getCitytoWatch(position).getCellsMaxPower()));
-                        editCellsArea.setText(Float.toString(adapter.getCitytoWatch(position).getCellsArea()));
-                        editCellsEfficiency.setText(Float.toString(adapter.getCitytoWatch(position).getCellsEfficiency()));
-                        editDiffuseEfficiency.setText(Float.toString(adapter.getCitytoWatch(position).getDiffuseEfficiency()));
-                        editConverterPowerLimit.setText(Float.toString(adapter.getCitytoWatch(position).getConverterPowerLimit()));
-                        editConverterEfficiency.setText(Float.toString(adapter.getCitytoWatch(position).getConverterEfficiency()));
-                        editElevation.addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-                            @Override
-                            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-
-                            @Override
-                            public void afterTextChanged(Editable editable) {
-                                float elevation = Float.parseFloat(editElevation.getText().toString());
-                                editDiffuseEfficiency.setText(Float.toString(100-50 * elevation/90));
-                            }
-                        });
-
-                        alert.setPositiveButton(getString(R.string.dialog_edit_change_button), (dialog, whichButton) -> {
-                            adapter.updateCity(position, String.valueOf(editCity.getText()),
-                                    Float.parseFloat(editLatitude.getText().toString()),
-                                    Float.parseFloat(editLongitude.getText().toString()),
-                                    Float.parseFloat(editAzimuth.getText().toString()),
-                                    Float.parseFloat(editElevation.getText().toString()),
-                                    Float.parseFloat(editCellsMaxPower.getText().toString()),
-                                    Float.parseFloat(editCellsArea.getText().toString()),
-                                    Float.parseFloat(editCellsEfficiency.getText().toString()),
-                                    Float.parseFloat(editDiffuseEfficiency.getText().toString()),
-                                    Float.parseFloat(editConverterPowerLimit.getText().toString()),
-                                    Float.parseFloat(editConverterEfficiency.getText().toString())
-                                    );
-                        });
-                        alert.setNegativeButton(getString(R.string.dialog_add_close_button), (dialog, whichButton) -> {
-                        });
-
-                        alert.show();
+                        CityToWatch city = adapter.getCitytoWatch(position);
+                        editCityToWatch(city);
                     }
 
                     public void onLongItemClick(View view, int position) {
@@ -169,6 +110,70 @@ public class ManageLocationsActivity extends NavigationActivity {
 
     }
 
+    private void editCityToWatch(CityToWatch city) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_edit_location, null);
+
+        alert.setTitle(getString(R.string.edit_location_title));
+        alert.setView(dialogView);
+        EditText editLatitude = (EditText) dialogView.findViewById(R.id.EditLocation_Lat);
+        EditText editLongitude = (EditText) dialogView.findViewById(R.id.EditLocation_Lon);
+        EditText editCity = (EditText) dialogView.findViewById(R.id.EditLocation_Name);
+        EditText editAzimuth = (EditText) dialogView.findViewById(R.id.EditLocation_Azimuth);
+        EditText editElevation = (EditText) dialogView.findViewById(R.id.EditLocation_Elevation);
+        EditText editCellsMaxPower = (EditText) dialogView.findViewById(R.id.EditLocation_Cell_Max_Power);
+        EditText editCellsArea = (EditText) dialogView.findViewById(R.id.EditLocation_Cells_Area);
+        EditText editCellsEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Cell_Efficiency);
+        EditText editDiffuseEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Diffuse_Efficiency);
+        EditText editConverterPowerLimit = (EditText) dialogView.findViewById(R.id.EditLocation_Converter_Power_Limit);
+        EditText editConverterEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Converter_Efficiency);
+
+        editCity.setText(city.getCityName());
+        editLatitude.setText(Float.toString(city.getLatitude()));
+        editLongitude.setText(Float.toString(city.getLongitude()));
+        editAzimuth.setText(Float.toString(city.getAzimuthAngle()));
+        editElevation.setText(Float.toString(city.getElevationAngle()));
+        editCellsMaxPower.setText(Float.toString(city.getCellsMaxPower()));
+        editCellsArea.setText(Float.toString(city.getCellsArea()));
+        editCellsEfficiency.setText(Float.toString(city.getCellsEfficiency()));
+        editDiffuseEfficiency.setText(Float.toString(city.getDiffuseEfficiency()));
+        editConverterPowerLimit.setText(Float.toString(city.getConverterPowerLimit()));
+        editConverterEfficiency.setText(Float.toString(city.getConverterEfficiency()));
+        editElevation.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                float elevation = Float.parseFloat("0"+editElevation.getText().toString());
+                editDiffuseEfficiency.setText(Float.toString(100-50 * elevation/90));
+            }
+        });
+
+        alert.setPositiveButton(getString(R.string.dialog_edit_change_button), (dialog, whichButton) -> {
+            adapter.updateCity(city, String.valueOf(editCity.getText()),
+                    Float.parseFloat("0"+editLatitude.getText().toString()),
+                    Float.parseFloat("0"+editLongitude.getText().toString()),
+                    Float.parseFloat("0"+editAzimuth.getText().toString()),
+                    Float.parseFloat("0"+editElevation.getText().toString()),
+                    Float.parseFloat("0"+editCellsMaxPower.getText().toString()),
+                    Float.parseFloat("0"+editCellsArea.getText().toString()),
+                    Float.parseFloat("0"+editCellsEfficiency.getText().toString()),
+                    Float.parseFloat("0"+editDiffuseEfficiency.getText().toString()),
+                    Float.parseFloat("0"+editConverterPowerLimit.getText().toString()),
+                    Float.parseFloat("0"+editConverterEfficiency.getText().toString())
+                    );
+        });
+        alert.setNegativeButton(getString(R.string.dialog_add_close_button), (dialog, whichButton) -> {
+        });
+
+        alert.show();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -191,6 +196,7 @@ public class ManageLocationsActivity extends NavigationActivity {
         newCity.setCityId((int) id);  //use id also instead of city id as unique identifier
         cities.add(newCity);
         adapter.notifyDataSetChanged();
+        editCityToWatch(newCity);
     }
     private CityToWatch convertCityToWatched(City selectedCity) {
 
