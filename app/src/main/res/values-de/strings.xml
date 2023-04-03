@@ -4,7 +4,7 @@
     <string name="about">Über</string>
     <string name="about_privacy_heading">Privatsphäre-Informationen</string>
     <string name="about_more_info">Mehr Informationen können gefunden werden auf:</string>
-    <string name="about_license_text">Diese App ist abgeleitet von Privacy Friendly Weather, entwickelt von der Forschungsgruppe SECUSO. Quelltext lizenziert unter GPLv3. Die App benutzt Icons von Google Material Design Icons, lizenziert unter Apache License Version 2.0, die Leaflet Bibliothek, lizenziert unter 2-clause BSD License, lizenziert unter der Apache License Version 2.0, AutoSuggestTextViewAPICall, lizenziert unter der Apache License Version 2.0, Solarpositioning (net.e175.klaus:solarpositioning), lizenziert unter MIT Lizenz und die WilliamChart Bibliothek (com.db.chart), lizenziert unter der Apache License Version 2.0</string>
+    <string name="about_license_text">Diese App ist abgeleitet von Privacy Friendly Weather, entwickelt von der Forschungsgruppe SECUSO. Quelltext lizenziert unter GPLv3. Die App benutzt Icons von Google Material Design Icons, lizenziert unter Apache License Version 2.0, die Leaflet Bibliothek, lizenziert unter 2-clause BSD License, AutoSuggestTextViewAPICall, lizenziert unter der Apache License Version 2.0, Solarpositioning (net.e175.klaus:solarpositioning), lizenziert unter MIT Lizenz und die WilliamChart Bibliothek (com.db.chart), lizenziert unter der Apache License Version 2.0</string>
     <string name="about_license">Lizenz</string>
     <string name="about_privacy_answer">solarCast benötigt nur Zugang zum Internet. Es werden weder persönliche Daten gesammelt, noch wird Werbung angezeigt.</string>
     <string name="about_where_from">Woher kommen die Wetterinformationen?</string>

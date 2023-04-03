@@ -149,7 +149,7 @@ public class ManageLocationsActivity extends NavigationActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                float tilt = Float.parseFloat("0"+editTilt.getText().toString());
+                float tilt = Float.parseFloat(!editTilt.getText().toString().isEmpty() ? editTilt.getText().toString() : "0");
                 int diffuseEfficiency = (int) (100-50 * tilt/90);
                 editDiffuseEfficiency.setText(Float.toString((float) diffuseEfficiency));
             }
@@ -157,16 +157,16 @@ public class ManageLocationsActivity extends NavigationActivity {
 
         alert.setPositiveButton(getString(R.string.dialog_edit_change_button), (dialog, whichButton) -> {
             adapter.updateCity(city, String.valueOf(editCity.getText()),
-                    Float.parseFloat("0"+editLatitude.getText().toString()),
-                    Float.parseFloat("0"+editLongitude.getText().toString()),
-                    Float.parseFloat("0"+editAzimuth.getText().toString()),
-                    Float.parseFloat("0"+editTilt.getText().toString()),
-                    Float.parseFloat("0"+editCellsMaxPower.getText().toString()),
-                    Float.parseFloat("0"+editCellsArea.getText().toString()),
-                    Float.parseFloat("0"+editCellsEfficiency.getText().toString()),
-                    Float.parseFloat("0"+editDiffuseEfficiency.getText().toString()),
-                    Float.parseFloat("0"+editInverterPowerLimit.getText().toString()),
-                    Float.parseFloat("0"+editInverterEfficiency.getText().toString())
+                    Float.parseFloat(editLatitude.getText().toString().isEmpty() ? "0" : editLatitude.getText().toString()),
+                    Float.parseFloat(editLongitude.getText().toString().isEmpty() ? "0" : editLongitude.getText().toString()),
+                    Float.parseFloat(editAzimuth.getText().toString().isEmpty() ? "0" : editAzimuth.getText().toString()),
+                    Float.parseFloat(editTilt.getText().toString().isEmpty() ? "0" : editTilt.getText().toString()),
+                    Float.parseFloat(editCellsMaxPower.getText().toString().isEmpty() ? "0" : editCellsMaxPower.getText().toString()),
+                    Float.parseFloat(editCellsArea.getText().toString().isEmpty() ? "0" : editCellsArea.getText().toString()),
+                    Float.parseFloat(editCellsEfficiency.getText().toString().isEmpty() ? "0" : editCellsEfficiency.getText().toString()),
+                    Float.parseFloat(editDiffuseEfficiency.getText().toString().isEmpty() ? "0" : editDiffuseEfficiency.getText().toString()),
+                    Float.parseFloat(editInverterPowerLimit.getText().toString().isEmpty() ? "0" : editInverterPowerLimit.getText().toString()),
+                    Float.parseFloat(editInverterEfficiency.getText().toString().isEmpty() ? "0" : editInverterEfficiency.getText().toString())
                     );
         });
         alert.setNegativeButton(getString(R.string.dialog_add_close_button), (dialog, whichButton) -> {
