@@ -59,7 +59,7 @@
         android:id="@+id/EditLocation_Tilt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal|numberSigned"
+        android:inputType="numberDecimal"
         android:hint="@string/edit_location_hint_tilt"/>
     <TextView
         android:layout_width="match_parent"
@@ -69,7 +69,7 @@
         android:id="@+id/EditLocation_Cell_Max_Power"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal|numberSigned"
+        android:inputType="numberDecimal"
         android:hint="@string/edit_location_hint_cells_max_power"/>
     <TextView
         android:layout_width="match_parent"
@@ -79,7 +79,7 @@
         android:id="@+id/EditLocation_Cells_Area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal|numberSigned"
+        android:inputType="numberDecimal"
         android:hint="@string/edit_location_hint_cells_area"/>
     <TextView
         android:layout_width="match_parent"
@@ -89,7 +89,7 @@
         android:id="@+id/EditLocation_Cell_Efficiency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal|numberSigned"
+        android:inputType="numberDecimal"
         android:hint="@string/edit_location_hint_cells_efficiency"/>
     <TextView
         android:layout_width="match_parent"
@@ -99,7 +99,7 @@
         android:id="@+id/EditLocation_Diffuse_Efficiency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal|numberSigned"
+        android:inputType="numberDecimal"
         android:hint="@string/edit_location_hint_diffuse_efficiency"/>
     <TextView
         android:layout_width="match_parent"
@@ -109,7 +109,7 @@
         android:id="@+id/EditLocation_Inverter_Power_Limit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal|numberSigned"
+        android:inputType="numberDecimal"
         android:hint="@string/edit_location_hint_inverter_power_limit"/>
     <TextView
         android:layout_width="match_parent"
@@ -119,7 +119,7 @@
         android:id="@+id/EditLocation_Inverter_Efficiency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal|numberSigned"
+        android:inputType="numberDecimal"
         android:hint="@string/edit_location_hint_inverter_efficiency"/>
 </LinearLayout>
 </ScrollView>
