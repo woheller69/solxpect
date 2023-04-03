@@ -16,10 +16,10 @@ public class CityToWatch {
     private float cellsArea;
     private float cellsEfficiency;
     private float diffuseEfficiency;
-    private float converterPowerLimit;
-    private float converterEfficiency;
+    private float inverterPowerLimit;
+    private float inverterEfficiency;
     private float azimuthAngle;
-    private float elevationAngle;
+    private float tiltAngle;
     private int rank;
 
     public CityToWatch() {
@@ -36,10 +36,10 @@ public class CityToWatch {
         this.cellsArea=3.18f;
         this.cellsEfficiency=19.3f;
         this.diffuseEfficiency=40;
-        this.converterPowerLimit=600;
-        this.converterEfficiency=95;
+        this.inverterPowerLimit =600;
+        this.inverterEfficiency =95;
         this.azimuthAngle=170;
-        this.elevationAngle=90;
+        this.tiltAngle =90;
 
     }
 
@@ -103,16 +103,16 @@ public class CityToWatch {
         return diffuseEfficiency;
     }
 
-    public float getConverterEfficiency() {
-        return converterEfficiency;
+    public float getInverterEfficiency() {
+        return inverterEfficiency;
     }
 
-    public float getConverterPowerLimit() {
-        return converterPowerLimit;
+    public float getInverterPowerLimit() {
+        return inverterPowerLimit;
     }
 
-    public float getElevationAngle() {
-        return elevationAngle;
+    public float getTiltAngle() {
+        return tiltAngle;
     }
 
     public void setCellsMaxPower(float cellsMaxPower) {
@@ -131,19 +131,19 @@ public class CityToWatch {
         this.cellsEfficiency = cellsEfficiency;
     }
 
-    public void setConverterEfficiency(float converterEfficiency) {
-        this.converterEfficiency = converterEfficiency;
+    public void setInverterEfficiency(float inverterEfficiency) {
+        this.inverterEfficiency = inverterEfficiency;
     }
 
-    public void setConverterPowerLimit(float converterPowerLimit) {
-        this.converterPowerLimit = converterPowerLimit;
+    public void setInverterPowerLimit(float inverterPowerLimit) {
+        this.inverterPowerLimit = inverterPowerLimit;
     }
 
     public void setDiffuseEfficiency(float diffuseEfficiency) {
         this.diffuseEfficiency = diffuseEfficiency;
     }
 
-    public void setElevationAngle(float elevationAngle) {
-        this.elevationAngle = elevationAngle;
+    public void setTiltAngle(float tiltAngle) {
+        this.tiltAngle = tiltAngle;
     }
 }

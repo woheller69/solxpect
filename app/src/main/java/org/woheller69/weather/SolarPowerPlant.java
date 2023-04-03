@@ -15,22 +15,22 @@ public class SolarPowerPlant {
     double cellsArea;
     double cellsEfficiency;
     double diffuseEfficiency;
-    double converterPowerLimit;
-    double converterEfficiency;
+    double inverterPowerLimit;
+    double inverterEfficiency;
     double azimuthAngle;
-    double elevationAngle;
+    double tiltAngle;
 
-    public SolarPowerPlant(double latitude, double longitude, double cellsMaxPower, double cellsArea, double cellsEfficiency, double diffuseEfficiency, double converterPowerLimit, double converterEfficiency, double azimuthAngle, double elevationAngle) {
+    public SolarPowerPlant(double latitude, double longitude, double cellsMaxPower, double cellsArea, double cellsEfficiency, double diffuseEfficiency, double inverterPowerLimit, double inverterEfficiency, double azimuthAngle, double tiltAngle) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.cellsMaxPower = cellsMaxPower;
         this.cellsArea = cellsArea;
         this.cellsEfficiency = cellsEfficiency / 100;
         this.diffuseEfficiency = diffuseEfficiency / 100;
-        this.converterPowerLimit = converterPowerLimit;
-        this.converterEfficiency = converterEfficiency / 100;
+        this.inverterPowerLimit = inverterPowerLimit;
+        this.inverterEfficiency = inverterEfficiency / 100;
         this.azimuthAngle = azimuthAngle;
-        this.elevationAngle = elevationAngle;
+        this.tiltAngle = tiltAngle;
 
     }
 
@@ -48,7 +48,7 @@ public class SolarPowerPlant {
         double solarElevation = 90 - position.getZenithAngle();
 
         Double[] directionSun = {Math.sin(solarAzimuth / 180 * Math.PI) * Math.cos(solarElevation / 180 * Math.PI), Math.cos(solarAzimuth / 180 * Math.PI) * Math.cos(solarElevation / 180 * Math.PI), Math.sin(solarElevation / 180 * Math.PI)};
-        Double[] normalPanel = {Math.sin(azimuthAngle / 180 * Math.PI) * Math.cos((90 - elevationAngle) / 180 * Math.PI), Math.cos(azimuthAngle / 180 * Math.PI) * Math.cos((90 - elevationAngle) / 180 * Math.PI), Math.sin((90 - elevationAngle) / 180 * Math.PI)};
+        Double[] normalPanel = {Math.sin(azimuthAngle / 180 * Math.PI) * Math.cos((90 - tiltAngle) / 180 * Math.PI), Math.cos(azimuthAngle / 180 * Math.PI) * Math.cos((90 - tiltAngle) / 180 * Math.PI), Math.sin((90 - tiltAngle) / 180 * Math.PI)};
 
         double efficiency = 0;  //calculate scalar product of sunDirection and normalPanel vectors
         for (int j = 0; j < directionSun.length; j++) {
@@ -61,7 +61,7 @@ public class SolarPowerPlant {
 
         double dcPower = (solarPowerNormal * efficiency + solarPowerDiffuse * diffuseEfficiency )* cellsEfficiency * cellsArea;
 
-        double acPower = Math.min(dcPower * converterEfficiency, converterPowerLimit);
+        double acPower = Math.min(dcPower * inverterEfficiency, inverterPowerLimit);
 
         return (float) acPower;
     }

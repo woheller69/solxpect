@@ -54,13 +54,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/edit_location_hint_elevation"/>
+        android:hint="@string/edit_location_hint_tilt"/>
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/EditLocation_Elevation"
+        android:id="@+id/EditLocation_Tilt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal|numberSigned"
-        android:hint="@string/edit_location_hint_elevation"/>
+        android:hint="@string/edit_location_hint_tilt"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,22 +104,22 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/edit_location_hint_converter_power_limit"/>
+        android:hint="@string/edit_location_hint_inverter_power_limit"/>
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/EditLocation_Converter_Power_Limit"
+        android:id="@+id/EditLocation_Inverter_Power_Limit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal|numberSigned"
-        android:hint="@string/edit_location_hint_converter_power_limit"/>
+        android:hint="@string/edit_location_hint_inverter_power_limit"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/edit_location_hint_converter_efficiency"/>
+        android:hint="@string/edit_location_hint_inverter_efficiency"/>
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/EditLocation_Converter_Efficiency"
+        android:id="@+id/EditLocation_Inverter_Efficiency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal|numberSigned"
-        android:hint="@string/edit_location_hint_converter_efficiency"/>
+        android:hint="@string/edit_location_hint_inverter_efficiency"/>
 </LinearLayout>
 </ScrollView>

@@ -10,7 +10,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.woheller69.weather.SolarPowerPlant;
 import org.woheller69.weather.database.CityToWatch;
-import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.HourlyForecast;
 import org.woheller69.weather.database.SQLiteHelper;
 import org.woheller69.weather.database.WeekForecast;
@@ -78,7 +77,7 @@ public class OMDataExtractor implements IDataExtractor {
 
             SQLiteHelper dbhelper = SQLiteHelper.getInstance(context);
             CityToWatch city = dbhelper.getCityToWatch(cityID);
-            SolarPowerPlant spp = new SolarPowerPlant(city.getLatitude(), city.getLongitude(), city.getCellsMaxPower(), city.getCellsArea(), city.getCellsEfficiency(),city.getDiffuseEfficiency(), city.getConverterPowerLimit(), city.getConverterEfficiency(), city.getAzimuthAngle(), city.getElevationAngle());
+            SolarPowerPlant spp = new SolarPowerPlant(city.getLatitude(), city.getLongitude(), city.getCellsMaxPower(), city.getCellsArea(), city.getCellsEfficiency(),city.getDiffuseEfficiency(), city.getInverterPowerLimit(), city.getInverterEfficiency(), city.getAzimuthAngle(), city.getTiltAngle());
 
 
             IApiToDatabaseConversion conversion = new OMToDatabaseConversion();

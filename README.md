@@ -12,6 +12,39 @@ It shows the estimated energy production for the next hours and up to 16 days.
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/01.png" width="150"/><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/02.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/03.png" width="150"/> 
 
 
+## Parameters
+
+#### Latitude [°] 
+Latitude specifies the north–south position of your solar power plant. It ranges from –90° at the south pole to 90° at the north pole.
+
+#### Longitude [°]
+Longitude specifies the east–west position of your solar power plant. The prime meridian defines 0° longitude. Positive longitudes are east of the prime meridian, negative ones are west.
+
+#### Azimuth [°]
+Azimuth is the horizontal direction of your solar power plant. 0° equals North, 90° equals East, 180° equals South, 270° equals West.
+
+#### Tilt [°]
+Tilt is the vertical direction of your solar power plant. 0° means it points up towards the the sky, 90° means it has a vertical orientation and points towards the horizon.
+
+#### Cells max power [W]
+Maximum power your solar cells can deliver.
+
+#### Cells efficiency  [%]
+Portion of energy in the form of sunlight that can be converted into electricity by the solar cell.
+
+#### Cell area [m\u00b2]
+Size of the active area your solar panel.
+
+#### Diffuse radiation efficiency  [%]
+Efficiency of your solar power plant for diffuse radiation. When pointing up it should be around 100%, when pointing to the horizon it may be around 50%. 
+Also depends on reflections etc.
+
+#### Inverter power  [W]
+Maximum power of your inverter. If it is lower than the maximum power of your panels the output power of your system will be limited by this parameter.
+
+#### Inverter efficiency  [%] 
+Efficiency of your inverter.
+
 ## License
 
 This app is licensed under the GPLv3.

@@ -2,15 +2,11 @@ package org.woheller69.weather.ui.RecycleList;
 
 import android.content.Context;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import org.woheller69.weather.R;
 import org.woheller69.weather.database.CityToWatch;
@@ -64,13 +60,13 @@ public class RecyclerOverviewListAdapter extends RecyclerView.Adapter<ItemViewHo
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         holder.cityName.setText(cities.get(position).getCityName());
         holder.azimuthAngle.setText(context.getString(R.string.edit_location_hint_azimuth) +": "+ cities.get(position).getAzimuthAngle());
-        holder.elevationAngle.setText(context.getString(R.string.edit_location_hint_elevation) +": "+ cities.get(position).getElevationAngle());
+        holder.tiltAngle.setText(context.getString(R.string.edit_location_hint_tilt) +": "+ cities.get(position).getTiltAngle());
         holder.cellsMaxPower.setText(context.getString(R.string.edit_location_hint_cells_max_power) +": "+ cities.get(position).getCellsMaxPower());
         holder.cellsEfficiency.setText(context.getString(R.string.edit_location_hint_cells_efficiency) +": "+ cities.get(position).getCellsEfficiency());
         holder.cellsArea.setText(context.getString(R.string.edit_location_hint_cells_area) +": "+ cities.get(position).getCellsArea());
         holder.diffuseEfficiency.setText(context.getString(R.string.edit_location_hint_diffuse_efficiency) +": "+ cities.get(position).getDiffuseEfficiency());
-        holder.converterPowerLimit.setText(context.getString(R.string.edit_location_hint_converter_power_limit) +": "+ cities.get(position).getConverterPowerLimit());
-        holder.converterEfficiency.setText(context.getString(R.string.edit_location_hint_converter_efficiency) +": "+ cities.get(position).getConverterEfficiency());
+        holder.inverterPowerLimit.setText(context.getString(R.string.edit_location_hint_inverter_power_limit) +": "+ cities.get(position).getInverterPowerLimit());
+        holder.inverterEfficiency.setText(context.getString(R.string.edit_location_hint_inverter_efficiency) +": "+ cities.get(position).getInverterEfficiency());
 
     }
 
@@ -118,18 +114,18 @@ public class RecyclerOverviewListAdapter extends RecyclerView.Adapter<ItemViewHo
     public CityToWatch getCitytoWatch(int position){
         return cities.get(position);
     }
-    public void updateCity(CityToWatch cityToWatch, String cityName, float latitude, float longitude, float azimuth, float elevation, float cellsMaxPower, float cellsArea, float cellsEfficiency, float diffuseEfficiency, float converterPowerLimit, float converterEfficiency) {
+    public void updateCity(CityToWatch cityToWatch, String cityName, float latitude, float longitude, float azimuth, float tilt, float cellsMaxPower, float cellsArea, float cellsEfficiency, float diffuseEfficiency, float inverterPowerLimit, float inverterEfficiency) {
         cityToWatch.setCityName(cityName);
         cityToWatch.setLatitude(latitude);
         cityToWatch.setLongitude(longitude);
         cityToWatch.setAzimuthAngle(azimuth);
-        cityToWatch.setElevationAngle(elevation);
+        cityToWatch.setTiltAngle(tilt);
         cityToWatch.setCellsMaxPower(cellsMaxPower);
         cityToWatch.setCellsArea(cellsArea);
         cityToWatch.setCellsEfficiency(cellsEfficiency);
         cityToWatch.setDiffuseEfficiency(diffuseEfficiency);
-        cityToWatch.setConverterPowerLimit(converterPowerLimit);
-        cityToWatch.setConverterEfficiency(converterEfficiency);
+        cityToWatch.setInverterPowerLimit(inverterPowerLimit);
+        cityToWatch.setInverterEfficiency(inverterEfficiency);
         database.updateCityToWatch(cityToWatch);
         notifyDataSetChanged();
     }

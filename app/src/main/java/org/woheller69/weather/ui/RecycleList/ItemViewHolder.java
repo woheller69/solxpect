@@ -18,14 +18,14 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
      * Member variables
      */
     public TextView cityName;
-    public TextView elevationAngle;
+    public TextView tiltAngle;
     public TextView azimuthAngle;
     public TextView cellsMaxPower;
     public TextView cellsArea;
     public TextView cellsEfficiency;
     public TextView diffuseEfficiency;
-    public TextView converterPowerLimit;
-    public TextView converterEfficiency;
+    public TextView inverterPowerLimit;
+    public TextView inverterEfficiency;
 
 
     /**
@@ -36,14 +36,14 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
     public ItemViewHolder(View itemView) {
         super(itemView);
         this.cityName = (TextView) itemView.findViewById(R.id.city_overview_list_item_text);
-        this.elevationAngle = (TextView) itemView.findViewById(R.id.city_elevation_angle);
+        this.tiltAngle = (TextView) itemView.findViewById(R.id.city_tilt_angle);
         this.azimuthAngle = (TextView)  itemView.findViewById(R.id.city_azimuth_angle);
         this.cellsMaxPower = (TextView) itemView.findViewById(R.id.city_cells_max_power);
         this.cellsArea = (TextView) itemView.findViewById(R.id.city_cells_area);
         this.cellsEfficiency = (TextView) itemView.findViewById(R.id.city_cells_efficiency);
         this.diffuseEfficiency = (TextView) itemView.findViewById(R.id.city_diffuse_efficiency);
-        this.converterPowerLimit = (TextView) itemView.findViewById(R.id.city_converter_power_limit);
-        this.converterEfficiency = (TextView) itemView.findViewById(R.id.city_converter_efficiency);
+        this.inverterPowerLimit = (TextView) itemView.findViewById(R.id.city_inverter_power_limit);
+        this.inverterEfficiency = (TextView) itemView.findViewById(R.id.city_inverter_efficiency);
 
     }
 

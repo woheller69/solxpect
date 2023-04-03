@@ -122,26 +122,26 @@ public class ManageLocationsActivity extends NavigationActivity {
         EditText editLongitude = (EditText) dialogView.findViewById(R.id.EditLocation_Lon);
         EditText editCity = (EditText) dialogView.findViewById(R.id.EditLocation_Name);
         EditText editAzimuth = (EditText) dialogView.findViewById(R.id.EditLocation_Azimuth);
-        EditText editElevation = (EditText) dialogView.findViewById(R.id.EditLocation_Elevation);
+        EditText editTilt = (EditText) dialogView.findViewById(R.id.EditLocation_Tilt);
         EditText editCellsMaxPower = (EditText) dialogView.findViewById(R.id.EditLocation_Cell_Max_Power);
         EditText editCellsArea = (EditText) dialogView.findViewById(R.id.EditLocation_Cells_Area);
         EditText editCellsEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Cell_Efficiency);
         EditText editDiffuseEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Diffuse_Efficiency);
-        EditText editConverterPowerLimit = (EditText) dialogView.findViewById(R.id.EditLocation_Converter_Power_Limit);
-        EditText editConverterEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Converter_Efficiency);
+        EditText editInverterPowerLimit = (EditText) dialogView.findViewById(R.id.EditLocation_Inverter_Power_Limit);
+        EditText editInverterEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Inverter_Efficiency);
 
         editCity.setText(city.getCityName());
         editLatitude.setText(Float.toString(city.getLatitude()));
         editLongitude.setText(Float.toString(city.getLongitude()));
         editAzimuth.setText(Float.toString(city.getAzimuthAngle()));
-        editElevation.setText(Float.toString(city.getElevationAngle()));
+        editTilt.setText(Float.toString(city.getTiltAngle()));
         editCellsMaxPower.setText(Float.toString(city.getCellsMaxPower()));
         editCellsArea.setText(Float.toString(city.getCellsArea()));
         editCellsEfficiency.setText(Float.toString(city.getCellsEfficiency()));
         editDiffuseEfficiency.setText(Float.toString(city.getDiffuseEfficiency()));
-        editConverterPowerLimit.setText(Float.toString(city.getConverterPowerLimit()));
-        editConverterEfficiency.setText(Float.toString(city.getConverterEfficiency()));
-        editElevation.addTextChangedListener(new TextWatcher() {
+        editInverterPowerLimit.setText(Float.toString(city.getInverterPowerLimit()));
+        editInverterEfficiency.setText(Float.toString(city.getInverterEfficiency()));
+        editTilt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
             @Override
@@ -149,8 +149,8 @@ public class ManageLocationsActivity extends NavigationActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                float elevation = Float.parseFloat("0"+editElevation.getText().toString());
-                int diffuseEfficiency = (int) (100-50 * elevation/90);
+                float tilt = Float.parseFloat("0"+editTilt.getText().toString());
+                int diffuseEfficiency = (int) (100-50 * tilt/90);
                 editDiffuseEfficiency.setText(Float.toString((float) diffuseEfficiency));
             }
         });
@@ -160,13 +160,13 @@ public class ManageLocationsActivity extends NavigationActivity {
                     Float.parseFloat("0"+editLatitude.getText().toString()),
                     Float.parseFloat("0"+editLongitude.getText().toString()),
                     Float.parseFloat("0"+editAzimuth.getText().toString()),
-                    Float.parseFloat("0"+editElevation.getText().toString()),
+                    Float.parseFloat("0"+editTilt.getText().toString()),
                     Float.parseFloat("0"+editCellsMaxPower.getText().toString()),
                     Float.parseFloat("0"+editCellsArea.getText().toString()),
                     Float.parseFloat("0"+editCellsEfficiency.getText().toString()),
                     Float.parseFloat("0"+editDiffuseEfficiency.getText().toString()),
-                    Float.parseFloat("0"+editConverterPowerLimit.getText().toString()),
-                    Float.parseFloat("0"+editConverterEfficiency.getText().toString())
+                    Float.parseFloat("0"+editInverterPowerLimit.getText().toString()),
+                    Float.parseFloat("0"+editInverterEfficiency.getText().toString())
                     );
         });
         alert.setNegativeButton(getString(R.string.dialog_add_close_button), (dialog, whichButton) -> {

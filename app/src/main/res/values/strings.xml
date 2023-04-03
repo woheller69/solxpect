@@ -119,13 +119,13 @@
     <string name="edit_location_hint_latitude">Latitude [°]</string>
     <string name="edit_location_hint_longitude">Longitude [°]</string>
     <string name="edit_location_hint_azimuth">Azimuth [°]</string>
-    <string name="edit_location_hint_elevation">Elevation [°]</string>
+    <string name="edit_location_hint_tilt">Tilt [°]</string>
     <string name="edit_location_hint_cells_max_power">Cells max power [W]</string>
     <string name="edit_location_hint_cells_efficiency">Cells efficiency [%]</string>
     <string name="edit_location_hint_cells_area">Cell area [m\u00b2]</string>
     <string name="edit_location_hint_diffuse_efficiency">Diffuse radiation efficiency [%]</string>
-    <string name="edit_location_hint_converter_power_limit">Converter power [W]</string>
-    <string name="edit_location_hint_converter_efficiency">Converter efficiency [%]</string>
+    <string name="edit_location_hint_inverter_power_limit">Inverter power [W]</string>
+    <string name="edit_location_hint_inverter_efficiency">Inverter efficiency [%]</string>
     <string name="units_Wh">Wh</string>
     <string name="edit_location_title">Edit location</string>
 </resources>

@@ -47,10 +47,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String CITIES_TO_WATCH_CELLS_AREA = "cells_area";
     private static final String CITIES_TO_WATCH_CELLS_EFFICIENCY = "cells_efficiency";
     private static final String CITIES_TO_WATCH_DIFFUSE_EFFICIENCY = "diffuse_efficiency";
-    private static final String CITIES_TO_WATCH_CONVERTER_POWER_LIMIT = "converter_power_limit";
-    private static final String CITIES_TO_WATCH_CONVERTER_EFFICIENCY = "converter_efficiency";
+    private static final String CITIES_TO_WATCH_INVERTER_POWER_LIMIT = "inverter_power_limit";
+    private static final String CITIES_TO_WATCH_INVERTER_EFFICIENCY = "inverter_efficiency";
     private static final String CITIES_TO_WATCH_AZIMUTH_ANGLE = "azimuth_angle";
-    private static final String CITIES_TO_WATCH_ELEVATION_ANGLE = "elevation_angle";
+    private static final String CITIES_TO_WATCH_TILT_ANGLE = "tilt_angle";
 
     //Names of columns in TABLE_FORECAST
     private static final String FORECAST_ID = "forecast_id";
@@ -128,10 +128,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             CITIES_TO_WATCH_CELLS_AREA + " REAL NOT NULL," +
             CITIES_TO_WATCH_CELLS_EFFICIENCY + " REAL NOT NULL," +
             CITIES_TO_WATCH_DIFFUSE_EFFICIENCY + " REAL NOT NULL," +
-            CITIES_TO_WATCH_CONVERTER_POWER_LIMIT + " REAL NOT NULL," +
-            CITIES_TO_WATCH_CONVERTER_EFFICIENCY + " REAL NOT NULL," +
+            CITIES_TO_WATCH_INVERTER_POWER_LIMIT + " REAL NOT NULL," +
+            CITIES_TO_WATCH_INVERTER_EFFICIENCY + " REAL NOT NULL," +
             CITIES_TO_WATCH_AZIMUTH_ANGLE + " REAL NOT NULL," +
-            CITIES_TO_WATCH_ELEVATION_ANGLE + " REAL NOT NULL)";
+            CITIES_TO_WATCH_TILT_ANGLE + " REAL NOT NULL)";
 
     public static SQLiteHelper getInstance(Context context) {
         if (instance == null && context != null) {
@@ -175,10 +175,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(CITIES_TO_WATCH_CELLS_AREA,city.getCellsArea());
         values.put(CITIES_TO_WATCH_CELLS_EFFICIENCY,city.getCellsEfficiency());
         values.put(CITIES_TO_WATCH_DIFFUSE_EFFICIENCY,city.getDiffuseEfficiency());
-        values.put(CITIES_TO_WATCH_CONVERTER_POWER_LIMIT,city.getConverterPowerLimit());
-        values.put(CITIES_TO_WATCH_CONVERTER_EFFICIENCY,city.getConverterEfficiency());
+        values.put(CITIES_TO_WATCH_INVERTER_POWER_LIMIT,city.getInverterPowerLimit());
+        values.put(CITIES_TO_WATCH_INVERTER_EFFICIENCY,city.getInverterEfficiency());
         values.put(CITIES_TO_WATCH_AZIMUTH_ANGLE,city.getAzimuthAngle());
-        values.put(CITIES_TO_WATCH_ELEVATION_ANGLE,city.getElevationAngle());
+        values.put(CITIES_TO_WATCH_TILT_ANGLE,city.getTiltAngle());
 
         long id=database.insert(TABLE_CITIES_TO_WATCH, null, values);
 
@@ -206,10 +206,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                         ", " + CITIES_TO_WATCH_CELLS_AREA +
                         ", " + CITIES_TO_WATCH_CELLS_EFFICIENCY +
                         ", " + CITIES_TO_WATCH_DIFFUSE_EFFICIENCY +
-                        ", " + CITIES_TO_WATCH_CONVERTER_POWER_LIMIT +
-                        ", " + CITIES_TO_WATCH_CONVERTER_EFFICIENCY +
+                        ", " + CITIES_TO_WATCH_INVERTER_POWER_LIMIT +
+                        ", " + CITIES_TO_WATCH_INVERTER_EFFICIENCY +
                         ", " + CITIES_TO_WATCH_AZIMUTH_ANGLE +
-                        ", " + CITIES_TO_WATCH_ELEVATION_ANGLE +
+                        ", " + CITIES_TO_WATCH_TILT_ANGLE +
                         ", " + CITIES_TO_WATCH_COLUMN_RANK +
                         " FROM " + TABLE_CITIES_TO_WATCH +
                         " WHERE " + CITIES_TO_WATCH_CITY_ID + " = ?", arguments);
@@ -226,10 +226,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             cityToWatch.setCellsArea(Float.parseFloat(cursor.getString(6)));
             cityToWatch.setCellsEfficiency(Float.parseFloat(cursor.getString(7)));
             cityToWatch.setDiffuseEfficiency(Float.parseFloat(cursor.getString(8)));
-            cityToWatch.setConverterPowerLimit(Float.parseFloat(cursor.getString(9)));
-            cityToWatch.setConverterEfficiency(Float.parseFloat(cursor.getString(10)));
+            cityToWatch.setInverterPowerLimit(Float.parseFloat(cursor.getString(9)));
+            cityToWatch.setInverterEfficiency(Float.parseFloat(cursor.getString(10)));
             cityToWatch.setAzimuthAngle(Float.parseFloat(cursor.getString(11)));
-            cityToWatch.setElevationAngle(Float.parseFloat(cursor.getString(12)));
+            cityToWatch.setTiltAngle(Float.parseFloat(cursor.getString(12)));
             cityToWatch.setRank(Integer.parseInt(cursor.getString(13)));
 
             cursor.close();
@@ -255,10 +255,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                         ", " + CITIES_TO_WATCH_CELLS_AREA +
                         ", " + CITIES_TO_WATCH_CELLS_EFFICIENCY +
                         ", " + CITIES_TO_WATCH_DIFFUSE_EFFICIENCY +
-                        ", " + CITIES_TO_WATCH_CONVERTER_POWER_LIMIT +
-                        ", " + CITIES_TO_WATCH_CONVERTER_EFFICIENCY +
+                        ", " + CITIES_TO_WATCH_INVERTER_POWER_LIMIT +
+                        ", " + CITIES_TO_WATCH_INVERTER_EFFICIENCY +
                         ", " + CITIES_TO_WATCH_AZIMUTH_ANGLE +
-                        ", " + CITIES_TO_WATCH_ELEVATION_ANGLE +
+                        ", " + CITIES_TO_WATCH_TILT_ANGLE +
                         ", " + CITIES_TO_WATCH_COLUMN_RANK +
                         " FROM " + TABLE_CITIES_TO_WATCH
                 , new String[]{});
@@ -277,10 +277,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 cityToWatch.setCellsArea(Float.parseFloat(cursor.getString(6)));
                 cityToWatch.setCellsEfficiency(Float.parseFloat(cursor.getString(7)));
                 cityToWatch.setDiffuseEfficiency(Float.parseFloat(cursor.getString(8)));
-                cityToWatch.setConverterPowerLimit(Float.parseFloat(cursor.getString(9)));
-                cityToWatch.setConverterEfficiency(Float.parseFloat(cursor.getString(10)));
+                cityToWatch.setInverterPowerLimit(Float.parseFloat(cursor.getString(9)));
+                cityToWatch.setInverterEfficiency(Float.parseFloat(cursor.getString(10)));
                 cityToWatch.setAzimuthAngle(Float.parseFloat(cursor.getString(11)));
-                cityToWatch.setElevationAngle(Float.parseFloat(cursor.getString(12)));
+                cityToWatch.setTiltAngle(Float.parseFloat(cursor.getString(12)));
                 cityToWatch.setRank(Integer.parseInt(cursor.getString(13)));
 
                 cityToWatchList.add(cityToWatch);
@@ -305,10 +305,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(CITIES_TO_WATCH_CELLS_AREA,cityToWatch.getCellsArea());
         values.put(CITIES_TO_WATCH_CELLS_EFFICIENCY,cityToWatch.getCellsEfficiency());
         values.put(CITIES_TO_WATCH_DIFFUSE_EFFICIENCY,cityToWatch.getDiffuseEfficiency());
-        values.put(CITIES_TO_WATCH_CONVERTER_POWER_LIMIT,cityToWatch.getConverterPowerLimit());
-        values.put(CITIES_TO_WATCH_CONVERTER_EFFICIENCY,cityToWatch.getConverterEfficiency());
+        values.put(CITIES_TO_WATCH_INVERTER_POWER_LIMIT,cityToWatch.getInverterPowerLimit());
+        values.put(CITIES_TO_WATCH_INVERTER_EFFICIENCY,cityToWatch.getInverterEfficiency());
         values.put(CITIES_TO_WATCH_AZIMUTH_ANGLE,cityToWatch.getAzimuthAngle());
-        values.put(CITIES_TO_WATCH_ELEVATION_ANGLE,cityToWatch.getElevationAngle());
+        values.put(CITIES_TO_WATCH_TILT_ANGLE,cityToWatch.getTiltAngle());
 
         database.update(TABLE_CITIES_TO_WATCH, values, CITIES_TO_WATCH_ID + " = ?",
                 new String[]{String.valueOf(cityToWatch.getId())});
