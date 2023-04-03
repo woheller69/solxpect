@@ -1,6 +1,6 @@
 package org.woheller69.weather.ui.updater;
 
-import org.woheller69.weather.database.CurrentWeatherData;
+import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.HourlyForecast;
 import org.woheller69.weather.database.WeekForecast;
 
@@ -24,10 +24,10 @@ public class ViewUpdater {
         subscribers.remove(sub);
     }
 
-    public static void updateCurrentWeatherData(CurrentWeatherData data) {
+    public static void updateGeneralDataData(GeneralData data) {
         ArrayList<IUpdateableCityUI> subcopy = new ArrayList<>(subscribers);  //copy list needed as bugfix for concurrent modification exception
         for (IUpdateableCityUI sub : subcopy) {
-            sub.processNewCurrentWeatherData(data);
+            sub.processNewGeneralData(data);
         }
     }
 

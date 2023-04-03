@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.woheller69.weather.R;
-import org.woheller69.weather.database.CurrentWeatherData;
+import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.SQLiteHelper;
 import org.woheller69.weather.ui.Help.StringFormatUtils;
 import org.woheller69.weather.ui.UiResourceProvider;
@@ -69,7 +69,7 @@ public class WeekWeatherAdapter extends RecyclerView.Adapter<WeekWeatherAdapter.
         if (dayValues.length!=11) return;  //Fixes app crash if forecastData not yet ready.
 
         SQLiteHelper dbHelper = SQLiteHelper.getInstance(context);
-        CurrentWeatherData currentWeather = dbHelper.getCurrentWeatherByCityId(cityID);
+        GeneralData generalData = dbHelper.getGeneralDataByCityId(cityID);
 
         Calendar forecastTime = Calendar.getInstance();
         forecastTime.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -77,7 +77,7 @@ public class WeekWeatherAdapter extends RecyclerView.Adapter<WeekWeatherAdapter.
 
         boolean isDay;
 
-        if (currentWeather.getTimeSunrise()==0 || currentWeather.getTimeSunset()==0) {
+        if (generalData.getTimeSunrise()==0 || generalData.getTimeSunset()==0) {
             if ((dbHelper.getCityToWatch(cityID).getLatitude()) > 0) {  //northern hemisphere
                 isDay = forecastTime.get(Calendar.DAY_OF_YEAR) >= 80 && forecastTime.get(Calendar.DAY_OF_YEAR) <= 265;  //from March 21 to September 22 (incl)
             } else { //southern hemisphere

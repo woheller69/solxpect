@@ -1,17 +1,10 @@
 package org.woheller69.weather.activities;
 
-import static java.lang.Boolean.TRUE;
-
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 
-import androidx.core.app.ActivityCompat;
 import androidx.preference.PreferenceManager;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -19,31 +12,25 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.woheller69.weather.R;
-import org.woheller69.weather.database.CityToWatch;
-import org.woheller69.weather.database.CurrentWeatherData;
+import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.HourlyForecast;
 import org.woheller69.weather.database.SQLiteHelper;
 import org.woheller69.weather.database.WeekForecast;
 import org.woheller69.weather.ui.updater.IUpdateableCityUI;
 import org.woheller69.weather.ui.updater.ViewUpdater;
 import org.woheller69.weather.ui.viewPager.WeatherPagerAdapter;
-import static org.woheller69.weather.database.SQLiteHelper.getWidgetCityID;
 
 import java.lang.reflect.Field;
 import java.util.List;
-import java.util.Locale;
 
 public class ForecastCityActivity extends NavigationActivity implements IUpdateableCityUI {
     private WeatherPagerAdapter pagerAdapter;
@@ -88,9 +75,9 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
         if (pagerAdapter.getItemCount()>0) {  //only if at least one city is watched
              //if pagerAdapter has item with current cityId go there, otherwise use cityId from current item
             if (pagerAdapter.getPosForCityID(cityId)==-1) cityId=pagerAdapter.getCityIDForPos(viewPager2.getCurrentItem());
-            CurrentWeatherData currentWeather = db.getCurrentWeatherByCityId(cityId);
+            GeneralData generalData = db.getGeneralDataByCityId(cityId);
 
-            long timestamp = currentWeather.getTimestamp();
+            long timestamp = generalData.getTimestamp();
             long systemTime = System.currentTimeMillis() / 1000;
             SharedPreferences prefManager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             long updateInterval = (long) (Float.parseFloat(prefManager.getString("pref_updateInterval", "2")) * 60 * 60);
@@ -120,9 +107,9 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
                 //Update current tab if outside update interval, show animation
                 SharedPreferences prefManager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SQLiteHelper database = SQLiteHelper.getInstance(getApplicationContext().getApplicationContext());
-                CurrentWeatherData currentWeather = database.getCurrentWeatherByCityId(pagerAdapter.getCityIDForPos(position));
+                GeneralData generalData = database.getGeneralDataByCityId(pagerAdapter.getCityIDForPos(position));
 
-                long timestamp = currentWeather.getTimestamp();
+                long timestamp = generalData.getTimestamp();
                 long systemTime = System.currentTimeMillis() / 1000;
                 long updateInterval = (long) (Float.parseFloat(prefManager.getString("pref_updateInterval", "2")) * 60 * 60);
 
@@ -204,7 +191,7 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
     }
 
     @Override
-    public void processNewCurrentWeatherData(CurrentWeatherData data) {
+    public void processNewGeneralData(GeneralData data) {
         if (refreshActionButton != null && refreshActionButton.getActionView() != null) {
             refreshActionButton.getActionView().clearAnimation();
         }

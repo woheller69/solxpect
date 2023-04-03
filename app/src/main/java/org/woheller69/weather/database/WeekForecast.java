@@ -13,36 +13,20 @@ public class WeekForecast {
     private long timestamp;
     private long forecastFor;
     private int weatherID;
-    private float temperature;
-    private float temperature_min;
-    private float temperature_max;
-    private float humidity;
-    private float pressure;
-    private float precipitation;
-    private float wind_speed;
-    private float wind_direction;
-    private float uv_index;
+    private float energyDay;
     private long timeSunrise;
     private long timeSunset;
 
     public WeekForecast() {
     }
 
-    public WeekForecast(int id, int city_id, long timestamp, long forecastFor, int weatherID, float temperature, float temperature_min, float temperature_max, float humidity, float pressure, float precipitation, float wind_speed, float wind_direction, float uv_index) {
+    public WeekForecast(int id, int city_id, long timestamp, long forecastFor, int weatherID, float temperature, float temperature_min, float temperature_max, float humidity, float pressure, float energyDay, float wind_speed, float wind_direction, float uv_index) {
         this.id = id;
         this.city_id = city_id;
         this.timestamp = timestamp;
         this.forecastFor = forecastFor;
         this.weatherID = weatherID;
-        this.temperature = temperature;
-        this.temperature_min = temperature_min;
-        this.temperature_max = temperature_max;
-        this.humidity = humidity;
-        this.pressure = pressure;
-        this.precipitation=precipitation;
-        this.wind_speed=wind_speed;
-        this.wind_direction=wind_direction;
-        this.uv_index=uv_index;
+        this.energyDay = energyDay;
     }
 
 
@@ -69,7 +53,7 @@ public class WeekForecast {
      */
     public long getLocalForecastTime(Context context) {
         SQLiteHelper dbhelper = SQLiteHelper.getInstance(context);
-        int timezoneseconds = dbhelper.getCurrentWeatherByCityId(city_id).getTimeZoneSeconds();
+        int timezoneseconds = dbhelper.getGeneralDataByCityId(city_id).getTimeZoneSeconds();
         return forecastFor + timezoneseconds * 1000L;
     }
 
@@ -117,77 +101,9 @@ public class WeekForecast {
         this.weatherID = weatherID;
     }
 
-    /**
-     * @return Returns the current temperature in Celsius.
-     */
-    public float getTemperature() {
-        return temperature;
-    }
+    public float getEnergyDay() {return energyDay;}
 
-    /**
-     * @param temperature The current temperature to set in Celsius.
-     */
-    public void setTemperature(float temperature) {
-        this.temperature = temperature;
-    }
-
-    /**
-     * @return Returns the min temperature in Celsius.
-     */
-    public float getMinTemperature() {
-        return temperature_min;
-    }
-
-    /**
-     * @param temperature_min The min temperature to set in Celsius.
-     */
-    public void setMinTemperature(float temperature_min) {
-        this.temperature_min = temperature_min;
-    }
-
-    /**
-     * @return Returns the max temperature in Celsius.
-     */
-    public float getMaxTemperature() {
-        return temperature_max;
-    }
-
-    /**
-     * @param temperature_max The max temperature to set in Celsius.
-     */
-    public void setMaxTemperature(float temperature_max) {
-        this.temperature_max = temperature_max;
-    }
-
-
-    /**
-     * @return Returns the humidity value in percent.
-     */
-    public float getHumidity() {
-        return humidity;
-    }
-
-    /**
-     * @param humidity The humidity value in percent to set.
-     */
-    public void setHumidity(float humidity) {
-        this.humidity = humidity;
-    }
-
-    public float getPressure() { return pressure;}
-    public void setPressure(float pressure) {this.pressure=pressure;}
-
-    public float getPrecipitation() {return precipitation;    }
-    public void setPrecipitation(float precipitation) {this.precipitation=precipitation;}
-
-    public float getWind_speed() { return wind_speed;}
-    public void setWind_speed(float wind_speed) {this.wind_speed=wind_speed;}
-
-    public float getWind_direction() { return wind_direction;}
-    public void setWind_direction(float wind_direction) {this.wind_direction=wind_direction;}
-
-    public float getUv_index() { return uv_index; }
-    public void setUv_index(float uv_index) {this.uv_index=uv_index;}
+    public void setEnergyDay(float energyDay) {this.energyDay =energyDay;}
 
     public long getTimeSunrise() { return timeSunrise; }
 

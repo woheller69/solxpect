@@ -150,7 +150,8 @@ public class ManageLocationsActivity extends NavigationActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 float elevation = Float.parseFloat("0"+editElevation.getText().toString());
-                editDiffuseEfficiency.setText(Float.toString(100-50 * elevation/90));
+                int diffuseEfficiency = (int) (100-50 * elevation/90);
+                editDiffuseEfficiency.setText(Float.toString((float) diffuseEfficiency));
             }
         });
 

@@ -45,7 +45,7 @@ public class HourlyForecast {
      */
     public long getLocalForecastTime(Context context) {
         SQLiteHelper dbhelper = SQLiteHelper.getInstance(context);
-        int timezoneseconds = dbhelper.getCurrentWeatherByCityId(city_id).getTimeZoneSeconds();
+        int timezoneseconds = dbhelper.getGeneralDataByCityId(city_id).getTimeZoneSeconds();
         return forecastFor + timezoneseconds * 1000L;
     }
 

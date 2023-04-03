@@ -2,9 +2,7 @@ package org.woheller69.weather.ui;
 
 import static org.woheller69.weather.ui.RecycleList.CityWeatherAdapter.CHART;
 import static org.woheller69.weather.ui.RecycleList.CityWeatherAdapter.DAY;
-import static org.woheller69.weather.ui.RecycleList.CityWeatherAdapter.DETAILS;
 import static org.woheller69.weather.ui.RecycleList.CityWeatherAdapter.EMPTY;
-import static org.woheller69.weather.ui.RecycleList.CityWeatherAdapter.OVERVIEW;
 import static org.woheller69.weather.ui.RecycleList.CityWeatherAdapter.WEEK;
 
 import android.annotation.SuppressLint;
@@ -16,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
 
@@ -25,7 +22,7 @@ import android.view.ViewGroup;
 
 import org.woheller69.weather.R;
 import org.woheller69.weather.activities.ForecastCityActivity;
-import org.woheller69.weather.database.CurrentWeatherData;
+import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.HourlyForecast;
 import org.woheller69.weather.database.SQLiteHelper;
 import org.woheller69.weather.database.WeekForecast;
@@ -38,7 +35,7 @@ import org.woheller69.weather.ui.viewPager.WeatherPagerAdapter;
 import java.util.List;
 
 public class WeatherCityFragment extends Fragment implements IUpdateableCityUI {
-    private static final int MINGRIDWIDTH = 500;
+
     private int mCityId = -1;
     private int[] mDataSetTypes = new int[]{};
     private static int[] mFull = {DAY, WEEK, CHART}; //TODO Make dynamic from Settings
@@ -65,10 +62,10 @@ public class WeatherCityFragment extends Fragment implements IUpdateableCityUI {
     }
 
     public void loadData() {
-                CurrentWeatherData currentWeatherData = SQLiteHelper.getInstance(getContext()).getCurrentWeatherByCityId(mCityId);
-                if (currentWeatherData.getTimestamp()==0) mDataSetTypes=mEmpty;  //show empty view if no data available yet
+                GeneralData generalData = SQLiteHelper.getInstance(getContext()).getGeneralDataByCityId(mCityId);
+                if (generalData.getTimestamp()==0) mDataSetTypes=mEmpty;  //show empty view if no data available yet
                 else mDataSetTypes=mFull;
-                mAdapter = new CityWeatherAdapter(currentWeatherData, mDataSetTypes, getContext());
+                mAdapter = new CityWeatherAdapter(generalData, mDataSetTypes, getContext());
                 setAdapter(mAdapter);
             }
 
@@ -123,7 +120,7 @@ public class WeatherCityFragment extends Fragment implements IUpdateableCityUI {
     }
 
     @Override
-    public void processNewCurrentWeatherData(CurrentWeatherData data) {
+    public void processNewGeneralData(GeneralData data) {
         if (data != null && data.getCity_id() == mCityId) {
             mDataSetTypes= mFull;
             setAdapter(new CityWeatherAdapter(data, mDataSetTypes, getContext()));

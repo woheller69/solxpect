@@ -24,7 +24,7 @@ public class OMHttpRequest {
         SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(context);
 
         return String.format(
-                "%sforecast?latitude=%s&longitude=%s&forecast_days=%s&hourly=diffuse_radiation,direct_normal_irradiance,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,precipitation_sum,windspeed_10m_max&current_weather=true&windspeed_unit=ms&timeformat=unixtime&timezone=auto",
+                "%sforecast?latitude=%s&longitude=%s&forecast_days=%s&hourly=diffuse_radiation,direct_normal_irradiance,weathercode&daily=weathercode,sunrise,sunset,&timeformat=unixtime&timezone=auto",
                 BuildConfig.BASE_URL,
                 lat,
                 lon,

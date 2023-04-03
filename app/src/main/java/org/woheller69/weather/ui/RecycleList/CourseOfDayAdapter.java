@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.woheller69.weather.R;
-import org.woheller69.weather.database.CurrentWeatherData;
+import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.HourlyForecast;
 import org.woheller69.weather.database.SQLiteHelper;
 import org.woheller69.weather.ui.Help.StringFormatUtils;
@@ -63,14 +63,14 @@ public class CourseOfDayAdapter extends RecyclerView.Adapter<CourseOfDayAdapter.
     @Override
     public void onBindViewHolder(CourseOfDayViewHolder holder, int position) {
         SQLiteHelper dbHelper = SQLiteHelper.getInstance(context);
-        CurrentWeatherData currentWeather = dbHelper.getCurrentWeatherByCityId(courseOfDayList.get(position).getCity_id());
+        GeneralData generalData = dbHelper.getGeneralDataByCityId(courseOfDayList.get(position).getCity_id());
 
         Calendar forecastTime = Calendar.getInstance();
         forecastTime.setTimeZone(TimeZone.getTimeZone("GMT"));
         forecastTime.setTimeInMillis(courseOfDayList.get(position).getLocalForecastTime(context));
 
         boolean isDay;
-        if (currentWeather.getTimeSunrise()==0 || currentWeather.getTimeSunset()==0){
+        if (generalData.getTimeSunrise()==0 || generalData.getTimeSunset()==0){
             if ((dbHelper.getCityToWatch(courseOfDayList.get(position).getCity_id()).getLatitude())>0){  //northern hemisphere
                 isDay= forecastTime.get(Calendar.DAY_OF_YEAR) >= 80 && forecastTime.get(Calendar.DAY_OF_YEAR) <= 265;  //from March 21 to September 22 (incl)
             }else{ //southern hemisphere
@@ -79,14 +79,14 @@ public class CourseOfDayAdapter extends RecyclerView.Adapter<CourseOfDayAdapter.
         }else {
             Calendar sunSetTime = Calendar.getInstance();
             sunSetTime.setTimeZone(TimeZone.getTimeZone("GMT"));
-            sunSetTime.setTimeInMillis(currentWeather.getTimeSunset() * 1000 + currentWeather.getTimeZoneSeconds() * 1000L);
+            sunSetTime.setTimeInMillis(generalData.getTimeSunset() * 1000 + generalData.getTimeZoneSeconds() * 1000L);
             sunSetTime.set(Calendar.DAY_OF_YEAR, forecastTime.get(Calendar.DAY_OF_YEAR));
             sunSetTime.set(Calendar.YEAR, forecastTime.get(Calendar.YEAR));
 
 
             Calendar sunRiseTime = Calendar.getInstance();
             sunRiseTime.setTimeZone(TimeZone.getTimeZone("GMT"));
-            sunRiseTime.setTimeInMillis(currentWeather.getTimeSunrise() * 1000 + currentWeather.getTimeZoneSeconds() * 1000L);
+            sunRiseTime.setTimeInMillis(generalData.getTimeSunrise() * 1000 + generalData.getTimeZoneSeconds() * 1000L);
             sunRiseTime.set(Calendar.DAY_OF_YEAR, forecastTime.get(Calendar.DAY_OF_YEAR));
             sunRiseTime.set(Calendar.YEAR, forecastTime.get(Calendar.YEAR));
 

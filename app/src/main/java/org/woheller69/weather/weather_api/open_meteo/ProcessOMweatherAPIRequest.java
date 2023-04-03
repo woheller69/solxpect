@@ -1,11 +1,7 @@
 package org.woheller69.weather.weather_api.open_meteo;
 
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Handler;
-import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -14,8 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.woheller69.weather.R;
 import org.woheller69.weather.activities.NavigationActivity;
-import org.woheller69.weather.database.CityToWatch;
-import org.woheller69.weather.database.CurrentWeatherData;
+import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.HourlyForecast;
 import org.woheller69.weather.database.WeekForecast;
 import org.woheller69.weather.database.SQLiteHelper;
@@ -23,7 +18,6 @@ import org.woheller69.weather.ui.updater.ViewUpdater;
 import org.woheller69.weather.weather_api.IDataExtractor;
 import org.woheller69.weather.weather_api.IProcessHttpRequest;
 
-import androidx.preference.PreferenceManager;
 import org.woheller69.weather.weather_api.IApiToDatabaseConversion.WeatherCategories;
 
 import java.util.ArrayList;
@@ -88,50 +82,41 @@ public class ProcessOMweatherAPIRequest implements IProcessHttpRequest {
             }
 
             //Extract current weather
-                String rain60min=context.getResources().getString(R.string.error_no_rain60min_data);
-                CurrentWeatherData weatherData = extractor.extractCurrentWeather(json.getString("current_weather"));
+            GeneralData generalData = new GeneralData();
+            generalData.setTimestamp(System.currentTimeMillis() / 1000);
+            generalData.setCity_id(cityId);
+            generalData.setTimeSunrise(weekforecasts.get(0).getTimeSunrise());
+            generalData.setTimeSunset(weekforecasts.get(0).getTimeSunset());
+            generalData.setTimeZoneSeconds(json.getInt("utc_offset_seconds"));
+            GeneralData current = dbHelper.getGeneralDataByCityId(cityId);
+            if (current != null && current.getCity_id() == cityId) {
+                dbHelper.updateGeneralData(generalData);
+            } else {
+                dbHelper.addGeneralData(generalData);
+            }
 
-                if (weatherData == null) {
-                    final String ERROR_MSG = context.getResources().getString(R.string.error_convert_to_json);
-                    if (NavigationActivity.isVisible)
-                        Toast.makeText(context, ERROR_MSG, Toast.LENGTH_LONG).show();
-                } else {
-                    weatherData.setCity_id(cityId);
-                    weatherData.setRain60min(rain60min);
-                    weatherData.setTimeSunrise(weekforecasts.get(0).getTimeSunrise());
-                    weatherData.setTimeSunset(weekforecasts.get(0).getTimeSunset());
-                    weatherData.setTimeZoneSeconds(json.getInt("utc_offset_seconds"));
-                    CurrentWeatherData current = dbHelper.getCurrentWeatherByCityId(cityId);
-                    if (current != null && current.getCity_id() == cityId) {
-                        dbHelper.updateCurrentWeather(weatherData);
-                    } else {
-                        dbHelper.addCurrentWeather(weatherData);
-                    }
+            //Extract hourly weather
+            dbHelper.deleteForecastsByCityId(cityId);
+            List<HourlyForecast> hourlyforecasts = new ArrayList<>();
+            hourlyforecasts = extractor.extractHourlyForecast(json.getString("hourly"), cityId);
+
+            if (hourlyforecasts!=null && !hourlyforecasts.isEmpty()){
+                for (HourlyForecast hourlyForecast: hourlyforecasts){
+                    hourlyForecast.setCity_id(cityId);
                 }
-
-
-                //Extract hourly weather
-                dbHelper.deleteForecastsByCityId(cityId);
-                List<HourlyForecast> hourlyforecasts = new ArrayList<>();
-                hourlyforecasts = extractor.extractHourlyForecast(json.getString("hourly"), cityId);
-
-                if (hourlyforecasts!=null && !hourlyforecasts.isEmpty()){
-                    for (HourlyForecast hourlyForecast: hourlyforecasts){
-                        hourlyForecast.setCity_id(cityId);
-                    }
-                } else {
-                    final String ERROR_MSG = context.getResources().getString(R.string.error_convert_to_json);
-                    if (NavigationActivity.isVisible)
-                        Toast.makeText(context, ERROR_MSG, Toast.LENGTH_LONG).show();
-                    return;
-                }
+            } else {
+                final String ERROR_MSG = context.getResources().getString(R.string.error_convert_to_json);
+                if (NavigationActivity.isVisible)
+                    Toast.makeText(context, ERROR_MSG, Toast.LENGTH_LONG).show();
+                return;
+            }
             dbHelper.addForecasts(hourlyforecasts);
 
             weekforecasts = reanalyzeWeekIDs(weekforecasts, hourlyforecasts);
 
             dbHelper.addWeekForecasts(weekforecasts);
 
-            ViewUpdater.updateCurrentWeatherData(weatherData);
+            ViewUpdater.updateGeneralDataData(generalData);
             ViewUpdater.updateWeekForecasts(weekforecasts);
             ViewUpdater.updateForecasts(hourlyforecasts);
 
@@ -192,7 +177,7 @@ public class ProcessOMweatherAPIRequest implements IProcessHttpRequest {
                    totalEnergy+=hourlyForecast.getPower();
                 }
             }
-            weekForecast.setPrecipitation(totalEnergy/1000);
+            weekForecast.setEnergyDay(totalEnergy/1000);
         }
 
         return weekforecasts;

@@ -9,7 +9,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import org.woheller69.weather.database.CityToWatch;
-import org.woheller69.weather.database.CurrentWeatherData;
+import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.HourlyForecast;
 import org.woheller69.weather.database.SQLiteHelper;
 import org.woheller69.weather.database.WeekForecast;
@@ -77,7 +77,7 @@ public class WeatherPagerAdapter extends FragmentStateAdapter implements IUpdate
 
 
     @Override
-    public void processNewCurrentWeatherData(CurrentWeatherData data) {
+    public void processNewGeneralData(GeneralData data) {
 
     }
 

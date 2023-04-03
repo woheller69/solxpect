@@ -3,7 +3,6 @@ package org.woheller69.weather.ui.RecycleList;
 import android.content.Context;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,27 +14,23 @@ import android.widget.TextView;
 import com.db.chart.Tools;
 import com.db.chart.model.BarSet;
 import com.db.chart.model.ChartSet;
-import com.db.chart.model.LineSet;
 import com.db.chart.view.AxisController;
 import com.db.chart.view.BarChartView;
 
 import org.woheller69.weather.R;
-import org.woheller69.weather.database.CurrentWeatherData;
+import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.HourlyForecast;
 import org.woheller69.weather.database.SQLiteHelper;
 import org.woheller69.weather.database.WeekForecast;
-import org.woheller69.weather.preferences.AppPreferencesManager;
 import org.woheller69.weather.ui.Help.StringFormatUtils;
 import org.woheller69.weather.ui.UiResourceProvider;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.TimeZone;
 
 public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.ViewHolder> {
-    private static final String TAG = "Forecast_Adapter";
 
     private int[] dataSetTypes;
     private List<HourlyForecast> courseDayList;
@@ -46,7 +41,7 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
     private RecyclerView mCourseOfDay;
     private RecyclerView mWeekWeather;
 
-    private CurrentWeatherData currentWeatherDataList;
+    private GeneralData generalDataList;
 
     public static final int OVERVIEW = 0;
     public static final int DETAILS = 1;
@@ -55,15 +50,15 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
     public static final int CHART = 4;
     public static final int EMPTY = 5;
 
-    public CityWeatherAdapter(CurrentWeatherData currentWeatherDataList, int[] dataSetTypes, Context context) {
-        this.currentWeatherDataList = currentWeatherDataList;
+    public CityWeatherAdapter(GeneralData generalDataList, int[] dataSetTypes, Context context) {
+        this.generalDataList = generalDataList;
         this.dataSetTypes = dataSetTypes;
         this.context = context;
 
         SQLiteHelper database = SQLiteHelper.getInstance(context.getApplicationContext());
 
-        List<HourlyForecast> hourlyForecasts = database.getForecastsByCityId(currentWeatherDataList.getCity_id());
-        List<WeekForecast> weekforecasts = database.getWeekForecastsByCityId(currentWeatherDataList.getCity_id());
+        List<HourlyForecast> hourlyForecasts = database.getForecastsByCityId(generalDataList.getCity_id());
+        List<WeekForecast> weekforecasts = database.getWeekForecastsByCityId(generalDataList.getCity_id());
 
         updateForecastData(hourlyForecasts);
         updateWeekForecastData(weekforecasts);
@@ -90,21 +85,21 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
         int cityId = forecasts.get(0).getCity_id();
 
         SQLiteHelper dbHelper = SQLiteHelper.getInstance(context.getApplicationContext());
-        int zonemilliseconds = dbHelper.getCurrentWeatherByCityId(cityId).getTimeZoneSeconds() * 1000;
+        int zonemilliseconds = dbHelper.getGeneralDataByCityId(cityId).getTimeZoneSeconds() * 1000;
 
         //temp max 0, temp min 1, humidity 2, pressure 3, precipitation 4, wind 5, wind direction 6, uv_index 7, forecast time 8, weather ID 9, number of FCs for day 10
 
         forecastData = new float[forecasts.size()][11];
 
         for (int i=0;i<forecasts.size();i++){
-            forecastData[i][0]=forecasts.get(i).getMaxTemperature();
-            forecastData[i][1]=forecasts.get(i).getMinTemperature();
-            forecastData[i][2]=forecasts.get(i).getHumidity();
-            forecastData[i][3]=forecasts.get(i).getPressure();
-            forecastData[i][4]=forecasts.get(i).getPrecipitation();
-            forecastData[i][5]=forecasts.get(i).getWind_speed();
-            forecastData[i][6]=forecasts.get(i).getWind_direction();
-            forecastData[i][7]=forecasts.get(i).getUv_index();
+            forecastData[i][0]=0;
+            forecastData[i][1]=0;
+            forecastData[i][2]=0;
+            forecastData[i][3]=0;
+            forecastData[i][4]=forecasts.get(i).getEnergyDay();
+            forecastData[i][5]=0;
+            forecastData[i][6]=0;
+            forecastData[i][7]=0;
             forecastData[i][8]=forecasts.get(i).getForecastTime()+zonemilliseconds;
             forecastData[i][9]=forecasts.get(i).getWeatherID();
             forecastData[i][10]=1;
@@ -123,17 +118,13 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
 
     public class OverViewHolder extends ViewHolder {
         TextView temperature;
-        ImageView weather;
-        ImageView windicon;
         TextView updatetime;
         TextView sun;
 
         OverViewHolder(View v) {
             super(v);
             this.temperature = v.findViewById(R.id.card_overview_temperature);
-            this.weather = v.findViewById(R.id.card_overview_weather_image);
             this.sun=v.findViewById(R.id.card_overview_sunrise_sunset);
-            this.windicon=v.findViewById(R.id.card_overview_windicon);
             this.updatetime=v.findViewById(R.id.card_overview_update_time);
         }
     }
@@ -236,26 +227,21 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-        boolean isDay = currentWeatherDataList.isDay(context);
-
-        if (viewHolder.getItemViewType() == OVERVIEW) {
+         if (viewHolder.getItemViewType() == OVERVIEW) {
             OverViewHolder holder = (OverViewHolder) viewHolder;
 
             //correct for timezone differences
-            int zoneseconds = currentWeatherDataList.getTimeZoneSeconds();
-            long riseTime = (currentWeatherDataList.getTimeSunrise() + zoneseconds) * 1000;
-            long setTime = (currentWeatherDataList.getTimeSunset() + zoneseconds) * 1000;
+            int zoneseconds = generalDataList.getTimeZoneSeconds();
+            long riseTime = (generalDataList.getTimeSunrise() + zoneseconds) * 1000;
+            long setTime = (generalDataList.getTimeSunset() + zoneseconds) * 1000;
             if (riseTime==zoneseconds*1000 || setTime==zoneseconds*1000) holder.sun.setText("\u2600\u25b2 --:--" + " \u25bc --:--" );
             else  {
                 holder.sun.setText("\u2600\u25b2 " + StringFormatUtils.formatTimeWithoutZone(context, riseTime) + " \u25bc " + StringFormatUtils.formatTimeWithoutZone(context, setTime));
             }
-            holder.windicon.setImageResource(StringFormatUtils.colorWindSpeedWidget(currentWeatherDataList.getWindSpeed()));
-            long time = currentWeatherDataList.getTimestamp();
+            long time = generalDataList.getTimestamp();
             long updateTime = ((time + zoneseconds) * 1000);
 
             holder.updatetime.setText("("+StringFormatUtils.formatTimeWithoutZone(context, updateTime)+")");
-
-            setImage(currentWeatherDataList.getWeatherID(), holder.weather, isDay);
 
 
         } else if (viewHolder.getItemViewType() == WEEK) {
@@ -265,7 +251,7 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
             holder.recyclerView.setLayoutManager(layoutManager);
 
 
-            final WeekWeatherAdapter adapter = new WeekWeatherAdapter(context, forecastData,currentWeatherDataList.getCity_id());
+            final WeekWeatherAdapter adapter = new WeekWeatherAdapter(context, forecastData, generalDataList.getCity_id());
             holder.recyclerView.setAdapter(adapter);
             holder.recyclerView.setFocusable(false);
 
@@ -280,7 +266,7 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
                         @Override
                         public void onItemClick(View view, int position) {
                             SQLiteHelper database = SQLiteHelper.getInstance(context.getApplicationContext());
-                            List<WeekForecast> weekforecasts = database.getWeekForecastsByCityId(currentWeatherDataList.getCity_id());
+                            List<WeekForecast> weekforecasts = database.getWeekForecastsByCityId(generalDataList.getCity_id());
                             long time = weekforecasts.get(position).getForecastTime();  //time of clicked week item
                             time=time-6*3600000;                                       //week item normally midday -> subtract 6h to get morning time
 
@@ -343,7 +329,7 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
             ChartViewHolder holder = (ChartViewHolder) viewHolder;
 
             SQLiteHelper database = SQLiteHelper.getInstance(context.getApplicationContext());
-            List<WeekForecast> weekforecasts = database.getWeekForecastsByCityId(currentWeatherDataList.getCity_id());
+            List<WeekForecast> weekforecasts = database.getWeekForecastsByCityId(generalDataList.getCity_id());
 
             if (weekforecasts.isEmpty()) {
                 return;
@@ -355,12 +341,12 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
 
             Calendar c = Calendar.getInstance();
             c.setTimeZone(TimeZone.getTimeZone("GMT"));
-            int zonemilliseconds = currentWeatherDataList.getTimeZoneSeconds()*1000;
+            int zonemilliseconds = generalDataList.getTimeZoneSeconds()*1000;
 
             for (int i=0 ; i< weekforecasts.size();i++) {
                 c.setTimeInMillis(weekforecasts.get(i).getForecastTime()+zonemilliseconds);
                 int day = c.get(Calendar.DAY_OF_WEEK);
-                float precip=weekforecasts.get(i).getPrecipitation();
+                float precip=weekforecasts.get(i).getEnergyDay();
 
                 String dayString = context.getResources().getString(StringFormatUtils.getDayShort(day));
                 if (weekforecasts.size()>8) dayString=dayString.substring(0,1);  //use first character only if more than 8 days to avoid overlapping text
@@ -369,18 +355,12 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
                 if (precip>pmax) pmax=precip;
             }
 
-            int step;
-
-            ArrayList<ChartSet> temperature = new ArrayList<>();
-
             ArrayList<ChartSet> precipitation = new ArrayList<>();
             precipitation.add(precipitationDataset);
 
             precipitationDataset.setColor(ContextCompat.getColor(context,R.color.yellow));
             precipitationDataset.setAlpha(0.8f);  // make precipitation bars transparent
 
-
-            step = (int) Math.ceil((Math.max(1,pmax))/4);
             holder.barChartView.addData(precipitation);
             holder.barChartView.setBarSpacing(10);
             holder.barChartView.setXAxis(false);
@@ -396,10 +376,6 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
             holder.precipitationunit.setText(" " + context.getResources().getString(R.string.units_kWh)+" ");
         }
         //No update for error needed
-    }
-
-    public void setImage(int value, ImageView imageView, boolean isDay) {
-        imageView.setImageResource(UiResourceProvider.getImageResourceForWeatherCategory(value, isDay));
     }
 
 
