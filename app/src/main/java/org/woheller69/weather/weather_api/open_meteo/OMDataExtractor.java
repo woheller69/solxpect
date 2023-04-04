@@ -1,9 +1,6 @@
 package org.woheller69.weather.weather_api.open_meteo;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-
-import androidx.preference.PreferenceManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,10 +42,10 @@ public class OMDataExtractor implements IDataExtractor {
             for (int i = 0; i < timeArray.length(); i++) {
                 WeekForecast weekForecast = new WeekForecast();
                 weekForecast.setTimestamp(System.currentTimeMillis() / 1000);
-                if (!timeArray.isNull(i)) weekForecast.setForecastTime((timeArray.getLong(i)+12*3600)*1000L);  //shift to midday
-                if (!weathercodeArray.isNull(i)) weekForecast.setWeatherID(conversion.convertWeatherCategory(weathercodeArray.getString(i)));
-                if (!sunriseArray.isNull(i)) weekForecast.setTimeSunrise(sunriseArray.getLong(i));
-                if (!sunsetArray.isNull(i)) weekForecast.setTimeSunset(sunsetArray.getLong(i));
+                if (timeArray!=null && !timeArray.isNull(i)) weekForecast.setForecastTime((timeArray.getLong(i)+12*3600)*1000L);  //shift to midday
+                if (weathercodeArray!=null && !weathercodeArray.isNull(i)) weekForecast.setWeatherID(conversion.convertWeatherCategory(weathercodeArray.getString(i)));
+                if (sunriseArray!=null && !sunriseArray.isNull(i)) weekForecast.setTimeSunrise(sunriseArray.getLong(i));
+                if (sunsetArray!=null && !sunsetArray.isNull(i)) weekForecast.setTimeSunset(sunsetArray.getLong(i));
                 weekforecasts.add(weekForecast);
             }
             return weekforecasts;
@@ -64,7 +61,6 @@ public class OMDataExtractor implements IDataExtractor {
     @Override
     public List<HourlyForecast> extractHourlyForecast(String data, int cityID) {
         try {
-            SharedPreferences prefManager = PreferenceManager.getDefaultSharedPreferences(context);
 
             List<HourlyForecast> hourlyForecasts = new ArrayList<>();
             JSONObject jsonData = new JSONObject(data);
@@ -84,10 +80,10 @@ public class OMDataExtractor implements IDataExtractor {
             for (int i = 0; i < timeArray.length(); i++) {
                 HourlyForecast hourlyForecast = new HourlyForecast();
                 hourlyForecast.setTimestamp(System.currentTimeMillis() / 1000);
-                if (timeArray!=null) hourlyForecast.setForecastTime(timeArray.getLong(i)*1000L);
-                if (weathercodeArray!=null) hourlyForecast.setWeatherID(conversion.convertWeatherCategory(weathercodeArray.getString(i)));
-                if (directRadiationArray!=null) hourlyForecast.setDirectRadiationNormal((float) directRadiationArray.getDouble(i));
-                if (diffuseRadiationArray!=null) hourlyForecast.setDiffuseRadiation((float) diffuseRadiationArray.getDouble(i));
+                if (timeArray!=null && !timeArray.isNull(i)) hourlyForecast.setForecastTime(timeArray.getLong(i)*1000L);
+                if (weathercodeArray!=null && !weathercodeArray.isNull(i)) hourlyForecast.setWeatherID(conversion.convertWeatherCategory(weathercodeArray.getString(i)));
+                if (directRadiationArray!=null && !directRadiationArray.isNull(i)) hourlyForecast.setDirectRadiationNormal((float) directRadiationArray.getDouble(i));
+                if (diffuseRadiationArray!=null && !diffuseRadiationArray.isNull(i)) hourlyForecast.setDiffuseRadiation((float) diffuseRadiationArray.getDouble(i));
                 hourlyForecast.setPower(spp.getPower(hourlyForecast.getDirectRadiationNormal(),hourlyForecast.getDiffuseRadiation(), timeArray.getLong(i)-1800));  //use solar position 1/2h earlier for calculation of average power in preceding hour
                 hourlyForecasts.add(hourlyForecast);
             }
