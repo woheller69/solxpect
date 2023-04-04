@@ -5,8 +5,9 @@ der Sonne und projiziert die Strahlung auf Ihr Solarpanel.
 Es zeigt die geschätzte Energieproduktion für die nächsten Stunden und bis zu 16 Tage an.
 
 Features:
-- Stündliches Prognose des Ertrags für bis zu 16 Tage
-- Keine Werbung
+- Ideal für Balkonkraftwerke.
+- Stündliche und tägliche Prognose des Ertrags für bis zu 16 Tage
+- 100% Privatsphäre, keine Werbung
 
 Minimale Berechtigungen:
 pvCaster benötigt nur ein Minimum an Berechtigungen, nämlich nur die INTERNET-Berechtigung. Diese ist nötig, um  Wetterdaten zu erhalten.
