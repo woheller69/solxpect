@@ -1,1 +1,1 @@
-solarCast forecasts the output of your solar power plant
+pvCaster forecasts the output of your solar power plant

@@ -1,4 +1,4 @@
-solarCast forecasts the output of your solar power plant
+pvCaster forecasts the output of your solar power plant
 
 This app takes direct and diffuse radiation data from Open-Meteo.com, calculates the position
 of the sun and projects the radiation on your solar panel.
@@ -9,4 +9,4 @@ Features:
 - No advertisement
 
 Minimum permissions:
-omWeather only requires the minimum amount of permission, namely only the INTERNET permission. This permission is necessary for retrieving weather data.
+pvCaster only requires the minimum amount of permission, namely only the INTERNET permission. This permission is necessary for retrieving weather data.

@@ -51,6 +51,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String CITIES_TO_WATCH_INVERTER_EFFICIENCY = "inverter_efficiency";
     private static final String CITIES_TO_WATCH_AZIMUTH_ANGLE = "azimuth_angle";
     private static final String CITIES_TO_WATCH_TILT_ANGLE = "tilt_angle";
+    private static final String CITIES_TO_WATCH_SHADING_ELEVATION = "shading_elevation";
+    private static final String CITIES_TO_WATCH_SHADING_OPACITY = "shading_opacity";
 
     //Names of columns in TABLE_FORECAST
     private static final String FORECAST_ID = "forecast_id";
@@ -131,7 +133,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             CITIES_TO_WATCH_INVERTER_POWER_LIMIT + " REAL NOT NULL," +
             CITIES_TO_WATCH_INVERTER_EFFICIENCY + " REAL NOT NULL," +
             CITIES_TO_WATCH_AZIMUTH_ANGLE + " REAL NOT NULL," +
-            CITIES_TO_WATCH_TILT_ANGLE + " REAL NOT NULL)";
+            CITIES_TO_WATCH_TILT_ANGLE + " REAL NOT NULL," +
+            CITIES_TO_WATCH_SHADING_ELEVATION + " VARCHAR(255) NOT NULL," +
+            CITIES_TO_WATCH_SHADING_OPACITY + " VARCHAR(255) NOT NULL)";
 
     public static SQLiteHelper getInstance(Context context) {
         if (instance == null && context != null) {
@@ -179,6 +183,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(CITIES_TO_WATCH_INVERTER_EFFICIENCY,city.getInverterEfficiency());
         values.put(CITIES_TO_WATCH_AZIMUTH_ANGLE,city.getAzimuthAngle());
         values.put(CITIES_TO_WATCH_TILT_ANGLE,city.getTiltAngle());
+        values.put(CITIES_TO_WATCH_SHADING_ELEVATION,city.getShadingElevationString());
+        values.put(CITIES_TO_WATCH_SHADING_OPACITY,city.getShadingOpacityString());
 
         long id=database.insert(TABLE_CITIES_TO_WATCH, null, values);
 
@@ -210,6 +216,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                         ", " + CITIES_TO_WATCH_INVERTER_EFFICIENCY +
                         ", " + CITIES_TO_WATCH_AZIMUTH_ANGLE +
                         ", " + CITIES_TO_WATCH_TILT_ANGLE +
+                        ", " + CITIES_TO_WATCH_SHADING_ELEVATION +
+                        ", " + CITIES_TO_WATCH_SHADING_OPACITY +
                         ", " + CITIES_TO_WATCH_COLUMN_RANK +
                         " FROM " + TABLE_CITIES_TO_WATCH +
                         " WHERE " + CITIES_TO_WATCH_CITY_ID + " = ?", arguments);
@@ -230,7 +238,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             cityToWatch.setInverterEfficiency(Float.parseFloat(cursor.getString(10)));
             cityToWatch.setAzimuthAngle(Float.parseFloat(cursor.getString(11)));
             cityToWatch.setTiltAngle(Float.parseFloat(cursor.getString(12)));
-            cityToWatch.setRank(Integer.parseInt(cursor.getString(13)));
+            cityToWatch.setShadingElevation(cursor.getString(13));
+            cityToWatch.setShadingOpacity(cursor.getString(14));
+            cityToWatch.setRank(Integer.parseInt(cursor.getString(15)));
 
             cursor.close();
         }
@@ -259,6 +269,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                         ", " + CITIES_TO_WATCH_INVERTER_EFFICIENCY +
                         ", " + CITIES_TO_WATCH_AZIMUTH_ANGLE +
                         ", " + CITIES_TO_WATCH_TILT_ANGLE +
+                        ", " + CITIES_TO_WATCH_SHADING_ELEVATION +
+                        ", " + CITIES_TO_WATCH_SHADING_OPACITY +
                         ", " + CITIES_TO_WATCH_COLUMN_RANK +
                         " FROM " + TABLE_CITIES_TO_WATCH
                 , new String[]{});
@@ -281,7 +293,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 cityToWatch.setInverterEfficiency(Float.parseFloat(cursor.getString(10)));
                 cityToWatch.setAzimuthAngle(Float.parseFloat(cursor.getString(11)));
                 cityToWatch.setTiltAngle(Float.parseFloat(cursor.getString(12)));
-                cityToWatch.setRank(Integer.parseInt(cursor.getString(13)));
+                cityToWatch.setShadingElevation(cursor.getString(13));
+                cityToWatch.setShadingOpacity(cursor.getString(14));
+                cityToWatch.setRank(Integer.parseInt(cursor.getString(15)));
 
                 cityToWatchList.add(cityToWatch);
             } while (cursor.moveToNext());
@@ -309,6 +323,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(CITIES_TO_WATCH_INVERTER_EFFICIENCY,cityToWatch.getInverterEfficiency());
         values.put(CITIES_TO_WATCH_AZIMUTH_ANGLE,cityToWatch.getAzimuthAngle());
         values.put(CITIES_TO_WATCH_TILT_ANGLE,cityToWatch.getTiltAngle());
+        values.put(CITIES_TO_WATCH_SHADING_ELEVATION,cityToWatch.getShadingElevationString());
+        values.put(CITIES_TO_WATCH_SHADING_OPACITY,cityToWatch.getShadingOpacityString());
 
         database.update(TABLE_CITIES_TO_WATCH, values, CITIES_TO_WATCH_ID + " = ?",
                 new String[]{String.valueOf(cityToWatch.getId())});

@@ -16,7 +16,7 @@ android {
         versionName "1.0"
 
         buildConfigField "String", "BASE_URL", "\"https://api.open-meteo.com/v1/\""
-        buildConfigField "String", "GITHUB_URL","\"https://github.com/woheller69/solarcast/\""
+        buildConfigField "String", "GITHUB_URL","\"https://github.com/woheller69/pvcaster/\""
     }
 
     buildTypes {

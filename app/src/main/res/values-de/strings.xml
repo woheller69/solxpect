@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">solarCast</string>
+    <string name="app_name">pvCaster</string>
     <string name="about">Über</string>
     <string name="about_privacy_heading">Privatsphäre-Informationen</string>
     <string name="about_more_info">Mehr Informationen können gefunden werden auf:</string>
     <string name="about_license_text">Diese App ist abgeleitet von Privacy Friendly Weather, entwickelt von der Forschungsgruppe SECUSO. Quelltext lizenziert unter GPLv3. Die App benutzt Icons von Google Material Design Icons, lizenziert unter Apache License Version 2.0, die Leaflet Bibliothek, lizenziert unter 2-clause BSD License, AutoSuggestTextViewAPICall, lizenziert unter der Apache License Version 2.0, Solarpositioning (net.e175.klaus:solarpositioning), lizenziert unter MIT Lizenz und die WilliamChart Bibliothek (com.db.chart), lizenziert unter der Apache License Version 2.0</string>
     <string name="about_license">Lizenz</string>
-    <string name="about_privacy_answer">solarCast benötigt nur Zugang zum Internet. Es werden weder persönliche Daten gesammelt, noch wird Werbung angezeigt.</string>
+    <string name="about_privacy_answer">pvCaster benötigt nur Zugang zum Internet. Es werden weder persönliche Daten gesammelt, noch wird Werbung angezeigt.</string>
     <string name="about_where_from">Woher kommen die Wetterinformationen?</string>
     <string name="about_where_from_answer">Die Wetterinformationen stammen von</string>
     <string name="activity_about">Über</string>
@@ -55,7 +55,7 @@
     <string name="next">Weiter</string>
     <string name="okay">OK</string>
     <string name="slide1_heading">Willkommen!</string>
-    <string name="slide1_text">solarCast prognostiziert den Ertrag Ihrer PV Anlage</string>
+    <string name="slide1_text">pvCaster prognostiziert den Ertrag Ihrer PV Anlage</string>
     <string name="slide2_text">Der Quellcode ist auf GitHub verfügbar. Weitere Informationen finden Sie auf der Über-Seite</string>
     <string name="card_error_content">Bitte versuchen Sie zu aktualisieren!</string>
     <string name="card_error_heading">Fehler beim Abrufen der Wetterdaten</string>

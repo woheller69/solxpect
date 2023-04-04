@@ -1,9 +1,9 @@
 <pre>Send a coffee to woheller69@t-online.de 
 <a href= "https://www.paypal.com/signin"><img  align="left" src="https://www.paypalobjects.com/webstatic/de_DE/i/de-pp-logo-150px.png"></a></pre>
 
-# solarCast
+# pvCaster
 
-solarCast forecasts the output of your solar power plant
+pvCaster forecasts the output of your solar power plant
 
 This app takes direct and diffuse radiation data from Open-Meteo.com, calculates the position
 of the sun and projects the radiation on your solar panel.

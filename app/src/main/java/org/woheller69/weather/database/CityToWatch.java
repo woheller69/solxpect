@@ -1,5 +1,7 @@
 package org.woheller69.weather.database;
 
+import java.util.Arrays;
+
 /**
  * This class is the database model for the cities to watch. 'Cities to watch' means the locations
  * for which a user would like to see the weather for. This includes those locations that will be
@@ -21,6 +23,8 @@ public class CityToWatch {
     private float azimuthAngle;
     private float tiltAngle;
     private int rank;
+    private int[] shadingElevation = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    private int[] shadingOpacity = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
     public CityToWatch() {
     }
@@ -145,5 +149,37 @@ public class CityToWatch {
 
     public void setTiltAngle(float tiltAngle) {
         this.tiltAngle = tiltAngle;
+    }
+
+    public void setShadingElevation(String string) {
+        shadingElevation = Arrays.stream(string.split(",")).mapToInt(Integer::parseInt).toArray();
+    }
+
+    public void setShadingElevation(int[] shadingElevation){
+        this.shadingElevation = shadingElevation;
+    }
+
+    public void setShadingOpacity(String string) {
+        shadingOpacity = Arrays.stream(string.split(",")).mapToInt(Integer::parseInt).toArray();
+    }
+
+    public void setShadingOpacity(int[] shadingOpacity){
+        this.shadingOpacity = shadingOpacity;
+    }
+
+    public int[] getShadingElevation(){
+        return shadingElevation;
+    }
+
+    public int[] getShadingOpacity(){
+        return shadingOpacity;
+    }
+
+    public String getShadingElevationString() {
+        return Arrays.toString(shadingElevation).replaceAll("\\[|\\]|\\s", "");
+    }
+
+    public String getShadingOpacityString() {
+        return Arrays.toString(shadingOpacity).replaceAll("\\[|\\]|\\s", "");
     }
 }

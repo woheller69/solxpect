@@ -1,4 +1,4 @@
-solarCast prognostiziert den Ertrag Ihrer PV Anlage
+pvCaster prognostiziert den Ertrag Ihrer PV Anlage
 
 Diese App nimmt direkte und diffuse Strahlungsdaten von Open-Meteo.com, berechnet die Position
 der Sonne und projiziert die Strahlung auf Ihr Solarpanel.
@@ -9,7 +9,7 @@ Features:
 - Keine Werbung
 
 Minimale Berechtigungen:
-solarCast benötigt nur ein Minimum an Berechtigungen, nämlich nur die INTERNET-Berechtigung. Diese ist nötig, um  Wetterdaten zu erhalten.
+pvCaster benötigt nur ein Minimum an Berechtigungen, nämlich nur die INTERNET-Berechtigung. Diese ist nötig, um  Wetterdaten zu erhalten.
 
 
 
