@@ -9,7 +9,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     defaultConfig {
-        applicationId "org.woheller69.pvforecast"
+        applicationId "org.woheller69.solxpect"
         minSdkVersion 26
         targetSdkVersion 31
         versionCode 10
