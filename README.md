@@ -32,7 +32,7 @@ Maximum power your solar cells can deliver.
 #### Cells efficiency  [%]
 Portion of energy in the form of sunlight that can be converted into electricity by the solar cell.
 
-#### Cell area [m\u00b2]
+#### Cell area [m<sup>2</sup>]
 Size of the active area your solar panel.
 
 #### Diffuse radiation efficiency  [%]
