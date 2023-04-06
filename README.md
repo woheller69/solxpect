@@ -9,7 +9,7 @@ This app takes direct and diffuse radiation data from Open-Meteo.com, calculates
 of the sun and projects the radiation on your solar panel.
 It shows the estimated energy production for the next hours and up to 16 days.
 
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/01.png" width="150"/><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/02.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/03.png" width="150"/> 
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/01.png" width="150"/><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/02.png" width="150"/><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/03.png" width="150"/><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/04.png" width="150"/> 
 
 
 ## Parameters
