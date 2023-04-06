@@ -104,7 +104,7 @@
     <string name="dialog_OK_button">OK</string>
     <string name="dialog_NO_button">No</string>
     <string name="dialog_Later_button">Maybe later</string>
-    <string name="dialog_StarOnGitHub">Do you like this app? Please give a star on GitHub or buy the developer a coffee via PayPal.</string>
+    <string name="dialog_StarOnGitHub">Do you like this app? Please give a star on GitHub and buy the developer a coffee via PayPal.</string>
     <string name="settings_show_pressure">Show air pressure</string>
     <string name="action_position" translatable="false">Update Location</string>
     <string name="settings_GPS_manual">Manual update only</string>
@@ -128,4 +128,8 @@
     <string name="edit_location_hint_inverter_efficiency">Inverter efficiency [%]</string>
     <string name="units_Wh">Wh</string>
     <string name="edit_location_title">Edit location</string>
+    <string name="edit_location_shading_azimuth_heading">Azimuth range [°]</string>
+    <string name="edit_location_shading_solar_elevation_heading">Min. solar elevation [°]</string>
+    <string name="edit_location_shading_opacity_heading">Shading below this elevation [%]</string>
+    <string name="edit_location_shading_heading">Shading</string>
 </resources>

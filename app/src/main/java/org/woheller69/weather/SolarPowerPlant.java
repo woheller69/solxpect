@@ -19,8 +19,10 @@ public class SolarPowerPlant {
     double inverterEfficiency;
     double azimuthAngle;
     double tiltAngle;
+    private int[] shadingElevation;
+    private int[] shadingOpacity;
 
-    public SolarPowerPlant(double latitude, double longitude, double cellsMaxPower, double cellsArea, double cellsEfficiency, double diffuseEfficiency, double inverterPowerLimit, double inverterEfficiency, double azimuthAngle, double tiltAngle) {
+    public SolarPowerPlant(double latitude, double longitude, double cellsMaxPower, double cellsArea, double cellsEfficiency, double diffuseEfficiency, double inverterPowerLimit, double inverterEfficiency, double azimuthAngle, double tiltAngle, int[] shadingElevation, int[] shadingOpacity ) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.cellsMaxPower = cellsMaxPower;
@@ -31,6 +33,8 @@ public class SolarPowerPlant {
         this.inverterEfficiency = inverterEfficiency / 100;
         this.azimuthAngle = azimuthAngle;
         this.tiltAngle = tiltAngle;
+        this.shadingElevation = shadingElevation;
+        this.shadingOpacity = shadingOpacity;
 
     }
 
@@ -51,14 +55,21 @@ public class SolarPowerPlant {
         Double[] normalPanel = {Math.sin(azimuthAngle / 180 * Math.PI) * Math.cos((90 - tiltAngle) / 180 * Math.PI), Math.cos(azimuthAngle / 180 * Math.PI) * Math.cos((90 - tiltAngle) / 180 * Math.PI), Math.sin((90 - tiltAngle) / 180 * Math.PI)};
 
         double efficiency = 0;  //calculate scalar product of sunDirection and normalPanel vectors
-        for (int j = 0; j < directionSun.length; j++) {
-            efficiency += directionSun[j] * normalPanel[j];
+        if(solarPowerNormal>0) {  //only needed if normal radiation is available
+            for (int j = 0; j < directionSun.length; j++) {
+                efficiency += directionSun[j] * normalPanel[j];
+            }
+
+            efficiency = Math.max(0, efficiency); //scalar product is negative if sun points to back of module. set 0 in this case
+
+            if (efficiency > 0) {
+                //Calculate shading  in 10 degree ranges, total 36 ranges
+                int shadingIndex = ((((int) Math.round((solarAzimuth + 5) / 10)) - 1) % 36 + 36) % 36;
+                if (shadingElevation[shadingIndex] > solarElevation) {
+                    efficiency *= (double) (100 - shadingOpacity[shadingIndex])/100;
+                }
+            }
         }
-
-        efficiency = Math.max(0,efficiency); //scalar product is negative if sun points to back of module. set 0 in this case
-
-        //TODO solarPowerDiffuse ignored so far
-
         double dcPower = (solarPowerNormal * efficiency + solarPowerDiffuse * diffuseEfficiency )* cellsEfficiency * cellsArea;
 
         double acPower = Math.min(dcPower * inverterEfficiency, inverterPowerLimit);

@@ -3,8 +3,11 @@ package org.woheller69.weather.ui.RecycleList;
 import android.content.Context;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,12 +70,16 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
 
     // function update 3-hour or 1-hour forecast list
     public void updateForecastData(List<HourlyForecast> hourlyForecasts) {
-
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         courseDayList = new ArrayList<>();
 
             for (HourlyForecast f : hourlyForecasts) {
-                if (f.getForecastTime() >= System.currentTimeMillis()) {
+                if (sp.getBoolean("pref_debug",false)) {
                     courseDayList.add(f);
+                } else {
+                    if (f.getForecastTime() >= System.currentTimeMillis()) {
+                        courseDayList.add(f);
+                    }
                 }
             }
             notifyDataSetChanged();

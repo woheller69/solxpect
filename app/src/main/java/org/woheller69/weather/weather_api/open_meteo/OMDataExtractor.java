@@ -73,7 +73,7 @@ public class OMDataExtractor implements IDataExtractor {
 
             SQLiteHelper dbhelper = SQLiteHelper.getInstance(context);
             CityToWatch city = dbhelper.getCityToWatch(cityID);
-            SolarPowerPlant spp = new SolarPowerPlant(city.getLatitude(), city.getLongitude(), city.getCellsMaxPower(), city.getCellsArea(), city.getCellsEfficiency(),city.getDiffuseEfficiency(), city.getInverterPowerLimit(), city.getInverterEfficiency(), city.getAzimuthAngle(), city.getTiltAngle());
+            SolarPowerPlant spp = new SolarPowerPlant(city.getLatitude(), city.getLongitude(), city.getCellsMaxPower(), city.getCellsArea(), city.getCellsEfficiency(),city.getDiffuseEfficiency(), city.getInverterPowerLimit(), city.getInverterEfficiency(), city.getAzimuthAngle(), city.getTiltAngle(), city.getShadingElevation(), city.getShadingOpacity());
 
 
             IApiToDatabaseConversion conversion = new OMToDatabaseConversion();

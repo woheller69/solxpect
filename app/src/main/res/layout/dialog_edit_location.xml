@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingBottom="0dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -121,5 +121,20 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:hint="@string/edit_location_hint_inverter_efficiency"/>
+
+    <LinearLayout
+        android:id="@+id/edit_Location_shading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_location_shading_heading"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_marginBottom="10dp"/>
+
+    </LinearLayout>
 </LinearLayout>
 </ScrollView>

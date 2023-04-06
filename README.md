@@ -45,6 +45,11 @@ Maximum power of your inverter. If it is lower than the maximum power of your pa
 #### Inverter efficiency  [%] 
 Efficiency of your inverter.
 
+#### Shading
+In this section you can define the shading on your solar panels.
+For each azimuth angle range, you can specify the minimum elevation of the sun that is necessary for the sun to hit the solar panels.
+For elevations below this value you can set the percentage of shading. For example, a building will reduce radiation by 100%, a tree maybe only by 60%.
+
 ## License
 
 This app is licensed under the GPLv3.
