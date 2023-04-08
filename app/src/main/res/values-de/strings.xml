@@ -130,5 +130,6 @@
     <string name="edit_location_shading_solar_elevation_heading">Min. Elevation der Sonne [°]</string>
     <string name="edit_location_shading_opacity_heading">Abschattung unterhalb dieser Elevation [%]</string>
     <string name="edit_location_shading_heading">Abschattung</string>
+    <string name="activity_help">Anleitung</string>
 
 </resources>

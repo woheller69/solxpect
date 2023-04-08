@@ -1,0 +1,50 @@
+<html>
+<body>
+<h2>Overview</h2>
+
+This app takes direct and diffuse radiation data from Open-Meteo.com, calculates the position
+of the sun and projects the radiation on your solar panel.
+It shows the estimated energy production for the next hours and up to 16 days.
+The hourly values are calculated for the preceding hour.
+So if there are 150 Wh shown at 11:00 this means you can expect 150 Wh between 10:00 and 11:00.
+
+<h2>Parameters</h2>
+
+<h3>Latitude [°]</h3>
+Latitude specifies the north–south position of your solar power plant. It ranges from –90° at the south pole to 90° at the north pole.
+
+<h3>Longitude [°]</h3>
+Longitude specifies the east–west position of your solar power plant. The prime meridian defines 0° longitude. Positive longitudes are east of the prime meridian, negative ones are west.
+
+<h3>Azimuth [°]</h3>
+Azimuth is the horizontal direction of your solar power plant. 0° equals North, 90° equals East, 180° equals South, 270° equals West.
+
+<h3>Tilt [°]</h3>
+Tilt is the vertical direction of your solar power plant. 0° means it points up towards the the sky, 90° means it has a vertical orientation and points towards the horizon.
+
+<h3>Cells max power [W]</h3>
+Maximum power your solar cells can deliver.
+
+<h3>Cells efficiency  [%]</h3>
+Portion of energy in the form of sunlight that can be converted into electricity by the solar cell.
+
+<h3>Cell area [m<sup>2</sup>]</h3>
+Size of the active area your solar panel.
+
+<h3>Diffuse radiation efficiency  [%]</h3>
+Efficiency of your solar power plant for diffuse radiation. When pointing up it should be around 100%, when pointing to the horizon it may be around 50%.
+Also depends on reflections etc.
+
+<h3>Inverter power  [W]</h3>
+Maximum power of your inverter. If it is lower than the maximum power of your panels the output power of your system will be limited by this parameter.
+
+<h3>Inverter efficiency  [%]</h3>
+Efficiency of your inverter.
+
+<h3>Shading</h3>
+In this section you can define the shading on your solar panels.
+For each azimuth angle range, you can specify the minimum elevation of the sun that is necessary for the sun to hit the solar panels.
+For elevations below this value you can set the percentage of shading. For example, a building will reduce radiation by 100%, a tree maybe only by 60%.
+
+</body>
+</html>

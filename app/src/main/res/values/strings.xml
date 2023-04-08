@@ -132,4 +132,5 @@
     <string name="edit_location_shading_solar_elevation_heading">Min. solar elevation [°]</string>
     <string name="edit_location_shading_opacity_heading">Shading below this elevation [%]</string>
     <string name="edit_location_shading_heading">Shading</string>
+    <string name="activity_help">Instructions</string>
 </resources>

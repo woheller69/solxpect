@@ -174,10 +174,13 @@ public class NavigationActivity extends AppCompatActivity implements OnNavigatio
             startActivity(intent);
         }else if (itemId==R.id.nav_about) {
             intent = new Intent(this, AboutActivity.class);
-            createBackStack(intent);
+            startActivity(intent);
         }else if(itemId==R.id.nav_settings) {
             intent = new Intent(this, SettingsActivity.class);
-            createBackStack(intent);
+            startActivity(intent);
+        }else if(itemId==R.id.nav_help) {
+            intent = new Intent(this, HelpActivity.class);
+            startActivity(intent);
         }else if (itemId==R.id.star_on_github){
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse(BuildConfig.GITHUB_URL)));

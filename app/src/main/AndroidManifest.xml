@@ -46,6 +46,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.woheller69.weather.activities.ForecastCityActivity" />
         </activity>
+        <activity
+            android:name="org.woheller69.weather.activities.HelpActivity"
+            android:label="@string/activity_help"
+            android:parentActivityName="org.woheller69.weather.activities.ForecastCityActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.woheller69.weather.activities.ForecastCityActivity" />
+        </activity>
 
         <activity
             android:name="org.woheller69.weather.activities.SettingsActivity"
