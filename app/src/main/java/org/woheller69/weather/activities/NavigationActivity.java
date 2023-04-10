@@ -144,18 +144,6 @@ public class NavigationActivity extends AppCompatActivity implements OnNavigatio
         }
     }
 
-    /**
-     * Enables back navigation for activities that are launched from the NavBar. See
-     * {@code AndroidManifest.xml} to find out the parent activity names for each activity.
-     *
-     * @param intent
-     */
-    private void createBackStack(Intent intent) {
-        TaskStackBuilder builder = TaskStackBuilder.create(this);
-        builder.addNextIntentWithParentStack(intent);
-        builder.startActivities();
-    }
-
     private void callDrawerItem(final int itemId) {
 
         Intent intent;
