@@ -41,4 +41,9 @@ public class HelpActivity extends NavigationActivity{
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
+
+    @Override
+    protected int getNavigationDrawerID() {
+        return R.id.nav_help;
+    }
 }
