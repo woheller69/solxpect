@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.PreferenceManager;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -19,17 +20,24 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.TextView;
+import net.e175.klaus.solarpositioning.AzimuthZenithAngle;
+import net.e175.klaus.solarpositioning.DeltaT;
+import net.e175.klaus.solarpositioning.Grena3;
 
 import org.woheller69.weather.R;
 import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.HourlyForecast;
 import org.woheller69.weather.database.SQLiteHelper;
 import org.woheller69.weather.database.WeekForecast;
+import org.woheller69.weather.ui.Help.StringFormatUtils;
 import org.woheller69.weather.ui.updater.IUpdateableCityUI;
 import org.woheller69.weather.ui.updater.ViewUpdater;
 import org.woheller69.weather.ui.viewPager.WeatherPagerAdapter;
 
 import java.lang.reflect.Field;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public class ForecastCityActivity extends NavigationActivity implements IUpdateableCityUI {
@@ -179,6 +187,26 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
                 WeatherPagerAdapter.refreshSingleData(getApplicationContext(),true, pagerAdapter.getCityIDForPos(viewPager2.getCurrentItem()));
                 ForecastCityActivity.startRefreshAnimation();
             }
+        } else if (id==R.id.menu_sun_position){
+            Long time = System.currentTimeMillis()/1000;
+            Instant i = Instant.ofEpochSecond(time); //currentTimeMillis is in GMT
+            ZonedDateTime dateTime = ZonedDateTime.ofInstant(i, ZoneId.of("GMT"));
+            AzimuthZenithAngle position = Grena3.calculateSolarPosition(
+                    dateTime,
+                    db.getCityToWatch(cityId).getLatitude(),
+                    db.getCityToWatch(cityId).getLongitude(),
+                    DeltaT.estimate(dateTime.toLocalDate())); // delta T (s)
+
+            String solarAzimuth = StringFormatUtils.formatDecimal((float) position.getAzimuth(),"");
+            String solarElevation = StringFormatUtils.formatDecimal((float) (90 - position.getZenithAngle()),"");
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle(R.string.action_sun_position);
+
+            alertDialogBuilder.setMessage(getString(R.string.edit_location_hint_azimuth)+": "+solarAzimuth + " \n" + getString(R.string.action_sun_elevation) + ": " + solarElevation);
+            alertDialogBuilder.setPositiveButton(getString(android.R.string.ok), (dialog, which) -> { });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
         }
 
         return super.onOptionsItemSelected(item);
