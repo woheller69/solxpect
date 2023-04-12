@@ -33,8 +33,12 @@ Maximum power your solar cells can deliver.
 #### Cells efficiency  [%]
 Portion of energy in the form of sunlight that can be converted into electricity by the solar cell.
 
+#### Temperature coefficient  [%/K]
+Dependence of the cell power on temperature (usually in the range of -0.4%/K).
+Cell temperature is estimated from ambient temperature and total irradiance.
+
 #### Cell area [m<sup>2</sup>]
-Size of the active area your solar panel.
+Size of your solar panel.
 
 #### Diffuse radiation efficiency  [%]
 Efficiency of your solar power plant for diffuse radiation. When pointing up it should be around 100%, when pointing to the horizon it may be around 50%. 
