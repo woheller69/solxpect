@@ -40,7 +40,7 @@ public class SolarPowerPlant {
 
     }
 
-    public float getPower(double solarPowerNormal, double solarPowerDiffuse, long epochTimeSeconds, float ambientTemperature) {
+    public float getPower(double solarPowerNormal, double solarPowerDiffuse, long epochTimeSeconds, double ambientTemperature) {
         Instant i = Instant.ofEpochSecond(epochTimeSeconds); //currentTimeMillis is in GMT
         ZonedDateTime dateTime = ZonedDateTime.ofInstant(i, ZoneId.of("GMT"));
 
@@ -73,8 +73,8 @@ public class SolarPowerPlant {
             }
         }
 
-        float totalRadiationOnCell = (float) (solarPowerNormal * efficiency + solarPowerDiffuse * diffuseEfficiency);  //flat plate equivalent of the solar irradiance
-        float cellTemperature = calcCellTemperature(ambientTemperature,totalRadiationOnCell);
+        double totalRadiationOnCell = solarPowerNormal * efficiency + solarPowerDiffuse * diffuseEfficiency;  //flat plate equivalent of the solar irradiance
+        double cellTemperature = calcCellTemperature(ambientTemperature,totalRadiationOnCell);
 
         double dcPower = totalRadiationOnCell * cellsEfficiency * (1+(cellTemperature - 25)*cellsTempCoeff) * cellsArea;
 
@@ -83,11 +83,11 @@ public class SolarPowerPlant {
         return (float) acPower;
     }
 
-    public static float calcCellTemperature(float ambientTemperature, float totalIrradiance){
+    public static double calcCellTemperature(double ambientTemperature, double totalIrradiance){
         //models from here: https://www.scielo.br/j/babt/a/FBq5Pmm4gSFqsfh3V8MxfGN/  Photovoltaic Cell Temperature Estimation for a Grid-Connect Photovoltaic Systems in Curitiba
         //float cellTemperature =  30.006f + 0.0175f*(totalIrradiance-300f)+1.14f*(ambientTemperature-25f);  //Lasnier and Ang  Lasnier, F.; Ang, T. G. Photovoltaic engineering handbook, 1st ed.; IOP Publishing LTD: Lasnier, France, 1990; pp. 258.
         //float cellTemperature = ambientTemperature + 0.028f*totalIrradiance-1f;  //Schott Schott, T. Operation temperatures of PV modules. Photovoltaic solar energy conference 1985, pp. 392-396.
-        float cellTemperature = ambientTemperature + 0.0342f*totalIrradiance;  //Ross model: https://www.researchgate.net/publication/275438802_Thermal_effects_of_the_extended_holographic_regions_for_holographic_planar_concentrator
+        double cellTemperature = ambientTemperature + 0.0342f*totalIrradiance;  //Ross model: https://www.researchgate.net/publication/275438802_Thermal_effects_of_the_extended_holographic_regions_for_holographic_planar_concentrator
         //assuming "not so well cooled" : 0.0342
         return cellTemperature;
     }

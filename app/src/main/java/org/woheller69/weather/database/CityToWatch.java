@@ -37,15 +37,15 @@ public class CityToWatch {
         this.id = id;
         this.cityId = cityId;
         this.cityName = cityName;
-        this.cellsMaxPower = 650;
+        this.cellsMaxPower = 650.0f;
         this.cellsArea = 3.18f;
         this.cellsEfficiency = 19.3f;
         this.cellsTempCoeff = -0.4f;
-        this.diffuseEfficiency = 40;
-        this.inverterPowerLimit = 600;
-        this.inverterEfficiency = 95;
-        this.azimuthAngle = 170;
-        this.tiltAngle = 90;
+        this.diffuseEfficiency = 40.0f;
+        this.inverterPowerLimit = 600.0f;
+        this.inverterEfficiency = 95.0f;
+        this.azimuthAngle = 170.0f;
+        this.tiltAngle = 90.0f;
 
     }
 

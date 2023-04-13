@@ -78,16 +78,16 @@ public class OMDataExtractor implements IDataExtractor {
 
 
             IApiToDatabaseConversion conversion = new OMToDatabaseConversion();
-            float ambientTemperature = 25;
+            double ambientTemperature = 25.0;
             for (int i = 0; i < timeArray.length(); i++) {
                 HourlyForecast hourlyForecast = new HourlyForecast();
                 hourlyForecast.setTimestamp(System.currentTimeMillis() / 1000);
                 if (timeArray!=null && !timeArray.isNull(i)) hourlyForecast.setForecastTime(timeArray.getLong(i)*1000L);
-                if (tempArray != null && !tempArray.isNull(i)) ambientTemperature = (float) tempArray.getDouble(i);
+                if (tempArray != null && !tempArray.isNull(i)) ambientTemperature = tempArray.getDouble(i);
                 if (weathercodeArray!=null && !weathercodeArray.isNull(i)) hourlyForecast.setWeatherID(conversion.convertWeatherCategory(weathercodeArray.getString(i)));
                 if (directRadiationArray!=null && !directRadiationArray.isNull(i)) hourlyForecast.setDirectRadiationNormal((float) directRadiationArray.getDouble(i));
                 if (diffuseRadiationArray!=null && !diffuseRadiationArray.isNull(i)) hourlyForecast.setDiffuseRadiation((float) diffuseRadiationArray.getDouble(i));
-                hourlyForecast.setPower(spp.getPower(hourlyForecast.getDirectRadiationNormal(),hourlyForecast.getDiffuseRadiation(), timeArray.getLong(i)-1800 , ambientTemperature));  //use solar position 1/2h earlier for calculation of average power in preceding hour
+                hourlyForecast.setPower(spp.getPower(hourlyForecast.getDirectRadiationNormal(), hourlyForecast.getDiffuseRadiation(), timeArray.getLong(i)-1800, ambientTemperature));  //use solar position 1/2h earlier for calculation of average power in preceding hour
                 hourlyForecasts.add(hourlyForecast);
             }
             return hourlyForecasts;
