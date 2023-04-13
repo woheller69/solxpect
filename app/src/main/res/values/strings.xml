@@ -13,12 +13,7 @@
     <string name="slide1_text">solXpect forecasts the output of your solar power plant</string>
     <string name="slide2_heading" translatable="false">Github</string>
     <string name="slide2_text">The sourcecode of this app is available at GitHub. For further explanations have a look at the About Page.</string>
-    <string name="card_details_heading">Now</string>
-    <string name="card_details_humidity">Humidity:</string>
-    <string name="card_details_pressure">Pressure:</string>
-    <string name="card_details_wind_speed">Wind:</string>
     <string name="card_week_heading">Week</string>
-    <string name="card_day_heading">Course of the day</string>
     <string name="card_error_heading">Error fetching weather data</string>
     <string name="card_error_content">Please try to update!</string>
     <string name="about_privacy_heading">Privacy Info</string>
@@ -30,15 +25,6 @@
     <string name="about_github" translatable="false"><a href="https://github.com/woheller69/solxpect">Github-Repo</a></string>
     <string name="about_openmeteo" translatable="false"><a href="https://open-meteo.com">Open-Meteo \n(Attribution 4.0 International CC BY 4.0)</a></string>
     <string name="activity_settings_title">Settings</string>
-    <string name="settings_title_units">Units</string>
-    <string name="settings_summary_temperature">Set the unit to use for displaying temperatures</string>
-    <string name="settings_title_temperature">Temperatures</string>
-    <string name="settings_celsius">Celsius</string>
-    <string name="settings_fahrenheit">Fahrenheit</string>
-    <string name="settings_summary_distance">Set the unit to use for displaying distances</string>
-    <string name="settings_title_distance">Distances</string>
-    <string name="settings_kilometers">Kilometers</string>
-    <string name="settings_miles">Miles</string>
     <string name="abbreviation_monday">Mo.</string>
     <string name="abbreviation_tuesday">Tu.</string>
     <string name="abbreviation_wednesday">We.</string>
@@ -79,42 +65,18 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
     <string name="chart">Chart</string>
-    <string name="units_rh">% rh</string>
     <string name="units_kWh">kWh</string>
-    <string name="units_km">km</string>
-    <string name="units_hPa">hPa</string>
-    <string name="units_Bft">Bft</string>
-    <string name="units_mm_h">mm/h</string>
-    <string name="units_km_h">km/h</string>
-    <string name="units_mph">mph</string>
-    <string name="card_details_rain60min">☔ 60 min:</string>
-    <string name="error_no_rain60min_data">no data</string>
     <string name="dialog_edit_change_button">Modify</string>
     <string name="edit_location_hint_name">Name</string>
     <string name="settings_search">Search</string>
-    <string name="settings_temp_decimal">Show temperature with one decimal</string>
     <string name="settings_darkmode">Android 10+ Dark Mode</string>
-    <string name="settings_position">Position</string>
-    <string name="settings_GPS_summary">Allow usage of current GPS position in first TAB and in current weather widget. Position update is triggered automatically by widget.</string>
-    <string name="settings_GPS_position">Allow GPS usage</string>
-    <string name="error_no_position">No position available</string>
     <string name="settings_time24h">24-hour format</string>
     <string name="summary_time24h">Override system setting</string>
-    <string name="settings_wind">Use Beaufort scale</string>
     <string name="dialog_OK_button">OK</string>
     <string name="dialog_NO_button">No</string>
     <string name="dialog_Later_button">Maybe later</string>
     <string name="dialog_StarOnGitHub">Do you like this app? Please give a star on GitHub and buy the developer a coffee via PayPal.</string>
-    <string name="settings_show_pressure">Show air pressure</string>
-    <string name="action_position" translatable="false">Update Location</string>
-    <string name="settings_GPS_manual">Manual update only</string>
-    <string name="rationale_background_location">Please also allow GPS usage in the background for use in the widget</string>
-    <string name="error_no_gps">Please turn on GPS</string>
     <string name="slide3_heading">Open-Meteo</string>
-    <string name="summary_reanalyze">Improve week icons by analyzing hourly forecasts between sunrise and sunset (experimental).</string>
-    <string name="settings_reanalyze">Week Icons</string>
-    <string name="settings_precipitation">Precipitation</string>
-    <string name="summary_precipitation">Use snow amount  instead of the equivalent amount of water.</string>
     <string name="settings_forecast_days">Number of forecast days</string>
     <string name="edit_location_hint_latitude">Latitude [°]</string>
     <string name="edit_location_hint_longitude">Longitude [°]</string>
@@ -135,4 +97,5 @@
     <string name="activity_help">Instructions</string>
     <string name="action_sun_position">Sun position</string>
     <string name="action_sun_elevation">Elevation [°]</string>
+    <string name="edit_location_hint_cells_temp_coeff">Temperature coefficient [%/K]</string>
 </resources>

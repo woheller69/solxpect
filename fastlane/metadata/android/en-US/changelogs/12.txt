@@ -1,0 +1,6 @@
+Estimate panel temperature from ambient temperature and radiation
+Additional parameter: temperature coefficient
+Adapt efficiency according to these values
+Bugfix input filter
+
+!!! Please enter temperature coeffient of your panels !!!

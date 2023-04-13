@@ -17,6 +17,7 @@ public class CityToWatch {
     private float cellsMaxPower;
     private float cellsArea;
     private float cellsEfficiency;
+    private float cellsTempCoeff;
     private float diffuseEfficiency;
     private float inverterPowerLimit;
     private float inverterEfficiency;
@@ -36,14 +37,15 @@ public class CityToWatch {
         this.id = id;
         this.cityId = cityId;
         this.cityName = cityName;
-        this.cellsMaxPower=650;
-        this.cellsArea=3.18f;
-        this.cellsEfficiency=19.3f;
-        this.diffuseEfficiency=40;
-        this.inverterPowerLimit =600;
-        this.inverterEfficiency =95;
-        this.azimuthAngle=170;
-        this.tiltAngle =90;
+        this.cellsMaxPower = 650;
+        this.cellsArea = 3.18f;
+        this.cellsEfficiency = 19.3f;
+        this.cellsTempCoeff = -0.4f;
+        this.diffuseEfficiency = 40;
+        this.inverterPowerLimit = 600;
+        this.inverterEfficiency = 95;
+        this.azimuthAngle = 170;
+        this.tiltAngle = 90;
 
     }
 
@@ -181,5 +183,13 @@ public class CityToWatch {
 
     public String getShadingOpacityString() {
         return Arrays.toString(shadingOpacity).replaceAll("\\[|\\]|\\s", "");
+    }
+
+    public float getCellsTempCoeff() {
+        return cellsTempCoeff;
+    }
+
+    public void setCellsTempCoeff(float cellsTempCoeff) {
+        this.cellsTempCoeff = cellsTempCoeff;
     }
 }

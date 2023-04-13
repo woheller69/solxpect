@@ -5,7 +5,7 @@
         android:id="@+id/menu_sun_position"
         android:orderInCategory="80"
         android:visible="true"
-        android:icon="@drawable/ic_wb_sunny_24px"
+        android:icon="@drawable/ic_sunny_24px"
         app:showAsAction="always"
         android:title="@string/action_sun_position" />
     <item

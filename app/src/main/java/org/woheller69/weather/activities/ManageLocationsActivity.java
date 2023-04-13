@@ -187,6 +187,7 @@ public class ManageLocationsActivity extends NavigationActivity {
         EditText editCellsMaxPower = (EditText) dialogView.findViewById(R.id.EditLocation_Cell_Max_Power);
         EditText editCellsArea = (EditText) dialogView.findViewById(R.id.EditLocation_Cells_Area);
         EditText editCellsEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Cell_Efficiency);
+        EditText editCellsTempCoeff = (EditText) dialogView.findViewById(R.id.EditLocation_Cell_Temp_Coeff);
         EditText editDiffuseEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Diffuse_Efficiency);
         EditText editInverterPowerLimit = (EditText) dialogView.findViewById(R.id.EditLocation_Inverter_Power_Limit);
         EditText editInverterEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Inverter_Efficiency);
@@ -204,6 +205,8 @@ public class ManageLocationsActivity extends NavigationActivity {
         editCellsArea.setText(Float.toString(city.getCellsArea()));
         editCellsEfficiency.setText(Float.toString(city.getCellsEfficiency()));
         editCellsEfficiency.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 100)});
+        editCellsTempCoeff.setText(Float.toString(city.getCellsTempCoeff()));
+        editCellsTempCoeff.setFilters(new InputFilter[]{ new InputFilterMinMax(-100, 100)});
         editDiffuseEfficiency.setText(Float.toString(city.getDiffuseEfficiency()));
         editDiffuseEfficiency.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 100)});
         editInverterPowerLimit.setText(Float.toString(city.getInverterPowerLimit()));
@@ -237,6 +240,7 @@ public class ManageLocationsActivity extends NavigationActivity {
                     Float.parseFloat(editCellsMaxPower.getText().toString().isEmpty() ? "0" : editCellsMaxPower.getText().toString()),
                     Float.parseFloat(editCellsArea.getText().toString().isEmpty() ? "0" : editCellsArea.getText().toString()),
                     Float.parseFloat(editCellsEfficiency.getText().toString().isEmpty() ? "0" : editCellsEfficiency.getText().toString()),
+                    Float.parseFloat(editCellsTempCoeff.getText().toString().isEmpty() ? "0" : editCellsTempCoeff.getText().toString()),
                     Float.parseFloat(editDiffuseEfficiency.getText().toString().isEmpty() ? "0" : editDiffuseEfficiency.getText().toString()),
                     Float.parseFloat(editInverterPowerLimit.getText().toString().isEmpty() ? "0" : editInverterPowerLimit.getText().toString()),
                     Float.parseFloat(editInverterEfficiency.getText().toString().isEmpty() ? "0" : editInverterEfficiency.getText().toString()),

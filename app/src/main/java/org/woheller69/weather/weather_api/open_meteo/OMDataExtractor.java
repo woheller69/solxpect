@@ -66,6 +66,7 @@ public class OMDataExtractor implements IDataExtractor {
             JSONObject jsonData = new JSONObject(data);
             JSONArray timeArray = jsonData.getJSONArray("time");
             JSONArray weathercodeArray = jsonData.has("weathercode") ? jsonData.getJSONArray("weathercode") : null;
+            JSONArray tempArray = jsonData.has("temperature_2m") ? jsonData.getJSONArray("temperature_2m") : null;
             JSONArray directRadiationArray = jsonData.has("direct_normal_irradiance") ? jsonData.getJSONArray("direct_normal_irradiance") : null;
             JSONArray diffuseRadiationArray = jsonData.has("diffuse_radiation") ? jsonData.getJSONArray("diffuse_radiation") : null;
 
@@ -73,18 +74,20 @@ public class OMDataExtractor implements IDataExtractor {
 
             SQLiteHelper dbhelper = SQLiteHelper.getInstance(context);
             CityToWatch city = dbhelper.getCityToWatch(cityID);
-            SolarPowerPlant spp = new SolarPowerPlant(city.getLatitude(), city.getLongitude(), city.getCellsMaxPower(), city.getCellsArea(), city.getCellsEfficiency(),city.getDiffuseEfficiency(), city.getInverterPowerLimit(), city.getInverterEfficiency(), city.getAzimuthAngle(), city.getTiltAngle(), city.getShadingElevation(), city.getShadingOpacity());
+            SolarPowerPlant spp = new SolarPowerPlant(city.getLatitude(), city.getLongitude(), city.getCellsMaxPower(), city.getCellsArea(), city.getCellsEfficiency(), city.getCellsTempCoeff(), city.getDiffuseEfficiency(), city.getInverterPowerLimit(), city.getInverterEfficiency(), city.getAzimuthAngle(), city.getTiltAngle(), city.getShadingElevation(), city.getShadingOpacity());
 
 
             IApiToDatabaseConversion conversion = new OMToDatabaseConversion();
+            float ambientTemperature = 25;
             for (int i = 0; i < timeArray.length(); i++) {
                 HourlyForecast hourlyForecast = new HourlyForecast();
                 hourlyForecast.setTimestamp(System.currentTimeMillis() / 1000);
                 if (timeArray!=null && !timeArray.isNull(i)) hourlyForecast.setForecastTime(timeArray.getLong(i)*1000L);
+                if (tempArray != null && !tempArray.isNull(i)) ambientTemperature = (float) tempArray.getDouble(i);
                 if (weathercodeArray!=null && !weathercodeArray.isNull(i)) hourlyForecast.setWeatherID(conversion.convertWeatherCategory(weathercodeArray.getString(i)));
                 if (directRadiationArray!=null && !directRadiationArray.isNull(i)) hourlyForecast.setDirectRadiationNormal((float) directRadiationArray.getDouble(i));
                 if (diffuseRadiationArray!=null && !diffuseRadiationArray.isNull(i)) hourlyForecast.setDiffuseRadiation((float) diffuseRadiationArray.getDouble(i));
-                hourlyForecast.setPower(spp.getPower(hourlyForecast.getDirectRadiationNormal(),hourlyForecast.getDiffuseRadiation(), timeArray.getLong(i)-1800));  //use solar position 1/2h earlier for calculation of average power in preceding hour
+                hourlyForecast.setPower(spp.getPower(hourlyForecast.getDirectRadiationNormal(),hourlyForecast.getDiffuseRadiation(), timeArray.getLong(i)-1800 , ambientTemperature));  //use solar position 1/2h earlier for calculation of average power in preceding hour
                 hourlyForecasts.add(hourlyForecast);
             }
             return hourlyForecasts;

@@ -15,11 +15,6 @@
     <string name="activity_settings">Einstellungen</string>
     <string name="action_refresh">Aktualisieren</string>
     <string name="activity_settings_title">Einstellungen</string>
-    <string name="card_details_heading">Jetzt</string>
-    <string name="card_details_humidity">Luftfeuchte:</string>
-    <string name="card_details_pressure">Luftdruck:</string>
-    <string name="card_details_wind_speed">Wind:</string>
-    <string name="card_day_heading">Tagesverlauf</string>
     <string name="card_week_heading">Woche</string>
     <string name="error_convert_to_json">Die erhaltenen Wetterdaten entsprachen nicht dem erwarteten Format.</string>
     <string name="error_no_internet">Das Gerät ist nicht mit dem Internet verbunden!</string>
@@ -30,20 +25,10 @@
     <string name="dialog_add_label">Ort, der hinzugefügt werden soll:</string>
     <string name="dialog_add_no_city_found">Es wurde kein Ort gefunden, der der Eingabe entspricht. Es wird empfohlen, einen Eintrag aus dem Dropdown-Menu zu wählen.</string>
     <string name="navigation_drawer_close">Navigationsleiste schließen</string>
-    <string name="settings_title_units">Maßeinheiten</string>
-    <string name="settings_title_temperature">Temperaturen</string>
-    <string name="settings_title_distance">Entfernungen</string>
-    <string name="settings_celsius">Celsius</string>
-    <string name="settings_fahrenheit">Fahrenheit</string>
-    <string name="settings_kilometers">Kilometer</string>
-    <string name="settings_miles">Meilen</string>
-    <string name="settings_summary_distance">Die Einheit, die zur Anzeige von Entfernungen verwendet wird.</string>
-    <string name="settings_summary_temperature">Die Einheit, die zur Anzeige von Temperaturen verwendet wird.</string>
     <string name="settings_interval_summary">Setzen Sie das Interval der automatischen Updates</string>
     <string name="settings_intervals">Intervalle</string>
     <string name="settings_update_interval">Update Intervall</string>
     <string name="settings_title_display_options">Anzeigeoptionen</string>
-
     <string name="navigation_drawer_open">Navigationsleiste öffnen</string>
     <string name="abbreviation_friday">Fr.</string>
     <string name="abbreviation_monday">Mo.</string>
@@ -62,7 +47,6 @@
     <string name="long_press_text">Halten und ziehen Sie, um die Orte zu sortieren.</string>
     <string name="swipe_to_delete">Wischen Sie zum Löschen</string>
     <string name="infoProvider">Die Wetterinformationen stammen von Open-Meteo.com</string>
-
     <string name="monday">Montag</string>
     <string name="tuesday">Dienstag</string>
     <string name="wednesday">Mittwoch</string>
@@ -71,34 +55,17 @@
     <string name="saturday">Samstag</string>
     <string name="sunday">Sonntag</string>
     <string name="chart">Diagramm</string>
-    <string name="units_rh">% rh</string>
     <string name="units_kWh">kWh</string>
-    <string name="units_km">km</string>
-    <string name="units_hPa">hPa</string>
-    <string name="units_Bft">Bft</string>
-    <string name="units_mm_h">mm/h</string>
-    <string name="units_km_h">km/h</string>
-    <string name="units_mph">mph</string>
-    <string name="card_details_rain60min">☔ 60 min:</string>
-    <string name="error_no_rain60min_data">keine Daten</string>
     <string name="dialog_edit_change_button">Ändern</string>
     <string name="edit_location_hint_name">Name</string>
     <string name="settings_search">Suche</string>
-    <string name="settings_temp_decimal">Temperatur mit einer Dezimalstelle anzeigen</string>
     <string name="settings_darkmode">Android 10+ Dark Mode</string>
-    <string name="settings_position">Position</string>
-    <string name="settings_GPS_summary">Erlaubt die Nutzung der aktuellen GPS Position im ersten TAB und im Widget für das aktuelle Wetter. Das Update der Position wird automatisch vom Widget ausgelöst.</string>
-    <string name="settings_GPS_position">GPS Nutzung erlauben</string>
-    <string name="error_no_position">Keine Position verfügbar</string>
     <string name="settings_time24h">24-Stunden-Format</string>
     <string name="summary_time24h">Systemeinstellung überschreiben</string>
-    <string name="settings_wind">Beaufort-Skala benutzen</string>
     <string name="dialog_OK_button">OK</string>
     <string name="dialog_NO_button">Nein</string>
     <string name="dialog_Later_button">Vielleicht später</string>
     <string name="dialog_StarOnGitHub">Mögen Sie diese App? Bitte vergeben Sie einen Stern auf GitHub und spendieren Sie dem Entwickler einen Kaffee über PayPal.</string>
-    <string name="settings_show_pressure">Luftdruck anzeigen</string>
-    <string name="settings_GPS_manual">Nur manuell aktualisieren</string>
     <string name="settings_interval_quarter">15 min</string>
     <string name="settings_interval_half">30 min</string>
     <string name="settings_interval_one">1 h</string>
@@ -106,13 +73,7 @@
     <string name="settings_interval_six">6 h</string>
     <string name="settings_interval_twelve">12 h</string>
     <string name="settings_interval_twentyfour">24 h</string>
-    <string name="rationale_background_location">Bitte erlauben Sie auch die GPS Nutzung im Hintergrund für die Verwendung im Widget</string>
-    <string name="error_no_gps">Bitte GPS einschalten</string>
     <string name="slide3_heading">Open-Meteo</string>
-    <string name="summary_reanalyze">Verbessern der Wochensymbole durch Analyse der stündlichen Vorhersagen zwischen Sonnenaufgang und Sonnenuntergang (experimentell).</string>
-    <string name="settings_reanalyze">Wochensymbole</string>
-    <string name="settings_precipitation">Niederschlag</string>
-    <string name="summary_precipitation">Schneemenge anstelle der entsprechenden Wassermenge verwenden.</string>
     <string name="settings_forecast_days">Anzahl der prognostizierten Tage</string>
     <string name="edit_location_hint_latitude">Breitengrad [°]</string>
     <string name="edit_location_hint_longitude">Längengrad [°]</string>
@@ -133,5 +94,6 @@
     <string name="activity_help">Anleitung</string>
     <string name="action_sun_position">Sonnenposition</string>
     <string name="action_sun_elevation">Elevation [°]</string>
+    <string name="edit_location_hint_cells_temp_coeff">Temperaturkoeffizient [%/K]</string>
 
 </resources>

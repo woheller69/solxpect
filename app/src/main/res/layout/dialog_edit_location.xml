@@ -94,6 +94,16 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/edit_location_hint_cells_temp_coeff"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/EditLocation_Cell_Temp_Coeff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal|numberSigned"
+        android:hint="@string/edit_location_hint_cells_temp_coeff"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="@string/edit_location_hint_diffuse_efficiency"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Diffuse_Efficiency"
