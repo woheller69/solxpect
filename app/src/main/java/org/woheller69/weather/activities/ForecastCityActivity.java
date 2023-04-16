@@ -83,18 +83,6 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
         if (pagerAdapter.getItemCount()>0) {  //only if at least one city is watched
              //if pagerAdapter has item with current cityId go there, otherwise use cityId from current item
             if (pagerAdapter.getPosForCityID(cityId)==-1) cityId=pagerAdapter.getCityIDForPos(viewPager2.getCurrentItem());
-            GeneralData generalData = db.getGeneralDataByCityId(cityId);
-
-            long timestamp = generalData.getTimestamp();
-            long systemTime = System.currentTimeMillis() / 1000;
-            SharedPreferences prefManager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            long updateInterval = (long) (Float.parseFloat(prefManager.getString("pref_updateInterval", "2")) * 60 * 60);
-
-            if (timestamp + updateInterval - systemTime <= 0) {
-                WeatherPagerAdapter.refreshSingleData(getApplicationContext(), true, cityId); //only update current tab at start
-                ForecastCityActivity.startRefreshAnimation();
-
-            }
             if (viewPager2.getCurrentItem()!=pagerAdapter.getPosForCityID(cityId)) viewPager2.setCurrentItem(pagerAdapter.getPosForCityID(cityId),false);
         }
     }
