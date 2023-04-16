@@ -361,15 +361,16 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
                 if (energyDay>energyMax) energyMax=energyDay;
             }
 
-            //Calculate step size. Target:  4 <= steps < 10, but step size must integer >= 1
+            //Calculate step size. Target:  4 <= steps <= 7, but step size must integer >= 1
             int stepSize = 1;
             int numSteps;
 
-            do {
-                numSteps = (int) (energyMax / stepSize);
-                if (numSteps > 10) stepSize *=10;
-                else if (numSteps < 4) stepSize /=2;
-            } while (numSteps > 10 || numSteps < 4 && stepSize>0);
+             do {
+                 numSteps = (int) (energyMax / stepSize);
+                 if (numSteps > 10) stepSize *=10;
+                 else if (numSteps > 7) stepSize *=2;
+                 else if (numSteps < 4) stepSize /=2;
+             } while (numSteps > 7 || numSteps < 4 && stepSize>0);
 
             if (stepSize<1) stepSize=1;  //Step size must be integer, min 1
 
