@@ -27,7 +27,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/graph_precipitationunit"
+                android:id="@+id/graph_energyunit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -48,11 +48,12 @@
                 android:background="@color/white" />
 
             <com.db.chart.view.BarChartView
-                android:id="@+id/graph_precipitation"
+                android:id="@+id/graph_energy"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_below="@+id/spacer"
                 chart:chart_axisBorderSpacing="8dp" />
         </RelativeLayout>

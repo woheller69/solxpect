@@ -26,7 +26,6 @@ import org.woheller69.weather.database.HourlyForecast;
 import org.woheller69.weather.database.SQLiteHelper;
 import org.woheller69.weather.database.WeekForecast;
 import org.woheller69.weather.ui.Help.StringFormatUtils;
-import org.woheller69.weather.ui.UiResourceProvider;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -181,13 +180,13 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
 
     public class ChartViewHolder extends ViewHolder {
 
-        TextView precipitationunit;
+        TextView energyUnit;
         BarChartView barChartView;
 
         ChartViewHolder(View v) {
             super(v);
-            this.barChartView = v.findViewById(R.id.graph_precipitation);
-            this.precipitationunit=v.findViewById(R.id.graph_precipitationunit);
+            this.barChartView = v.findViewById(R.id.graph_energy);
+            this.energyUnit =v.findViewById(R.id.graph_energyunit);
         }
     }
 
@@ -342,9 +341,9 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
                 return;
             }
 
-            float pmax=0;
+            float energyMax=0;
 
-            BarSet precipitationDataset = new BarSet();
+            BarSet energyDataset = new BarSet();
 
             Calendar c = Calendar.getInstance();
             c.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -353,34 +352,46 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
             for (int i=0 ; i< weekforecasts.size();i++) {
                 c.setTimeInMillis(weekforecasts.get(i).getForecastTime()+zonemilliseconds);
                 int day = c.get(Calendar.DAY_OF_WEEK);
-                float precip=weekforecasts.get(i).getEnergyDay();
+                float energyDay=weekforecasts.get(i).getEnergyDay();
 
                 String dayString = context.getResources().getString(StringFormatUtils.getDayShort(day));
                 if (weekforecasts.size()>8) dayString=dayString.substring(0,1);  //use first character only if more than 8 days to avoid overlapping text
 
-                precipitationDataset.addBar(dayString, precip);
-                if (precip>pmax) pmax=precip;
+                energyDataset.addBar(dayString, energyDay);
+                if (energyDay>energyMax) energyMax=energyDay;
             }
 
-            ArrayList<ChartSet> precipitation = new ArrayList<>();
-            precipitation.add(precipitationDataset);
+            //Calculate step size. Target:  4 <= steps < 10, but step size must integer >= 1
+            int stepSize = 1;
+            int numSteps;
 
-            precipitationDataset.setColor(ContextCompat.getColor(context,R.color.yellow));
-            precipitationDataset.setAlpha(0.8f);  // make precipitation bars transparent
+            do {
+                numSteps = (int) (energyMax / stepSize);
+                if (numSteps > 10) stepSize *=10;
+                else if (numSteps < 4) stepSize /=2;
+            } while (numSteps > 10 || numSteps < 4 && stepSize>0);
 
-            holder.barChartView.addData(precipitation);
+            if (stepSize<1) stepSize=1;  //Step size must be integer, min 1
+
+            ArrayList<ChartSet> energyData = new ArrayList<>();
+            energyData.add(energyDataset);
+
+            energyDataset.setColor(ContextCompat.getColor(context,R.color.yellow));
+            energyDataset.setAlpha(0.8f);  // make energyData bars transparent
+
+            holder.barChartView.addData(energyData);
             holder.barChartView.setBarSpacing(10);
+            holder.barChartView.setStep(stepSize);
             holder.barChartView.setXAxis(false);
             holder.barChartView.setYAxis(false);
-            holder.barChartView.setYLabels(AxisController.LabelPosition.INSIDE); //no labels for precipitation
+            holder.barChartView.setYLabels(AxisController.LabelPosition.OUTSIDE);
             holder.barChartView.setLabelsColor(ContextCompat.getColor(context,R.color.colorPrimaryDark));  //transparent color, make labels invisible
             holder.barChartView.setAxisColor(ContextCompat.getColor(context,R.color.colorPrimaryDark));
             holder.barChartView.setFontSize((int) Tools.fromDpToPx(17));
-            holder.barChartView.setBorderSpacing(Tools.fromDpToPx(30));
 
             holder.barChartView.show();
 
-            holder.precipitationunit.setText(" " + context.getResources().getString(R.string.units_kWh)+" ");
+            holder.energyUnit.setText(" " + context.getResources().getString(R.string.units_kWh)+" ");
         }
         //No update for error needed
     }
