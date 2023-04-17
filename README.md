@@ -54,7 +54,7 @@ Efficiency of your inverter.
 In this section you can define the shading on your solar panels.
 For each azimuth angle range, you can specify the minimum elevation of the sun that is necessary for the sun to hit the solar panels.
 For elevations below this value you can set the percentage of shading. For example, a building will reduce radiation by 100%, a tree maybe only by 60%.
-You can use the button with sun icon to get information about the current azimuth and elevation of the sun to find out at what elevation the sun gets above 
+You can use the button with sun icon (main window) to get information about the current azimuth and elevation of the sun to find out at what elevation the sun gets above 
 buildings or trees.
 
 ## License
