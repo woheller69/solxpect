@@ -104,4 +104,5 @@
     <string name="permission_required">Permission required</string>
     <string name="permission_message">%s needs access to external storage. Please accept permission and try again.</string>
     <string name="toast_delete">Please delete file and try again</string>
+    <string name="restore_database_message">Restore Data from Documents folder. Open folder \'Documents\' and select solXpect.zip if needed!</string>
 </resources>

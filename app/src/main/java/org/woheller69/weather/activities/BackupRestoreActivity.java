@@ -43,7 +43,7 @@ public class BackupRestoreActivity extends NavigationActivity{
         mRestore = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    File intData = new File(Environment.getDataDirectory() + "//databases//" + this.getPackageName());
+                    File intData = new File(Environment.getDataDirectory() + "//data//" + this.getPackageName());
                     if (result.getData()!=null && result.getData().getData()!=null) Backup.zipExtract(this, intData, result.getData().getData());
                 });
     }
@@ -74,7 +74,7 @@ public class BackupRestoreActivity extends NavigationActivity{
                 try {
                     new ZipFile(dbBackup).addFolder(intData);
                 } catch (ZipException e) {
-                    e.printStackTrace();
+                    Toast.makeText(this,e.toString(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -93,7 +93,7 @@ public class BackupRestoreActivity extends NavigationActivity{
         String filesBackup = getResources().getString(R.string.app_name)+".zip";
         final File zipFileBackup = new File(extStorage, filesBackup);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(getResources().getString(R.string.restore_database));
+        builder.setMessage(getResources().getString(R.string.restore_database_message));
         builder.setPositiveButton(R.string.dialog_OK_button, (dialog, whichButton) -> {
             if (!Backup.checkPermissionStorage(this)) {
                 Backup.requestPermission(this);
