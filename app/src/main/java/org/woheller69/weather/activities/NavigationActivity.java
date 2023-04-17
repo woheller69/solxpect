@@ -169,6 +169,9 @@ public class NavigationActivity extends AppCompatActivity implements OnNavigatio
         }else if(itemId==R.id.nav_help) {
             intent = new Intent(this, HelpActivity.class);
             startActivity(intent);
+        }else if(itemId==R.id.nav_backuprestore) {
+            intent = new Intent(this, BackupRestoreActivity.class);
+            startActivity(intent);
         }else if (itemId==R.id.star_on_github){
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse(BuildConfig.GITHUB_URL)));

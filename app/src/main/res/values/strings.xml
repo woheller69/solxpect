@@ -20,7 +20,7 @@
     <string name="about">About</string>
     <string name="version_number" translatable="false">Version</string>
     <string name="about_license">License</string>
-    <string name="about_license_text">This application is derived from Privacy Friendly Weather, developed by the research group SECUSO. Sourcecode licensed under GPLv3. The app uses icons from Google Material Design Icons licensed under Apache License Version 2.0, the Leaflet library which is licensed under 2-clause BSD License, AutoSuggestTextViewAPICall which is licensed under Apache License Version 2.0, Solarpositioning (net.e175.klaus:solarpositioning) which is licensed under MIT License,  and WilliamChart library (com.db.chart) which is licensed under Apache License Version 2.0</string>
+    <string name="about_license_text">This application is derived from Privacy Friendly Weather, developed by the research group SECUSO. Sourcecode licensed under GPLv3. The app uses icons from Google Material Design Icons licensed under Apache License Version 2.0, the Leaflet library which is licensed under 2-clause BSD License, AutoSuggestTextViewAPICall which is licensed under Apache License Version 2.0, Solarpositioning (net.e175.klaus:solarpositioning) which is licensed under MIT License, Zip4j (https://github.com/srikanth-lingala/zip4j) which is licensed under Apache License Version 2.0, and WilliamChart library (com.db.chart) which is licensed under Apache License Version 2.0</string>
     <string name="about_more_info">More information can be found on:</string>
     <string name="about_github" translatable="false"><a href="https://github.com/woheller69/solxpect">Github-Repo</a></string>
     <string name="about_openmeteo" translatable="false"><a href="https://open-meteo.com">Open-Meteo \n(Attribution 4.0 International CC BY 4.0)</a></string>
@@ -98,4 +98,10 @@
     <string name="action_sun_position">Sun position</string>
     <string name="action_sun_elevation">Elevation [°]</string>
     <string name="edit_location_hint_cells_temp_coeff">Temperature coefficient [%/K]</string>
+    <string name="activity_backuprestore">Backup/Restore</string>
+    <string name="backup_database">Backup database</string>
+    <string name="restore_database">Restore database</string>
+    <string name="permission_required">Permission required</string>
+    <string name="permission_message">%s needs access to external storage. Please accept permission and try again.</string>
+    <string name="toast_delete">Please delete file and try again</string>
 </resources>

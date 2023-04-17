@@ -26,6 +26,10 @@
             android:icon="@drawable/ic_help_24px"
             android:title="@string/activity_help" />
         <item
+            android:id="@+id/nav_backuprestore"
+            android:icon="@drawable/ic_settings_backup_restore_24px"
+            android:title="@string/activity_backuprestore" />
+        <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_24px"
             android:title="@string/activity_about" />
