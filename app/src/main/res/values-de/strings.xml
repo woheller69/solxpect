@@ -79,12 +79,12 @@
     <string name="edit_location_hint_longitude">Längengrad [°]</string>
     <string name="edit_location_hint_azimuth">Azimut [°]</string>
     <string name="edit_location_hint_tilt">Neigung [°]</string>
-    <string name="edit_location_hint_cells_max_power">Maximalleistung Zelle [W]</string>
-    <string name="edit_location_hint_cells_efficiency">Wirkungsgrad Zelle [%]</string>
-    <string name="edit_location_hint_cells_area">Fläche Zelle [m\u00b2]</string>
+    <string name="edit_location_hint_cells_max_power">Peakleistung der Zellen [W]</string>
+    <string name="edit_location_hint_cells_efficiency">Wirkungsgrad der Zellen [%]</string>
+    <string name="edit_location_hint_cells_area">Fläche der Zellen [m\u00b2]</string>
     <string name="edit_location_hint_diffuse_efficiency">Effizienz diffuse Strahlung [%]</string>
-    <string name="edit_location_hint_inverter_power_limit">Leistung Wechselrichter [W]</string>
-    <string name="edit_location_hint_inverter_efficiency">Effizienz Wechselrichter [%]</string>
+    <string name="edit_location_hint_inverter_power_limit">Wechselrichterleistung [W]</string>
+    <string name="edit_location_hint_inverter_efficiency">Wechselrichtereffizienz [%]</string>
     <string name="units_Wh">Wh</string>
     <string name="edit_location_title">Ort bearbeiten</string>
     <string name="edit_location_shading_azimuth_heading">Azimut Bereich [°]</string>
