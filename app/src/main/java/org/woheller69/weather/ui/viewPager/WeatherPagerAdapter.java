@@ -17,6 +17,7 @@ import org.woheller69.weather.services.UpdateDataService;
 import org.woheller69.weather.ui.WeatherCityFragment;
 import org.woheller69.weather.ui.updater.IUpdateableCityUI;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,18 +36,41 @@ public class WeatherPagerAdapter extends FragmentStateAdapter implements IUpdate
 
     private List<CityToWatch> cities;
 
+    private boolean showSum;
 
-    public WeatherPagerAdapter(Context context, @NonNull FragmentManager supportFragmentManager, @NonNull Lifecycle lifecycle) {
+    public WeatherPagerAdapter(Context context, @NonNull FragmentManager supportFragmentManager, @NonNull Lifecycle lifecycle, Boolean showSum) {
         super(supportFragmentManager,lifecycle);
         this.mContext = context;
         this.database = SQLiteHelper.getInstance(context);
+        this.showSum = showSum;
 
         loadCities();
     }
 
     public void loadCities() {
-        this.cities = database.getAllCitiesToWatch();
-        Collections.sort(cities, (o1, o2) -> o1.getRank() - o2.getRank());
+        List<CityToWatch> allCities = database.getAllCitiesToWatch();
+        Collections.sort(allCities, (o1, o2) -> o1.getRank() - o2.getRank());
+
+        if (showSum && !allCities.isEmpty()) {
+            List<CityToWatch> citiesFiltered = new ArrayList<>();
+            citiesFiltered.add(allCities.get(0));  //always add first element
+            if (allCities.size() > 0) {    //if there is more than one element
+                for (int i = 1; i < allCities.size(); i++) {
+                    boolean alreadyHasLatLon = false;
+                    for (int j = 0; j < citiesFiltered.size(); j++) {
+                        if (citiesFiltered.get(j).getLatitude() == allCities.get(i).getLatitude() && citiesFiltered.get(j).getLongitude() == allCities.get(i).getLongitude()) {
+                            alreadyHasLatLon = true;
+                        }
+                    }
+                    if (!alreadyHasLatLon) {
+                        citiesFiltered.add(allCities.get(i));
+                    }
+                }
+            }
+            this.cities = citiesFiltered;
+        } else {
+            this.cities = allCities;
+        }
     }
 
     @NonNull
@@ -64,7 +88,19 @@ public class WeatherPagerAdapter extends FragmentStateAdapter implements IUpdate
     }
 
     public CharSequence getPageTitle(int position) {
-         return cities.get(position).getCityName();
+        String title;
+        if (showSum){
+            String name = cities.get(position).getCityName();
+            if (name.contains("|")){
+                String[] name2 = name.split("\\|");
+                title =  name2[0];
+            } else {
+                title =  cities.get(position).getCityName();
+            }
+        } else {
+            title =  cities.get(position).getCityName();
+        }
+        return title;
     }
 
     public static void refreshSingleData(Context context, Boolean asap, int cityId) {
@@ -104,16 +140,6 @@ public class WeatherPagerAdapter extends FragmentStateAdapter implements IUpdate
             }
         }
         return -1;  //item not found
-    }
-
-    public float getLatForPos(int pos) {
-        CityToWatch city = cities.get(pos);
-        return city.getLatitude();
-    }
-
-    public float getLonForPos(int pos) {
-        CityToWatch city = cities.get(pos);
-        return city.getLongitude();
     }
 
 }

@@ -21,6 +21,7 @@ import com.db.chart.view.AxisController;
 import com.db.chart.view.BarChartView;
 
 import org.woheller69.weather.R;
+import org.woheller69.weather.database.CityToWatch;
 import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.HourlyForecast;
 import org.woheller69.weather.database.SQLiteHelper;
@@ -69,7 +70,34 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
 
     // function update 3-hour or 1-hour forecast list
     public void updateForecastData(List<HourlyForecast> hourlyForecasts) {
+        if (hourlyForecasts.isEmpty()) return;
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+
+        if (sp.getBoolean("pref_summarize",false)){
+            int cityId = hourlyForecasts.get(0).getCity_id();
+            ArrayList<Integer> CityIDList = new ArrayList<Integer>();
+            SQLiteHelper dbHelper = SQLiteHelper.getInstance(context.getApplicationContext());
+            hourlyForecasts = dbHelper.getForecastsByCityId(cityId); //get fresh values from database to make sure we do add new values to sum values from last update
+            List<CityToWatch> citiesToWatch = dbHelper.getAllCitiesToWatch();
+            CityToWatch requestedCity = dbHelper.getCityToWatch(cityId);
+            for (int i = 0; i < citiesToWatch.size(); i++) {
+                CityToWatch city = citiesToWatch.get(i);
+                if (city.getCityId()!=requestedCity.getCityId() && city.getLatitude() == requestedCity.getLatitude() && city.getLongitude() == requestedCity.getLongitude()) {
+                    CityIDList.add(city.getCityId());
+                }
+            }
+            if (CityIDList.size()>0){
+                for (int c=0; c<CityIDList.size();c++) {
+                    int iteratorCityId = CityIDList.get(c);
+                    List<HourlyForecast> hfc = dbHelper.getForecastsByCityId(iteratorCityId);
+                    if (hfc.size()!=hourlyForecasts.size()) break; //maybe something went wrong during update or city is not yet updated
+                    for (int i=0;i<hfc.size();i++){
+                        hourlyForecasts.get(i).setPower(hourlyForecasts.get(i).getPower()+hfc.get(i).getPower());
+                    }
+                }
+            }
+        }
+
         courseDayList = new ArrayList<>();
 
             for (HourlyForecast f : hourlyForecasts) {
@@ -87,8 +115,32 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
     // function for week forecast list
     public void updateWeekForecastData(List<WeekForecast> forecasts) {
         if (forecasts.isEmpty()) return;
-
         int cityId = forecasts.get(0).getCity_id();
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        if (sp.getBoolean("pref_summarize",false)){
+            ArrayList<Integer> CityIDList = new ArrayList<Integer>();
+            SQLiteHelper dbHelper = SQLiteHelper.getInstance(context.getApplicationContext());
+            forecasts = dbHelper.getWeekForecastsByCityId(cityId);  //get fresh values from database to make sure we do add new values to sum values from last update
+            List<CityToWatch> citiesToWatch = dbHelper.getAllCitiesToWatch();
+            CityToWatch requestedCity = dbHelper.getCityToWatch(cityId);
+            for (int i = 0; i < citiesToWatch.size(); i++) {
+                CityToWatch city = citiesToWatch.get(i);
+                if (city.getCityId()!=requestedCity.getCityId() && city.getLatitude() == requestedCity.getLatitude() && city.getLongitude() == requestedCity.getLongitude()) {
+                    CityIDList.add(city.getCityId());
+                }
+            }
+            if (CityIDList.size()>0){
+                for (int c=0; c<CityIDList.size();c++) {
+                    int iteratorCityId = CityIDList.get(c);
+                    List<WeekForecast> wfc = dbHelper.getWeekForecastsByCityId(iteratorCityId);
+                    if (wfc.size() != forecasts.size()) break;  //maybe something went wrong during update or city is not yet updated
+                    for (int i=0;i<wfc.size();i++){
+                        forecasts.get(i).setEnergyDay(forecasts.get(i).getEnergyDay()+wfc.get(i).getEnergyDay());
+                    }
+                }
+            }
+        }
 
         SQLiteHelper dbHelper = SQLiteHelper.getInstance(context.getApplicationContext());
         int zonemilliseconds = dbHelper.getGeneralDataByCityId(cityId).getTimeZoneSeconds() * 1000;

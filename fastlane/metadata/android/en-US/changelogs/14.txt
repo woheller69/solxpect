@@ -1,0 +1,2 @@
+Add option to show sum of all modules with same latitude/longitude
+Add option to clone location

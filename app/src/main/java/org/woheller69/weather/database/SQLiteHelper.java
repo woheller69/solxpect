@@ -403,6 +403,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
 
+    public synchronized  void deleteAllForecasts(){
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.delete(TABLE_GENERAL_DATA, COLUMN_CITY_ID + " <> ?",
+                new String[]{Integer.toString(-1)});
+        database.delete(TABLE_HOURLY_FORECAST, FORECAST_CITY_ID + " <> ?",
+                new String[]{Integer.toString(-1)});
+        database.delete(TABLE_WEEKFORECAST, WEEKFORECAST_CITY_ID + " <> ?",
+                new String[]{Integer.toString(-1)});
+        database.close();
+    }
+
     public synchronized List<HourlyForecast> getForecastsByCityId(int cityId) {
         SQLiteDatabase database = this.getWritableDatabase();
 

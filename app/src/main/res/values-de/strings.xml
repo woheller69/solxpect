@@ -102,6 +102,9 @@
     <string name="permission_message">%s benötigt Zugriff auf den externen Speicher. Bitte die Berechtigung erteilen und erneut versuchen.</string>
     <string name="toast_delete">Bitte die Datei zuerst löschen und erneut versuchen.</string>
     <string name="restore_database_message">Daten aus dem Dokumentenordner wiederherstellen. Falls nötig, Ordner \'Documents\' öffnen und solXpect.zip auswählen!</string>
+    <string name="settings_summarize">Summe anzeigen</string>
+    <string name="summary_summarize">Summiere die Werte aller Module mit gleichem Längen- und Breitengrad.</string>
+    <string name="dialog_add_clone_button">Klonen</string>
 
 
 </resources>

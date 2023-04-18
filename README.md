@@ -10,6 +10,10 @@ of the sun and projects the radiation on your solar panel.
 It shows the estimated energy production for the next hours and up to 16 days.
 The hourly values are calculated for the preceding hour. So if there are 150 Wh shown at 11:00 this means you can expect 150 Wh between 10:00 and 11:00.
 
+If you have several modules pointing in different directions you can define them as separate locations and switch on 'show sum' in preferences. Then
+all locations with same latitude/longitude are summarized. In this case you should define your location names as 'myPV | part1', 'myPV | part2', etc.
+In 'show sum' mode the location is then shown as 'myPV' and '|' is taken as delimiter in this case.
+
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/01.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/02.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/03.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/04.png" width="150"/> 
 
 
@@ -74,6 +78,7 @@ The app uses:
 - Map data from OpenStreetMap, licensed under the Open Data Commons Open Database License (ODbL) by the OpenStreetMap Foundation (OSMF) (https://www.openstreetmap.org/copyright)
 - Solar positioning library (https://github.com/klausbrunner/solarpositioning) which is licensed under <a href='https://github.com/klausbrunner/solarpositioning/blob/master/LICENSE.txt'>MIT License</a>
 - Zip4j (https://github.com/srikanth-lingala/zip4j) which is licensed under Apache License Version 2.0
+
 ## Contributing
 
 If you find a bug, please open an issue in the Github repository, assuming one does not already exist.

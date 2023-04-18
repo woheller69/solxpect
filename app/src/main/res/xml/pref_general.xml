@@ -12,6 +12,13 @@
             />
 
         <SwitchPreference
+            android:key="pref_summarize"
+            android:title="@string/settings_summarize"
+            android:summary="@string/summary_summarize"
+            android:defaultValue="false"
+            />
+
+        <SwitchPreference
             android:key="pref_TimeFormat"
             android:title="@string/settings_time24h"
             android:summary="@string/summary_time24h"

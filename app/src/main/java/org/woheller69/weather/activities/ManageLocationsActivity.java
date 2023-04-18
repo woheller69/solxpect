@@ -251,6 +251,40 @@ public class ManageLocationsActivity extends NavigationActivity {
         alert.setNegativeButton(getString(R.string.dialog_add_close_button), (dialog, whichButton) -> {
         });
 
+        alert.setNeutralButton(getString(R.string.dialog_add_clone_button), (dialog, whichButton) -> {
+            CityToWatch cloneCity = new CityToWatch(
+                    database.getMaxRank() + 1,
+                    -1,
+                    0, city.getLongitude(),city.getLatitude(),
+                    city.getCityName()
+            );
+            long id=database.addCityToWatch(cloneCity);
+            cloneCity.setId((int) id);
+            cloneCity.setCityId((int) id);  //use id also instead of city id as unique identifier
+            cities.add(cloneCity);
+            adapter.notifyDataSetChanged();
+            for (int i = 0; i < shadingElevation.length ; i++) {
+                shadingElevation[i]= Integer.parseInt(elevationViews[i].getText().toString().isEmpty() ? "0" : elevationViews[i].getText().toString());
+                shadingOpacity[i]= Integer.parseInt(opacityViews[i].getText().toString().isEmpty() ? "0" : opacityViews[i].getText().toString());
+            }
+            adapter.updateCity(cloneCity, String.valueOf(editCity.getText()),
+                    Float.parseFloat(editLatitude.getText().toString().isEmpty() ? "0" : editLatitude.getText().toString()),
+                    Float.parseFloat(editLongitude.getText().toString().isEmpty() ? "0" : editLongitude.getText().toString()),
+                    Float.parseFloat(editAzimuth.getText().toString().isEmpty() ? "0" : editAzimuth.getText().toString()),
+                    Float.parseFloat(editTilt.getText().toString().isEmpty() ? "0" : editTilt.getText().toString()),
+                    Float.parseFloat(editCellsMaxPower.getText().toString().isEmpty() ? "0" : editCellsMaxPower.getText().toString()),
+                    Float.parseFloat(editCellsArea.getText().toString().isEmpty() ? "0" : editCellsArea.getText().toString()),
+                    Float.parseFloat(editCellsEfficiency.getText().toString().isEmpty() ? "0" : editCellsEfficiency.getText().toString()),
+                    Float.parseFloat(editCellsTempCoeff.getText().toString().isEmpty() ? "0" : editCellsTempCoeff.getText().toString()),
+                    Float.parseFloat(editDiffuseEfficiency.getText().toString().isEmpty() ? "0" : editDiffuseEfficiency.getText().toString()),
+                    Float.parseFloat(editInverterPowerLimit.getText().toString().isEmpty() ? "0" : editInverterPowerLimit.getText().toString()),
+                    Float.parseFloat(editInverterEfficiency.getText().toString().isEmpty() ? "0" : editInverterEfficiency.getText().toString()),
+                    shadingElevation,
+                    shadingOpacity
+            );
+
+        });
+
         alert.show();
     }
 
@@ -283,7 +317,7 @@ public class ManageLocationsActivity extends NavigationActivity {
         return new CityToWatch(
                 database.getMaxRank() + 1,
                 -1,
-                selectedCity.getCityId(), selectedCity.getLongitude(),selectedCity.getLatitude(),
+                0, selectedCity.getLongitude(),selectedCity.getLatitude(),
                 selectedCity.getCityName()
         );
     }

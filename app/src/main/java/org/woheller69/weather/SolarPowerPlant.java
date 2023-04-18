@@ -20,8 +20,8 @@ public class SolarPowerPlant {
     double inverterEfficiency;
     double azimuthAngle;
     double tiltAngle;
-    private int[] shadingElevation;
-    private int[] shadingOpacity;
+    private final int[] shadingElevation;
+    private final int[] shadingOpacity;
 
     public SolarPowerPlant(double latitude, double longitude, double cellsMaxPower, double cellsArea, double cellsEfficiency, double cellsTempCoeff, double diffuseEfficiency, double inverterPowerLimit, double inverterEfficiency, double azimuthAngle, double tiltAngle, int[] shadingElevation, int[] shadingOpacity ) {
         this.latitude = latitude;

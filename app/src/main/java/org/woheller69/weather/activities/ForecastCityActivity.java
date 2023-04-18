@@ -48,6 +48,7 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
     private ViewPager2 viewPager2;
     private TabLayout tabLayout;
     private TextView noCityText;
+    private static Boolean isRefreshing = false;
     Context context;
 
     @Override
@@ -136,10 +137,15 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
     }
 
     private void initResources() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         viewPager2 = findViewById(R.id.viewPager2);
         reduceViewpager2DragSensitivity(viewPager2,2);
         tabLayout = findViewById(R.id.tab_layout);
-        pagerAdapter = new WeatherPagerAdapter(this, getSupportFragmentManager(),getLifecycle());
+        if (sharedPreferences.getBoolean("pref_summarize",false)){
+            pagerAdapter = new WeatherPagerAdapter(this, getSupportFragmentManager(),getLifecycle(),true);
+        } else {
+            pagerAdapter = new WeatherPagerAdapter(this, getSupportFragmentManager(),getLifecycle(),false);
+        }
         noCityText = findViewById(R.id.noCitySelectedText);
     }
 
@@ -158,6 +164,7 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
         refreshActionButton = menu.findItem(R.id.menu_refresh);
         refreshActionButton.setActionView(R.layout.menu_refresh_action_view);
         refreshActionButton.getActionView().setOnClickListener(v -> m.performIdentifierAction(refreshActionButton.getItemId(), 0));
+        if (isRefreshing) startRefreshAnimation();
 
         return true;
     }
@@ -208,28 +215,29 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
 
     @Override
     public void processNewGeneralData(GeneralData data) {
-        if (refreshActionButton != null && refreshActionButton.getActionView() != null) {
-            refreshActionButton.getActionView().clearAnimation();
-        }
+        stopRefreshAnimation();
     }
 
     @Override
     public void processNewWeekForecasts(List<WeekForecast> forecasts) {
-        if (refreshActionButton != null && refreshActionButton.getActionView() != null) {
-            refreshActionButton.getActionView().clearAnimation();
-        }
+        stopRefreshAnimation();
     }
 
     @Override
     public void processNewForecasts(List<HourlyForecast> hourlyForecasts) {
+        stopRefreshAnimation();
+    }
+
+    public static void stopRefreshAnimation(){
         if (refreshActionButton != null && refreshActionButton.getActionView() != null) {
             refreshActionButton.getActionView().clearAnimation();
         }
+        isRefreshing = false;
     }
 
     public static void startRefreshAnimation(){
-        {
-            if(refreshActionButton !=null && refreshActionButton.getActionView() != null) {
+         isRefreshing = true;
+         if(refreshActionButton !=null && refreshActionButton.getActionView() != null) {
                 RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                 rotate.setDuration(500);
                 rotate.setRepeatCount(5);
@@ -247,6 +255,7 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
                         refreshActionButton.getActionView().setActivated(true);
                         refreshActionButton.getActionView().setEnabled(true);
                         refreshActionButton.getActionView().setClickable(true);
+                        isRefreshing = false;
                     }
 
                     @Override
@@ -254,8 +263,7 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
                     }
                 });
                 refreshActionButton.getActionView().startAnimation(rotate);
-            }
-        }
+         }
     }
 
     //https://devdreamz.com/question/348298-how-to-modify-sensitivity-of-viewpager

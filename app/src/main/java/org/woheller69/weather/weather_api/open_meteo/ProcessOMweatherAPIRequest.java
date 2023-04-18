@@ -1,15 +1,18 @@
 package org.woheller69.weather.weather_api.open_meteo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.widget.Toast;
 
+import androidx.preference.PreferenceManager;
 import com.android.volley.VolleyError;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.woheller69.weather.R;
 import org.woheller69.weather.activities.NavigationActivity;
+import org.woheller69.weather.database.CityToWatch;
 import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.HourlyForecast;
 import org.woheller69.weather.database.WeekForecast;
@@ -62,66 +65,88 @@ public class ProcessOMweatherAPIRequest implements IProcessHttpRequest {
     public void processSuccessScenario(String response, int cityId) {
 
         IDataExtractor extractor = new OMDataExtractor(context);
-        try {
-            JSONObject json = new JSONObject(response);
 
-            //Extract daily weather
-            dbHelper.deleteWeekForecastsByCityId(cityId);
-            List<WeekForecast> weekforecasts = new ArrayList<>();
-            weekforecasts = extractor.extractWeekForecast(json.getString("daily"));
 
-            if (weekforecasts!=null && !weekforecasts.isEmpty()){
-                for (WeekForecast weekForecast: weekforecasts){
-                    weekForecast.setCity_id(cityId);
+        ArrayList<Integer> CityIDList = new ArrayList<Integer>();
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        if (sharedPreferences.getBoolean("pref_summarize",false)){
+            List<CityToWatch> citiesToWatch = dbHelper.getAllCitiesToWatch();
+            CityToWatch requestedCity = dbHelper.getCityToWatch(cityId);
+            for (int i = 0; i < citiesToWatch.size(); i++) {
+                CityToWatch city = citiesToWatch.get(i);
+                if (city.getCityId()!=requestedCity.getCityId() && city.getLatitude() == requestedCity.getLatitude() && city.getLongitude() == requestedCity.getLongitude()) {
+                    CityIDList.add(city.getCityId());
                 }
-            } else {
-                final String ERROR_MSG = context.getResources().getString(R.string.error_convert_to_json);
-                if (NavigationActivity.isVisible)
-                    Toast.makeText(context, ERROR_MSG, Toast.LENGTH_LONG).show();
-                return;
             }
+        }
 
-            //Extract current weather
-            GeneralData generalData = new GeneralData();
-            generalData.setTimestamp(System.currentTimeMillis() / 1000);
-            generalData.setCity_id(cityId);
-            generalData.setTimeSunrise(weekforecasts.get(0).getTimeSunrise());
-            generalData.setTimeSunset(weekforecasts.get(0).getTimeSunset());
-            generalData.setTimeZoneSeconds(json.getInt("utc_offset_seconds"));
-            GeneralData current = dbHelper.getGeneralDataByCityId(cityId);
-            if (current != null && current.getCity_id() == cityId) {
-                dbHelper.updateGeneralData(generalData);
-            } else {
-                dbHelper.addGeneralData(generalData);
-            }
+        CityIDList.add(cityId);  //add requested city at end of list. Call Viewupdater if last (requested) city is updated
 
-            //Extract hourly weather
-            dbHelper.deleteForecastsByCityId(cityId);
-            List<HourlyForecast> hourlyforecasts = new ArrayList<>();
-            hourlyforecasts = extractor.extractHourlyForecast(json.getString("hourly"), cityId);
+        for (int c=0; c<CityIDList.size();c++) {
+            cityId = CityIDList.get(c);
 
-            if (hourlyforecasts!=null && !hourlyforecasts.isEmpty()){
-                for (HourlyForecast hourlyForecast: hourlyforecasts){
-                    hourlyForecast.setCity_id(cityId);
+            try {
+                JSONObject json = new JSONObject(response);
+
+                //Extract daily weather
+                dbHelper.deleteWeekForecastsByCityId(cityId);
+                List<WeekForecast> weekforecasts = new ArrayList<>();
+                weekforecasts = extractor.extractWeekForecast(json.getString("daily"));
+
+                if (weekforecasts != null && !weekforecasts.isEmpty()) {
+                    for (WeekForecast weekForecast : weekforecasts) {
+                        weekForecast.setCity_id(cityId);
+                    }
+                } else {
+                    final String ERROR_MSG = context.getResources().getString(R.string.error_convert_to_json);
+                    if (NavigationActivity.isVisible)
+                        Toast.makeText(context, ERROR_MSG, Toast.LENGTH_LONG).show();
+                    return;
                 }
-            } else {
-                final String ERROR_MSG = context.getResources().getString(R.string.error_convert_to_json);
-                if (NavigationActivity.isVisible)
-                    Toast.makeText(context, ERROR_MSG, Toast.LENGTH_LONG).show();
-                return;
+
+                //Extract current weather
+                GeneralData generalData = new GeneralData();
+                generalData.setTimestamp(System.currentTimeMillis() / 1000);
+                generalData.setCity_id(cityId);
+                generalData.setTimeSunrise(weekforecasts.get(0).getTimeSunrise());
+                generalData.setTimeSunset(weekforecasts.get(0).getTimeSunset());
+                generalData.setTimeZoneSeconds(json.getInt("utc_offset_seconds"));
+                GeneralData current = dbHelper.getGeneralDataByCityId(cityId);
+                if (current != null && current.getCity_id() == cityId) {
+                    dbHelper.updateGeneralData(generalData);
+                } else {
+                    dbHelper.addGeneralData(generalData);
+                }
+
+                //Extract hourly weather
+                dbHelper.deleteForecastsByCityId(cityId);
+                List<HourlyForecast> hourlyforecasts = new ArrayList<>();
+                hourlyforecasts = extractor.extractHourlyForecast(json.getString("hourly"), cityId);
+
+                if (hourlyforecasts != null && !hourlyforecasts.isEmpty()) {
+                    for (HourlyForecast hourlyForecast : hourlyforecasts) {
+                        hourlyForecast.setCity_id(cityId);
+                    }
+                } else {
+                    final String ERROR_MSG = context.getResources().getString(R.string.error_convert_to_json);
+                    if (NavigationActivity.isVisible)
+                        Toast.makeText(context, ERROR_MSG, Toast.LENGTH_LONG).show();
+                    return;
+                }
+                dbHelper.addForecasts(hourlyforecasts);
+
+                weekforecasts = reanalyzeWeekIDs(weekforecasts, hourlyforecasts);
+
+                dbHelper.addWeekForecasts(weekforecasts);
+
+                if (c == CityIDList.size()-1) ViewUpdater.updateGeneralDataData(generalData); // Call Viewupdater if last (requested) city is updated
+                if (c == CityIDList.size()-1) ViewUpdater.updateWeekForecasts(weekforecasts);
+                if (c == CityIDList.size()-1) ViewUpdater.updateForecasts(hourlyforecasts);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            dbHelper.addForecasts(hourlyforecasts);
-
-            weekforecasts = reanalyzeWeekIDs(weekforecasts, hourlyforecasts);
-
-            dbHelper.addWeekForecasts(weekforecasts);
-
-            ViewUpdater.updateGeneralDataData(generalData);
-            ViewUpdater.updateWeekForecasts(weekforecasts);
-            ViewUpdater.updateForecasts(hourlyforecasts);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 

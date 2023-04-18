@@ -12,6 +12,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.SeekBarPreference;
 
 import org.woheller69.weather.R;
+import org.woheller69.weather.database.SQLiteHelper;
 
 public class SettingsActivity extends NavigationActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
@@ -80,6 +81,11 @@ public class SettingsActivity extends NavigationActivity implements SharedPrefer
             if (key.equals("pref_number_days")){
                 SeekBarPreference numberDays = findPreference("pref_number_days");
                 if (numberDays.getValue()<3) numberDays.setValue(3);
+            } else if (key.equals("pref_summarize")){
+                if (sharedPreferences.getBoolean("pref_summarize",false)) {
+                    SQLiteHelper database = SQLiteHelper.getInstance(getActivity());
+                    database.deleteAllForecasts();
+                }
             }
         }
     }
