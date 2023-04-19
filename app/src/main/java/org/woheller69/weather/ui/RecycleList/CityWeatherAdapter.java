@@ -145,8 +145,6 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
         SQLiteHelper dbHelper = SQLiteHelper.getInstance(context.getApplicationContext());
         int zonemilliseconds = dbHelper.getGeneralDataByCityId(cityId).getTimeZoneSeconds() * 1000;
 
-        //temp max 0, temp min 1, humidity 2, pressure 3, precipitation 4, wind 5, wind direction 6, uv_index 7, forecast time 8, weather ID 9, number of FCs for day 10
-
         forecastData = new float[forecasts.size()][11];
 
         for (int i=0;i<forecasts.size();i++){
@@ -386,12 +384,7 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
         } else if (viewHolder.getItemViewType() == CHART) {
             ChartViewHolder holder = (ChartViewHolder) viewHolder;
 
-            SQLiteHelper database = SQLiteHelper.getInstance(context.getApplicationContext());
-            List<WeekForecast> weekforecasts = database.getWeekForecastsByCityId(generalDataList.getCity_id());
-
-            if (weekforecasts.isEmpty()) {
-                return;
-            }
+            if(forecastData==null || forecastData.length==0 || forecastData[0]==null) return;
 
             float energyMax=0;
 
@@ -399,15 +392,14 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
 
             Calendar c = Calendar.getInstance();
             c.setTimeZone(TimeZone.getTimeZone("GMT"));
-            int zonemilliseconds = generalDataList.getTimeZoneSeconds()*1000;
 
-            for (int i=0 ; i< weekforecasts.size();i++) {
-                c.setTimeInMillis(weekforecasts.get(i).getForecastTime()+zonemilliseconds);
+            for (int i=0 ; i< forecastData.length;i++) {
+                c.setTimeInMillis((long) forecastData[i][8]);
                 int day = c.get(Calendar.DAY_OF_WEEK);
-                float energyDay=weekforecasts.get(i).getEnergyDay();
+                float energyDay=forecastData[i][4];
 
                 String dayString = context.getResources().getString(StringFormatUtils.getDayShort(day));
-                if (weekforecasts.size()>8) dayString=dayString.substring(0,1);  //use first character only if more than 8 days to avoid overlapping text
+                if (forecastData.length>8) dayString=dayString.substring(0,1);  //use first character only if more than 8 days to avoid overlapping text
 
                 energyDataset.addBar(dayString, energyDay);
                 if (energyDay>energyMax) energyMax=energyDay;
