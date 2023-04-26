@@ -37,7 +37,7 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
 
     private int[] dataSetTypes;
     private List<HourlyForecast> courseDayList;
-    private float[][] forecastData;
+    private List<WeekForecast> weekForecastList;
 
     private Context context;
     private ViewGroup mParent;
@@ -142,24 +142,8 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
             }
         }
 
-        SQLiteHelper dbHelper = SQLiteHelper.getInstance(context.getApplicationContext());
-        int zonemilliseconds = dbHelper.getGeneralDataByCityId(cityId).getTimeZoneSeconds() * 1000;
+        weekForecastList = forecasts;
 
-        forecastData = new float[forecasts.size()][11];
-
-        for (int i=0;i<forecasts.size();i++){
-            forecastData[i][0]=0;
-            forecastData[i][1]=0;
-            forecastData[i][2]=0;
-            forecastData[i][3]=0;
-            forecastData[i][4]=forecasts.get(i).getEnergyDay();
-            forecastData[i][5]=0;
-            forecastData[i][6]=0;
-            forecastData[i][7]=0;
-            forecastData[i][8]=forecasts.get(i).getForecastTime()+zonemilliseconds;
-            forecastData[i][9]=forecasts.get(i).getWeatherID();
-            forecastData[i][10]=1;
-        }
 
         notifyDataSetChanged();
     }
@@ -307,7 +291,7 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
             holder.recyclerView.setLayoutManager(layoutManager);
 
 
-            final WeekWeatherAdapter adapter = new WeekWeatherAdapter(context, forecastData, generalDataList.getCity_id());
+            final WeekWeatherAdapter adapter = new WeekWeatherAdapter(context, weekForecastList, generalDataList.getCity_id());
             holder.recyclerView.setAdapter(adapter);
             holder.recyclerView.setFocusable(false);
 
@@ -384,7 +368,7 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
         } else if (viewHolder.getItemViewType() == CHART) {
             ChartViewHolder holder = (ChartViewHolder) viewHolder;
 
-            if(forecastData==null || forecastData.length==0 || forecastData[0]==null) return;
+            if(weekForecastList.isEmpty()) return;
 
             float energyMax=0;
 
@@ -393,13 +377,13 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
             Calendar c = Calendar.getInstance();
             c.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-            for (int i=0 ; i< forecastData.length;i++) {
-                c.setTimeInMillis((long) forecastData[i][8]);
+            for (int i = 0 ; i < weekForecastList.size(); i++) {
+                c.setTimeInMillis(weekForecastList.get(i).getLocalForecastTime(context));
                 int day = c.get(Calendar.DAY_OF_WEEK);
-                float energyDay=forecastData[i][4];
+                float energyDay=weekForecastList.get(i).getEnergyDay();
 
                 String dayString = context.getResources().getString(StringFormatUtils.getDayShort(day));
-                if (forecastData.length>8) dayString=dayString.substring(0,1);  //use first character only if more than 8 days to avoid overlapping text
+                if (weekForecastList.size()>8) dayString=dayString.substring(0,1);  //use first character only if more than 8 days to avoid overlapping text
 
                 energyDataset.addBar(dayString, energyDay);
                 if (energyDay>energyMax) energyMax=energyDay;

@@ -108,4 +108,6 @@
     <string name="settings_summarize">Show sum</string>
     <string name="summary_summarize">Summarize values of modules at the same latitude and longitude.</string>
     <string name="dialog_add_clone_button">Clone</string>
+    <string name="itemRemoved">REMOVED:\u0020\u0020%s</string>
+    <string name="undo">UNDO</string>
 </resources>

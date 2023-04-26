@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import org.woheller69.weather.R;
 import org.woheller69.weather.database.CityToWatch;
 import org.woheller69.weather.database.SQLiteHelper;
@@ -28,6 +30,7 @@ public class RecyclerOverviewListAdapter extends RecyclerView.Adapter<ItemViewHo
      */
     private Context context;
     private final List<CityToWatch> cities;
+    private RecyclerView rv;
 
     SQLiteHelper database;
 
@@ -49,6 +52,7 @@ public class RecyclerOverviewListAdapter extends RecyclerView.Adapter<ItemViewHo
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_city_list, parent, false);
+        rv = (RecyclerView) parent;
         return new ItemViewHolder(view);
     }
 
@@ -90,6 +94,17 @@ public class RecyclerOverviewListAdapter extends RecyclerView.Adapter<ItemViewHo
         database.deleteCityToWatch(city);
         cities.remove(position);
         notifyItemRemoved(position);
+
+        Snackbar.make(rv,context.getString(R.string.itemRemoved,city.getCityName()),Snackbar.LENGTH_LONG).setAction(context.getString(R.string.undo), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                long id=database.addCityToWatch(city);
+                city.setId((int) id);
+                city.setCityId((int) id);  //use id also instead of city id as unique identifier
+                cities.add(position,city);
+                notifyItemInserted(position);
+            }
+        }).show();
     }
 
     /**

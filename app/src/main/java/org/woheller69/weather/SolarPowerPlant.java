@@ -75,8 +75,12 @@ public class SolarPowerPlant {
 
         double totalRadiationOnCell = solarPowerNormal * efficiency + solarPowerDiffuse * diffuseEfficiency;  //flat plate equivalent of the solar irradiance
         double cellTemperature = calcCellTemperature(ambientTemperature,totalRadiationOnCell);
-
-        double dcPower = totalRadiationOnCell * cellsEfficiency * (1+(cellTemperature - 25)*cellsTempCoeff) * cellsArea;
+        double dcPower;
+        if (cellsEfficiency!=0 && cellsArea!=0){
+            dcPower = totalRadiationOnCell * (1+(cellTemperature - 25)*cellsTempCoeff) * cellsEfficiency * cellsArea;
+        } else { //assume cellMaxPower is defined at 1000W/sqm
+            dcPower = totalRadiationOnCell/1000 * (1+(cellTemperature - 25)*cellsTempCoeff) * cellsMaxPower;
+        }
 
         double acPower = Math.min(dcPower * inverterEfficiency, inverterPowerLimit);
 

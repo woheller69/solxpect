@@ -14,11 +14,13 @@ import android.widget.TextView;
 import org.woheller69.weather.R;
 import org.woheller69.weather.database.GeneralData;
 import org.woheller69.weather.database.SQLiteHelper;
+import org.woheller69.weather.database.WeekForecast;
 import org.woheller69.weather.ui.Help.StringFormatUtils;
 import org.woheller69.weather.ui.UiResourceProvider;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -28,16 +30,16 @@ import java.util.TimeZone;
 public class WeekWeatherAdapter extends RecyclerView.Adapter<WeekWeatherAdapter.WeekForecastViewHolder> {
 
     private Context context;
-    private float[][] forecastData;
+    private List<WeekForecast> weekForecastList;
     private int cityID;
     private Date courseOfDayHeaderDate;
 
-    WeekWeatherAdapter(Context context, float[][] forecastData, int cityID) {
+    WeekWeatherAdapter(Context context, List<WeekForecast> weekForecastList, int cityID) {
         this.context = context;
         this.cityID = cityID;
-        this.forecastData = forecastData;
-        if (forecastData!=null && forecastData.length!=0 && forecastData[0]!=null) {
-            this.courseOfDayHeaderDate = new Date((long) forecastData[0][8]);  //init with date of first weekday
+        this.weekForecastList = weekForecastList;
+        if (!weekForecastList.isEmpty()) {
+            this.courseOfDayHeaderDate = new Date(weekForecastList.get(0).getLocalForecastTime(context));  //init with date of first weekday
         } else this.courseOfDayHeaderDate = new Date();  //fallback if no data available
     }
 
@@ -65,15 +67,14 @@ public class WeekWeatherAdapter extends RecyclerView.Adapter<WeekWeatherAdapter.
 
     @Override
     public void onBindViewHolder(WeekForecastViewHolder holder, int position) {
-        float[] dayValues = forecastData[position];
-        if (dayValues.length!=11) return;  //Fixes app crash if forecastData not yet ready.
+        WeekForecast weekForecast = weekForecastList.get(position);
 
         SQLiteHelper dbHelper = SQLiteHelper.getInstance(context);
         GeneralData generalData = dbHelper.getGeneralDataByCityId(cityID);
 
         Calendar forecastTime = Calendar.getInstance();
         forecastTime.setTimeZone(TimeZone.getTimeZone("GMT"));
-        forecastTime.setTimeInMillis((long) dayValues[8]);
+        forecastTime.setTimeInMillis(weekForecast.getLocalForecastTime(context));
 
         boolean isDay;
 
@@ -87,15 +88,15 @@ public class WeekWeatherAdapter extends RecyclerView.Adapter<WeekWeatherAdapter.
             isDay = true;
         }
 
-        setIcon((int) dayValues[9], holder.weather, isDay);
-        if (dayValues[4] == 0)
+        setIcon(weekForecast.getWeatherID(), holder.weather, isDay);
+        if (weekForecast.getEnergyDay() == 0)
             holder.power.setText("-");
         else
-            holder.power.setText(StringFormatUtils.formatDecimal(dayValues[4], context.getString(R.string.units_kWh)));
+            holder.power.setText(StringFormatUtils.formatDecimal(weekForecast.getEnergyDay(), context.getString(R.string.units_kWh)));
 
         Calendar c = Calendar.getInstance();
         c.setTimeZone(TimeZone.getTimeZone("GMT"));
-        c.setTimeInMillis((long) dayValues[8]);
+        c.setTimeInMillis(weekForecast.getLocalForecastTime(context));
         int day = c.get(Calendar.DAY_OF_WEEK);
 
         holder.day.setText(StringFormatUtils.getDayShort(day));
@@ -113,8 +114,8 @@ public class WeekWeatherAdapter extends RecyclerView.Adapter<WeekWeatherAdapter.
 
     @Override
     public int getItemCount() {
-    if (forecastData!=null)
-        return forecastData.length;
+    if (!weekForecastList.isEmpty())
+        return weekForecastList.size();
     else
         return 0;
     }
