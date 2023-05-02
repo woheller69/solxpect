@@ -1,0 +1,3 @@
+Offer UNDO operation when location is deleted
+Use cells peak power if cell area or efficiency = 0
+Improved check if device is online

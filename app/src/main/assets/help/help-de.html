@@ -2,58 +2,59 @@
 <body>
 <h2>Übersicht</h2>
 
-Diese App nimmt direkte und diffuse Strahlungsdaten von Open-Meteo.com, berechnet die Position
-der Sonne und projiziert die Strahlung auf Ihr Solarpanel.
-Es zeigt die geschätzte Energieproduktion für die nächsten Stunden und bis zu 16 Tage an.
-Die Stundenwerte werden für die vorangegangene Stunde berechnet.
-Wenn also um 11:00 Uhr 150 Wh angezeigt werden, bedeutet dies, dass Sie zwischen 10:00 und 11:00 Uhr mit 150 Wh rechnen können.
-
-<h3>Mehrere Module am gleichen Ort</h3>
-Wenn Sie mehrere Module haben, die in verschiedene Richtungen zeigen, können Sie sie als separate Standorte definieren und in den Einstellungen 'Summe anzeigen' einschalten.
-Dann werden alle Orte mit gleichem Breiten-/Längengrad zusammengefasst. In diesem Fall sollten Sie Ihre Standortnamen als 'myPV | Teil1', 'meinPV | Teil2' usw. definieren.
-Im Modus 'Summe anzeigen' wird der Standort dann als 'myPV' angezeigt und '|' wird in diesem Fall als Trennzeichen verwendet.
+Diese App prognostiziert die Leistung Ihrer Solaranlage unter Verwendung von Direkt- und Diffusstrahlungsdaten von Open-Meteo.com, berechnet die Position der Sonne und projiziert die Strahlung auf Ihr Solarpanel.
+Es zeigt die geschätzte Energieproduktion für die nächsten 16 Tage an, wobei stündliche Werte für die vorherige Stunde berechnet werden. Wenn zum Beispiel um 11:00 Uhr 150 Wh angezeigt werden, bedeutet dies, dass Sie zwischen 10:00 und 11:00 Uhr 150 Wh erwarten können.
+Um solXpect zu verwenden, geben Sie einfach Ihre Breiten- und Längenkoordinaten sowie den Azimut und die Neigung Ihres Solarpanels ein.
+Sie geben auch Informationen über die Spitzenleistung, Effizienz, Temperaturkoeffizienten und Fläche Ihres Solarpanels sowie die maximale Leistung und Effizienz Ihres Wechselrichters an.
+solXpect ermöglicht es Ihnen auch, Verschattungen auf Ihren Solarzellen zu definieren, indem Sie die minimale Sonnenhöhe angeben, die erforderlich ist, damit die Sonne auf die Solarzellen trifft, sowie den prozentualen Schatten für Höhen unter diesem Wert.
 
 <h2>Parameter</h2>
 
+<h3>Name</h3>
+Definieren Sie einen Namen für den Standort.
+Wenn Sie mehrere Solarpaneele mit denselben Breiten- und Längenkoordinaten, aber in unterschiedliche Richtungen ausgerichtet haben, können Sie sie als separate Standorte definieren und die Funktion "Summe anzeigen" verwenden, um ihre Leistung zusammenzufassen.
+In diesem Fall sollten Sie Ihre Standortnamen als "myPV | part1", "myPV | part2" usw. definieren. Im "Summe anzeigen"-Modus wird der Standort dann als "myPV" angezeigt und "|" wird in diesem Fall als Trennzeichen verwendet.
+
 <h3>Breitengrad [°]</h3>
-Der Breitengrad gibt die Nord-Süd-Position Ihres Solarkraftwerks an. Er reicht von –90° am Südpol bis 90° am Nordpol.
+Geben Sie die Nord-Süd-Position Ihrer Solaranlage an, die von -90° am Südpol bis 90° am Nordpol reicht.
 
 <h3>Längengrad [°]</h3>
-Der Längengrad gibt die Ost-West-Position Ihres Solarkraftwerks an. Der Nullmeridian definiert 0° Länge. Positive Längen liegen östlich des Nullmeridians, negative westlich.
+Geben Sie die Ost-West-Position Ihrer Solaranlage an, wobei 0° als Nullmeridian definiert ist. Positive Längengrade liegen östlich des Nullmeridians, negative westlich.
 
 <h3>Azimut [°]</h3>
-Azimut ist die horizontale Richtung Ihres Solarkraftwerks. 0° entspricht Norden, 90° entspricht Osten, 180° entspricht Süden, 270° entspricht Westen.
+Legen Sie die horizontale Ausrichtung Ihrer Solaranlage fest, wobei 0° Norden entspricht, 90° Osten, 180° Süden und 270° Westen.
 
 <h3>Neigung [°]</h3>
-Neigung ist die vertikale Richtung Ihres Solarkraftwerks. 0° bedeutet, dass es zum Himmel zeigt, 90° bedeutet, dass es vertikal ausgerichtet ist und zum Horizont zeigt.
+Legen Sie die vertikale Ausrichtung Ihrer Solaranlage fest, wobei 0° nach oben zum Himmel und 90° zum Horizont zeigt.
 
 <h3>Peakleistung der Zellen [W]</h3>
-Maximale Leistung, die Ihre Solarzellen liefern können.
+Geben Sie die maximale Leistung an, die Ihre Solarzellen liefern können. Derzeit wird dieser Wert nur verwendet, wenn für die Zelleneffizienz oder die Zellfläche ein Wert von 0 angegeben ist.
+In diesem Fall wird angenommen, dass die Nennleistung der Zellen bei einer Bestrahlungsstärke von 1000 W/m² vorliegt.
 
 <h3>Wirkungsgrad der Zellen [%]</h3>
-Energieanteil in Form von Sonnenlicht, der von der Solarzelle in Strom umgewandelt werden kann.
+Geben Sie den Anteil der Energie in Form von Sonnenlicht an, der von der Solarzelle in Strom umgewandelt werden kann.
 
 <h3>Temperaturkoeffizient  [%/K]</h3>
-Abhängigkeit der Leistung der Solarmodule von der Temperatur (normalerweise im Bereich von -0.4%/K).
+Geben Sie die Abhängigkeit der Zellleistung von der Temperatur an, normalerweise im Bereich von -0,4%/K. Die Zelltemperatur wird aus der Umgebungstemperatur und der Gesamtstrahlung geschätzt.
 
 <h3>Fläche der Zellen [m<sup>2</sup>]</h3>
-Fläche Ihres Solarpanels.
+Geben Sie die Größe Ihres Solarmoduls an.
 
 <h3>Effizienz diffuse Strahlung [%]</h3>
-Wirkungsgrad Ihres Solarkraftwerks bei diffuser Strahlung. Bei der Ausrichtung nach oben sollte er etwa 100 % betragen, bei der Ausrichtung zum Horizont etwa 50 %.
-Dies ist auch abhängig von Reflexionen etc.
+Geben Sie die Effizienz Ihrer Solaranlage für diffuse Strahlung an. Wenn sie nach oben gerichtet ist, sollte sie etwa 100% betragen, aber wenn sie in Richtung Horizont gerichtet ist, kann sie je nach Reflexionen und anderen Faktoren etwa 50% betragen.
+Sie müssen diesen Parameter wahrscheinlich optimieren.
 
 <h3>Wechselrichterleistung [W]</h3>
-Maximale Leistung Ihres Wechselrichters. Wenn sie niedriger als die maximale Leistung Ihrer Panels ist, wird die Ausgangsleistung Ihres Systems durch diesen Parameter begrenzt.
+Geben Sie die maximale Leistung Ihres Wechselrichters an. Wenn diese geringer ist als die maximale Leistung Ihrer Module, wird die Ausgangsleistung Ihres Systems durch diesen Parameter begrenzt.
 
 <h3>Wechselrichtereffizienz [%]</h3>
-Wirkungsgrad Ihres Wechselrichters.
+Geben Sie den Wirkungsgrad Ihres Wechselrichters ein.
 
 <h3>Abschattung</h3>
-In diesem Abschnitt können Sie die Abschattung Ihrer Solarmodule definieren.
-Für jeden Azimutwinkelbereich können Sie die minimale Elevation der Sonne angeben, die erforderlich ist, damit die Sonne auf die Solarmodule trifft.
-Für Elevationen unter diesem Wert können Sie den Prozentsatz der Abschattung festlegen. Beispielsweise reduziert ein Gebäude die Strahlung um 100 %, ein Baum vielleicht nur um 60 %.
-Über die Schaltfläche mit dem Sonnensymbol (Hauptfenster) erhalten Sie Informationen über den aktuellen Azimut und die aktuelle Elevation der Sonne. Damit können Sie herauszufinden, ab welcher Elevation die Sonne oberhalb der Gebäude oder Bäume steht.
+In diesem Abschnitt können Sie die Beschattung Ihrer Solarmodule definieren.
+Für jeden Azimutwinkelbereich können Sie die minimale Sonnenhöhe angeben, die erforderlich ist, damit die Sonne auf die Solarmodule trifft.
+Für Höhen unter diesem Wert können Sie den Prozentsatz der Beschattung festlegen. Zum Beispiel reduziert ein Gebäude die Strahlung um 100 %, ein Baum vielleicht nur um 60 %.
+Sie können die Schaltfläche mit dem Sonnen-Symbol im Hauptfenster verwenden, um Informationen über den aktuellen Azimut und die Höhe der Sonne zu erhalten und zu bestimmen, auf welcher Höhe die Sonne über Gebäuden oder Bäumen steht.
 
 </body>
 </html>

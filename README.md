@@ -3,16 +3,13 @@
 
 # solXpect
 
-solXpect forecasts the output of your solar power plant
-
-This app takes direct and diffuse radiation data from Open-Meteo.com, calculates the position
-of the sun and projects the radiation on your solar panel.
-It shows the estimated energy production for the next hours and up to 16 days.
-The hourly values are calculated for the preceding hour. So if there are 150 Wh shown at 11:00 this means you can expect 150 Wh between 10:00 and 11:00.
-
-If you have several modules pointing in different directions you can define them as separate locations and switch on 'show sum' in preferences. Then
-all locations with same latitude/longitude are summarized. In this case you should define your location names as 'myPV | part1', 'myPV | part2', etc.
-In 'show sum' mode the location is then shown as 'myPV' and '|' is taken as delimiter in this case.
+solXpect is an app that forecasts the output of your solar power plant by using direct and diffuse radiation data from Open-Meteo.com, calculating the position of the sun, and projecting the radiation on your solar panel. 
+It shows the estimated energy production for the next 16 days, with hourly values calculated for the preceding hour. As an example, if there are 150 Wh shown at 11:00 this means you can expect 150 Wh between 10:00 and 11:00.
+To use solXpect, you simply enter your latitude and longitude coordinates, as well as the azimuth and tilt of your solar panel. 
+You also enter information about the peak power, efficiency, temperature coefficient, and area of your solar panel, as well as the maximum power and efficiency of your inverter.
+Additionally, solXpect allows you to define shading on your solar panels by specifying the minimum elevation of the sun necessary for the sun to hit the solar panels, as well as the percentage of shading for elevations below this value.
+If you have multiple solar panels with the same latitude and longitude but pointing in different directions, you can define them as separate locations and use the 'show sum' feature to summarize their output.
+Overall, solXpect is a powerful tool for optimizing the use of your own energy and reduce your energy costs. 
 
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/01.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/02.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/03.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/04.png" width="150"/> 
 
@@ -20,47 +17,51 @@ In 'show sum' mode the location is then shown as 'myPV' and '|' is taken as deli
 
 ## Parameters
 
+#### Name
+Define a name for the location.
+If you have several modules pointing in different directions at the same location you can activate "showSum" mode in settings.
+In this case you should define your location names as 'myPV | part1', 'myPV | part2', etc. In 'show sum' mode the location is then shown as 'myPV' and '|' is taken as delimiter.
+
 #### Latitude [°] 
-Latitude specifies the north–south position of your solar power plant. It ranges from –90° at the south pole to 90° at the north pole.
+Enter the north-south position of your solar power plant, ranging from -90° at the south pole to 90° at the north pole.
 
 #### Longitude [°]
-Longitude specifies the east–west position of your solar power plant. The prime meridian defines 0° longitude. Positive longitudes are east of the prime meridian, negative ones are west.
+Enter the east-west position of your solar power plant, with 0° defined as the prime meridian. Positive longitudes are east of the prime meridian, negative ones are west.
 
 #### Azimuth [°]
-Azimuth is the horizontal direction of your solar power plant. 0° equals North, 90° equals East, 180° equals South, 270° equals West.
+Specify the horizontal direction of your solar power plant, with 0° corresponding to North, 90° to East, 180° to South, and 270° to West.
 
 #### Tilt [°]
-Tilt is the vertical direction of your solar power plant. 0° means it points up towards the the sky, 90° means it has a vertical orientation and points towards the horizon.
+Specify the vertical direction of your solar power plant, with 0° pointing upwards towards the sky and 90° being a vertical orientation pointing towards the horizon.
 
 #### Cells peak power [W]
-Peak power your solar cells can deliver.
+Enter the maximum power your solar cells can deliver. At the moment this value is only used if a value of 0 is specified for cells efficiency or cell area.
+In this case it is assumed that the cells peak power is given at an irradiance of 1000W/sqm.
 
 #### Cells efficiency  [%]
-Portion of energy in the form of sunlight that can be converted into electricity by the solar cell.
+Specify the portion of energy in the form of sunlight that can be converted into electricity by the solar cell.
 
 #### Temperature coefficient  [%/K]
-Dependence of the cell power on temperature (usually in the range of -0.4%/K).
-Cell temperature is estimated from ambient temperature and total irradiance.
+Enter the dependence of the cell power on temperature, usually in the range of -0.4%/K. Cell temperature is estimated from ambient temperature and total irradiance.
 
 #### Cell area [m<sup>2</sup>]
-Size of your solar panel.
+Enter the size of your solar panel.
 
 #### Diffuse radiation efficiency  [%]
-Efficiency of your solar power plant for diffuse radiation. When pointing up it should be around 100%, when pointing to the horizon it may be around 50%. 
-Also depends on reflections etc.
+Specify the efficiency of your solar power plant for diffuse radiation. When pointing up, it should be around 100%, but when pointing towards the horizon, it may be around 50%, depending on reflections and other factors.
+You probably need to optimize this parameter.
 
 #### Inverter power  [W]
-Maximum power of your inverter. If it is lower than the maximum power of your panels the output power of your system will be limited by this parameter.
+Specify the maximum power of your inverter. If it is lower than the maximum power of your panels, the output power of your system will be limited by this parameter.
 
 #### Inverter efficiency  [%] 
-Efficiency of your inverter.
+Enter the efficiency of your inverter.
 
 #### Shading
 In this section you can define the shading on your solar panels.
 For each azimuth angle range, you can specify the minimum elevation of the sun that is necessary for the sun to hit the solar panels.
 For elevations below this value you can set the percentage of shading. For example, a building will reduce radiation by 100%, a tree maybe only by 60%.
-You can use the button with sun icon (main window) to get information about the current azimuth and elevation of the sun to find out at what elevation the sun gets above 
-buildings or trees.
+You can use the sun icon button in the main window to get information about the current azimuth and elevation of the sun to determine at what elevation the sun gets above buildings or trees.
 
 ## License
 
