@@ -48,7 +48,12 @@ Enter the dependence of the cell power on temperature, usually in the range of -
 Enter the size of your solar panel.
 
 #### Diffuse radiation efficiency  [%]
-Specify the efficiency of your solar power plant for diffuse radiation. When pointing up, it should be around 100%, but when pointing towards the horizon, it may be around 50%, depending on reflections and other factors.
+Specify the efficiency of your solar power plant for diffuse radiation. When pointing up, it should be around 100%, but when pointing towards the horizon, it may be 50% or less, depending on the environment.
+You probably need to optimize this parameter.
+
+#### Albedo  [0..1]
+Specify the average albedo for your environment to take reflections into account. The value ranges from 0 (all radiation is absorbed) to 1 (all radiation is reflected).
+Examples: Fresh snow: 0.8, green gras: 0.25, asphalt: 0.1
 You probably need to optimize this parameter.
 
 #### Inverter power  [W]

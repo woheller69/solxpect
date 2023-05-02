@@ -1,7 +1,6 @@
 solXpect prognostiziert den Ertrag Ihrer PV Anlage
 
-Diese App nimmt direkte und diffuse Strahlungsdaten von Open-Meteo.com, berechnet die Position
-der Sonne und projiziert die Strahlung auf Ihr Solarpanel.
+Diese App nimmt direkte und diffuse Strahlungsdaten von Open-Meteo.com, berechnet die Position der Sonne und projiziert die Strahlung auf Ihr Solarpanel.
 Es zeigt die geschätzte Energieproduktion für die nächsten Stunden und bis zu 16 Tage an.
 
 Features:

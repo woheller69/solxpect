@@ -189,6 +189,7 @@ public class ManageLocationsActivity extends NavigationActivity {
         EditText editCellsEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Cell_Efficiency);
         EditText editCellsTempCoeff = (EditText) dialogView.findViewById(R.id.EditLocation_Cell_Temp_Coeff);
         EditText editDiffuseEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Diffuse_Efficiency);
+        EditText editAlbedo = (EditText) dialogView.findViewById(R.id.EditLocation_Albedo);
         EditText editInverterPowerLimit = (EditText) dialogView.findViewById(R.id.EditLocation_Inverter_Power_Limit);
         EditText editInverterEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Inverter_Efficiency);
 
@@ -209,6 +210,8 @@ public class ManageLocationsActivity extends NavigationActivity {
         editCellsTempCoeff.setFilters(new InputFilter[]{ new InputFilterMinMax(-100, 100)});
         editDiffuseEfficiency.setText(Float.toString(city.getDiffuseEfficiency()));
         editDiffuseEfficiency.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 100)});
+        editAlbedo.setText(Float.toString(city.getAlbedo()));
+        editAlbedo.setFilters(new InputFilter[]{ new InputFilterMinMax(0,1)});
         editInverterPowerLimit.setText(Float.toString(city.getInverterPowerLimit()));
         editInverterEfficiency.setText(Float.toString(city.getInverterEfficiency()));
         editInverterEfficiency.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 100)});
@@ -221,7 +224,7 @@ public class ManageLocationsActivity extends NavigationActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 float tilt = Float.parseFloat(!editTilt.getText().toString().isEmpty() ? editTilt.getText().toString() : "0");
-                int diffuseEfficiency = (int) (100-50 * tilt/90);
+                int diffuseEfficiency = (int) ( 50 + 50* Math.cos(tilt/180*Math.PI));
                 editDiffuseEfficiency.setText(Float.toString((float) diffuseEfficiency));
             }
         });
@@ -242,6 +245,7 @@ public class ManageLocationsActivity extends NavigationActivity {
                     Float.parseFloat(editCellsEfficiency.getText().toString().isEmpty() ? "0" : editCellsEfficiency.getText().toString()),
                     Float.parseFloat(editCellsTempCoeff.getText().toString().isEmpty() ? "0" : editCellsTempCoeff.getText().toString()),
                     Float.parseFloat(editDiffuseEfficiency.getText().toString().isEmpty() ? "0" : editDiffuseEfficiency.getText().toString()),
+                    Float.parseFloat(editAlbedo.getText().toString().isEmpty() ? "0" : editAlbedo.getText().toString()),
                     Float.parseFloat(editInverterPowerLimit.getText().toString().isEmpty() ? "0" : editInverterPowerLimit.getText().toString()),
                     Float.parseFloat(editInverterEfficiency.getText().toString().isEmpty() ? "0" : editInverterEfficiency.getText().toString()),
                     shadingElevation,
@@ -277,6 +281,7 @@ public class ManageLocationsActivity extends NavigationActivity {
                     Float.parseFloat(editCellsEfficiency.getText().toString().isEmpty() ? "0" : editCellsEfficiency.getText().toString()),
                     Float.parseFloat(editCellsTempCoeff.getText().toString().isEmpty() ? "0" : editCellsTempCoeff.getText().toString()),
                     Float.parseFloat(editDiffuseEfficiency.getText().toString().isEmpty() ? "0" : editDiffuseEfficiency.getText().toString()),
+                    Float.parseFloat(editAlbedo.getText().toString().isEmpty() ? "0" : editAlbedo.getText().toString()),
                     Float.parseFloat(editInverterPowerLimit.getText().toString().isEmpty() ? "0" : editInverterPowerLimit.getText().toString()),
                     Float.parseFloat(editInverterEfficiency.getText().toString().isEmpty() ? "0" : editInverterEfficiency.getText().toString()),
                     shadingElevation,

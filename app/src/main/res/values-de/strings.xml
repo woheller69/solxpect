@@ -107,6 +107,7 @@
     <string name="dialog_add_clone_button">Klonen</string>
     <string name="itemRemoved">ENTFERNT:\u0020\u0020%s</string>
     <string name="undo">WIEDERHERSTELLEN</string>
+    <string name="edit_location_hint_albedo">Albedo [0..1]</string>
 
 
 </resources>

@@ -15,6 +15,7 @@ public class HourlyForecast {
     private int weatherID;
     private float directRadiationNormal;
     private float diffuseRadiation;
+    private float shortwaveRadiation;
     private float power;
     private String city_name;
 
@@ -104,4 +105,8 @@ public class HourlyForecast {
     public void setDiffuseRadiation(float diffuseRadiation) { this.diffuseRadiation = diffuseRadiation; }
 
     public void setPower(float power) { this.power = power; }
+
+    public void setShortwaveRadiation(float shortwaveRadiation) { this.shortwaveRadiation = shortwaveRadiation; }
+
+    public float getShortwaveRadiation() { return this.shortwaveRadiation; }
 }

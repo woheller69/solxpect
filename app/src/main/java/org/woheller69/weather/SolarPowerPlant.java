@@ -9,6 +9,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 public class SolarPowerPlant {
+    double albedo;
     double latitude;
     double longitude;
     double cellsMaxPower;
@@ -23,7 +24,8 @@ public class SolarPowerPlant {
     private final int[] shadingElevation;
     private final int[] shadingOpacity;
 
-    public SolarPowerPlant(double latitude, double longitude, double cellsMaxPower, double cellsArea, double cellsEfficiency, double cellsTempCoeff, double diffuseEfficiency, double inverterPowerLimit, double inverterEfficiency, double azimuthAngle, double tiltAngle, int[] shadingElevation, int[] shadingOpacity ) {
+    public SolarPowerPlant(double latitude, double longitude, double cellsMaxPower, double cellsArea, double cellsEfficiency, double cellsTempCoeff, double diffuseEfficiency, double inverterPowerLimit, double inverterEfficiency, double azimuthAngle, double tiltAngle, int[] shadingElevation, int[] shadingOpacity, double albedo ) {
+        this.albedo = albedo;
         this.latitude = latitude;
         this.longitude = longitude;
         this.cellsMaxPower = cellsMaxPower;
@@ -40,7 +42,7 @@ public class SolarPowerPlant {
 
     }
 
-    public float getPower(double solarPowerNormal, double solarPowerDiffuse, long epochTimeSeconds, double ambientTemperature) {
+    public float getPower(double solarPowerNormal, double solarPowerDiffuse, double shortwaveRadiation, long epochTimeSeconds, double ambientTemperature) {
         Instant i = Instant.ofEpochSecond(epochTimeSeconds); //currentTimeMillis is in GMT
         ZonedDateTime dateTime = ZonedDateTime.ofInstant(i, ZoneId.of("GMT"));
 
@@ -73,7 +75,7 @@ public class SolarPowerPlant {
             }
         }
 
-        double totalRadiationOnCell = solarPowerNormal * efficiency + solarPowerDiffuse * diffuseEfficiency;  //flat plate equivalent of the solar irradiance
+        double totalRadiationOnCell = solarPowerNormal * efficiency + solarPowerDiffuse * diffuseEfficiency + shortwaveRadiation * (0.5-0.5*Math.cos(tiltAngle/180*Math.PI)) * albedo;  //flat plate equivalent of the solar irradiance
         double cellTemperature = calcCellTemperature(ambientTemperature,totalRadiationOnCell);
         double dcPower;
         if (cellsEfficiency!=0 && cellsArea!=0){

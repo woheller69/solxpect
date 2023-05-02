@@ -23,6 +23,7 @@ public class CityToWatch {
     private float inverterEfficiency;
     private float azimuthAngle;
     private float tiltAngle;
+    private float albedo;
     private int rank;
     private int[] shadingElevation = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     private int[] shadingOpacity =   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -46,6 +47,7 @@ public class CityToWatch {
         this.inverterEfficiency = 95.0f;
         this.azimuthAngle = 170.0f;
         this.tiltAngle = 90.0f;
+        this.albedo = 0f;
 
     }
 
@@ -192,4 +194,8 @@ public class CityToWatch {
     public void setCellsTempCoeff(float cellsTempCoeff) {
         this.cellsTempCoeff = cellsTempCoeff;
     }
+
+    public float getAlbedo() { return this.albedo;   }
+
+    public void setAlbedo (float albedo) { this.albedo = albedo; }
 }

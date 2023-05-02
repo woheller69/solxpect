@@ -110,4 +110,5 @@
     <string name="dialog_add_clone_button">Clone</string>
     <string name="itemRemoved">REMOVED:\u0020\u0020%s</string>
     <string name="undo">UNDO</string>
+    <string name="edit_location_hint_albedo">Albedo [0..1]</string>
 </resources>
