@@ -85,6 +85,7 @@ The app uses:
 - Map data from OpenStreetMap, licensed under the Open Data Commons Open Database License (ODbL) by the OpenStreetMap Foundation (OSMF) (https://www.openstreetmap.org/copyright)
 - Solar positioning library (https://github.com/klausbrunner/solarpositioning) which is licensed under <a href='https://github.com/klausbrunner/solarpositioning/blob/master/LICENSE.txt'>MIT License</a>
 - Zip4j (https://github.com/srikanth-lingala/zip4j) which is licensed under Apache License Version 2.0
+- CompassView (https://github.com/kix2902/CompassView) which is published under Apache License 2.0
 
 ## Contributing
 
