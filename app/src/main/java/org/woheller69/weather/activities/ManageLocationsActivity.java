@@ -200,7 +200,7 @@ public class ManageLocationsActivity extends NavigationActivity {
         editLatitude.setFilters(new InputFilter[]{ new InputFilterMinMax(-90, 90)});
         editLongitude.setText(Float.toString(city.getLongitude()));
         editLongitude.setFilters(new InputFilter[]{ new InputFilterMinMax(-180, 180)});
-        editCompass.setDegrees(city.getLongitude());
+        editCompass.setDegrees(city.getAzimuthAngle());
         editCompass.setOnCompassDragListener(degrees -> { editAzimuth.setText(Float.toString(Math.round(degrees))); });
         editAzimuth.setText(Float.toString(city.getAzimuthAngle()));
         editAzimuth.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 360)});
