@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -45,6 +45,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/edit_location_hint_azimuth"/>
+
+    <com.redinput.compassview.CompassView
+        android:id="@+id/EditLocation_Compass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:backgroundColor="#FFFFFF"
+        app:showMarker="true"
+        app:markerColor="@color/colorAccent"
+        app:lineColor="#000000"
+        app:textColor="#000000"
+        app:textSize="12sp"
+        app:rangeDegrees="180.0"/>
+
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Azimuth"
         android:layout_width="match_parent"

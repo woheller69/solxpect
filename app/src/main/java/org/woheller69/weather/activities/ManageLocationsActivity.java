@@ -3,6 +3,7 @@ package org.woheller69.weather.activities;
 import android.content.Context;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.redinput.compassview.CompassView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -183,6 +184,7 @@ public class ManageLocationsActivity extends NavigationActivity {
         EditText editLongitude = (EditText) dialogView.findViewById(R.id.EditLocation_Lon);
         EditText editCity = (EditText) dialogView.findViewById(R.id.EditLocation_Name);
         EditText editAzimuth = (EditText) dialogView.findViewById(R.id.EditLocation_Azimuth);
+        CompassView editCompass = (CompassView) dialogView.findViewById(R.id.EditLocation_Compass);
         EditText editTilt = (EditText) dialogView.findViewById(R.id.EditLocation_Tilt);
         EditText editCellsMaxPower = (EditText) dialogView.findViewById(R.id.EditLocation_Cell_Max_Power);
         EditText editCellsArea = (EditText) dialogView.findViewById(R.id.EditLocation_Cells_Area);
@@ -198,8 +200,22 @@ public class ManageLocationsActivity extends NavigationActivity {
         editLatitude.setFilters(new InputFilter[]{ new InputFilterMinMax(-90, 90)});
         editLongitude.setText(Float.toString(city.getLongitude()));
         editLongitude.setFilters(new InputFilter[]{ new InputFilterMinMax(-180, 180)});
+        editCompass.setDegrees(city.getLongitude());
+        editCompass.setOnCompassDragListener(degrees -> { editAzimuth.setText(Float.toString(Math.round(degrees))); });
         editAzimuth.setText(Float.toString(city.getAzimuthAngle()));
         editAzimuth.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 360)});
+        editAzimuth.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                float azimuth = Float.parseFloat(!editAzimuth.getText().toString().isEmpty() ? editAzimuth.getText().toString() : "0");
+                editCompass.setDegrees(azimuth);
+            }
+        });
         editTilt.setText(Float.toString(city.getTiltAngle()));
         editTilt.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 90)});
         editCellsMaxPower.setText(Float.toString(city.getCellsMaxPower()));
