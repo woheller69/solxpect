@@ -67,9 +67,7 @@ public class RecyclerOverviewListAdapter extends RecyclerView.Adapter<ItemViewHo
         holder.tiltAngle.setText(context.getString(R.string.edit_location_hint_tilt) +": "+ cities.get(position).getTiltAngle());
         holder.cellsMaxPower.setText(context.getString(R.string.edit_location_hint_cells_max_power) +": "+ cities.get(position).getCellsMaxPower());
         holder.cellsEfficiency.setText(context.getString(R.string.edit_location_hint_cells_efficiency) +": "+ cities.get(position).getCellsEfficiency());
-        holder.cellsTempCoeff.setText(context.getString(R.string.edit_location_hint_cells_temp_coeff) +": "+ cities.get(position).getCellsTempCoeff());
         holder.cellsArea.setText(context.getString(R.string.edit_location_hint_cells_area) +": "+ cities.get(position).getCellsArea());
-        holder.diffuseEfficiency.setText(context.getString(R.string.edit_location_hint_diffuse_efficiency) +": "+ cities.get(position).getDiffuseEfficiency());
         holder.inverterPowerLimit.setText(context.getString(R.string.edit_location_hint_inverter_power_limit) +": "+ cities.get(position).getInverterPowerLimit());
         holder.inverterEfficiency.setText(context.getString(R.string.edit_location_hint_inverter_efficiency) +": "+ cities.get(position).getInverterEfficiency());
 

@@ -23,8 +23,6 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
     public TextView cellsMaxPower;
     public TextView cellsArea;
     public TextView cellsEfficiency;
-    public TextView cellsTempCoeff;
-    public TextView diffuseEfficiency;
     public TextView inverterPowerLimit;
     public TextView inverterEfficiency;
 
@@ -42,8 +40,6 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
         this.cellsMaxPower = (TextView) itemView.findViewById(R.id.city_cells_max_power);
         this.cellsArea = (TextView) itemView.findViewById(R.id.city_cells_area);
         this.cellsEfficiency = (TextView) itemView.findViewById(R.id.city_cells_efficiency);
-        this.cellsTempCoeff = (TextView) itemView.findViewById(R.id.city_cells_temp_coeff);
-        this.diffuseEfficiency = (TextView) itemView.findViewById(R.id.city_diffuse_efficiency);
         this.inverterPowerLimit = (TextView) itemView.findViewById(R.id.city_inverter_power_limit);
         this.inverterEfficiency = (TextView) itemView.findViewById(R.id.city_inverter_efficiency);
 

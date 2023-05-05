@@ -1,0 +1,3 @@
+Take reflections into account
+Use better formula for diffuse efficiency
+Add compass to select azimuth angle

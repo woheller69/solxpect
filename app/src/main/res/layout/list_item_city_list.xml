@@ -89,23 +89,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 tools:visibility="visible" />
 
-            <TextView
-                android:id="@+id/city_cells_temp_coeff"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/edit_location_hint_cells_temp_coeff"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                tools:visibility="visible" />
-
-            <TextView
-                android:id="@+id/city_diffuse_efficiency"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/edit_location_hint_diffuse_efficiency"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/city_inverter_power_limit"

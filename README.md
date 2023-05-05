@@ -35,7 +35,7 @@ Specify the horizontal direction of your solar power plant, with 0° correspondi
 Specify the vertical direction of your solar power plant, with 0° pointing upwards towards the sky and 90° being a vertical orientation pointing towards the horizon.
 
 #### Cells peak power [W]
-Enter the maximum power your solar cells can deliver. At the moment this value is only used if a value of 0 is specified for cells efficiency or cell area.
+Enter the maximum power your solar cells (total of all cells) can deliver. At the moment this value is only used if a value of 0 is specified for cells efficiency or cell area.
 In this case it is assumed that the cells peak power is given at an irradiance of 1000W/sqm.
 
 #### Cells efficiency  [%]
@@ -45,7 +45,7 @@ Specify the portion of energy in the form of sunlight that can be converted into
 Enter the dependence of the cell power on temperature, usually in the range of -0.4%/K. Cell temperature is estimated from ambient temperature and total irradiance.
 
 #### Cell area [m<sup>2</sup>]
-Enter the size of your solar panel.
+Enter the size of your solar panels (total of all cells).
 
 #### Diffuse radiation efficiency  [%]
 Specify the efficiency of your solar power plant for diffuse radiation. When pointing up, it should be around 100%, but when pointing towards the horizon, it may be 50% or less, depending on the environment.
