@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import org.woheller69.weather.R;
 import org.woheller69.weather.activities.ForecastCityActivity;
-import org.woheller69.weather.activities.SettingsActivity;
+import org.woheller69.weather.activities.HelpActivity;
 
 
 /**
@@ -118,7 +118,7 @@ public class TutorialActivity extends AppCompatActivity {
     }
 
     private void launchSettings() {
-        startActivity(new Intent(TutorialActivity.this, SettingsActivity.class));
+        startActivity(new Intent(TutorialActivity.this, HelpActivity.class));
         finish();
     }
 

@@ -139,7 +139,8 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
     private void initResources() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         viewPager2 = findViewById(R.id.viewPager2);
-        reduceViewpager2DragSensitivity(viewPager2,2);
+        viewPager2.setUserInputEnabled(false);
+        //reduceViewpager2DragSensitivity(viewPager2,2);
         tabLayout = findViewById(R.id.tab_layout);
         if (sharedPreferences.getBoolean("pref_summarize",false)){
             pagerAdapter = new WeatherPagerAdapter(this, getSupportFragmentManager(),getLifecycle(),true);
