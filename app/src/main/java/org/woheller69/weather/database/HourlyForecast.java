@@ -17,6 +17,7 @@ public class HourlyForecast {
     private float diffuseRadiation;
     private float shortwaveRadiation;
     private float power;
+    private float energyCum;
     private String city_name;
 
 
@@ -109,4 +110,8 @@ public class HourlyForecast {
     public void setShortwaveRadiation(float shortwaveRadiation) { this.shortwaveRadiation = shortwaveRadiation; }
 
     public float getShortwaveRadiation() { return this.shortwaveRadiation; }
+
+    public float getEnergyCum() { return this.energyCum; }
+
+    public void setEnergyCum(float energy_cum) { this.energyCum = energy_cum;}
 }

@@ -98,21 +98,16 @@ public class CourseOfDayAdapter extends RecyclerView.Adapter<CourseOfDayAdapter.
         if (sp.getBoolean("pref_debug",false)) {
             holder.diffuseRadiation.setVisibility(View.VISIBLE);
             holder.directRadiationNormal.setVisibility(View.VISIBLE);
-            holder.energyCum.setVisibility(View.VISIBLE);
         } else {
             holder.diffuseRadiation.setVisibility(View.GONE);
             holder.directRadiationNormal.setVisibility(View.GONE);
-            holder.energyCum.setVisibility(View.GONE);
         }
 
         holder.time.setText(StringFormatUtils.formatTimeWithoutZone(context, courseOfDayList.get(position).getLocalForecastTime(context)));
         holder.directRadiationNormal.setText(StringFormatUtils.formatInt(courseOfDayList.get(position).getDirectRadiationNormal()," W/qm"));
         holder.diffuseRadiation.setText(StringFormatUtils.formatInt(courseOfDayList.get(position).getDiffuseRadiation()," W/qm"));
         holder.power.setText(StringFormatUtils.formatInt(courseOfDayList.get(position).getPower()," "+ context.getString(R.string.units_Wh)));
-        float energyCumulated=0;
-        for (int i=0; i<=position;i++)
-            energyCumulated+=courseOfDayList.get(i).getPower();
-        holder.energyCum.setText(StringFormatUtils.formatInt(energyCumulated," "+ context.getString(R.string.units_Wh)));
+        holder.energyCum.setText("\u03a3\u2009"+StringFormatUtils.formatEnergyCum(context, courseOfDayList.get(position).getEnergyCum()));
 
         updateRecyclerViewHeader();  //update header according to date in first visible item on the left
 

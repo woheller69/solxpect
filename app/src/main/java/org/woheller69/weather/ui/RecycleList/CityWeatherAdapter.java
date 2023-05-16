@@ -100,7 +100,10 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
 
         courseDayList = new ArrayList<>();
 
+        float energyCumulated=0;
             for (HourlyForecast f : hourlyForecasts) {
+                energyCumulated+=f.getPower();
+                f.setEnergyCum(energyCumulated);
                 if (sp.getBoolean("pref_debug",false)) {
                     courseDayList.add(f);
                 } else {

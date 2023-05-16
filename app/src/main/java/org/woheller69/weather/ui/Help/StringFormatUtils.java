@@ -28,6 +28,12 @@ public final class StringFormatUtils {
         return removeMinusIfZerosOnly(decimalFormat.format(decimal));
     }
 
+    public static String formatEnergyCum(Context context, float energyCum) {
+        if (energyCum < 10000.0f) return formatInt(energyCum, context.getString(R.string.units_Wh));
+        else if (energyCum < 100000.0f) return formatDecimal(energyCum/1000,context.getString(R.string.units_kWh));
+        else return formatInt(energyCum/1000,context.getString(R.string.units_kWh));
+    }
+
     public static String formatInt(float decimal) {
         intFormat.setRoundingMode(RoundingMode.HALF_UP);
         return removeMinusIfZerosOnly(intFormat.format(decimal));
