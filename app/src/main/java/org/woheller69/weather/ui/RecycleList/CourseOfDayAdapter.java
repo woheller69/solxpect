@@ -106,8 +106,8 @@ public class CourseOfDayAdapter extends RecyclerView.Adapter<CourseOfDayAdapter.
         holder.time.setText(StringFormatUtils.formatTimeWithoutZone(context, courseOfDayList.get(position).getLocalForecastTime(context)));
         holder.directRadiationNormal.setText(StringFormatUtils.formatInt(courseOfDayList.get(position).getDirectRadiationNormal()," W/qm"));
         holder.diffuseRadiation.setText(StringFormatUtils.formatInt(courseOfDayList.get(position).getDiffuseRadiation()," W/qm"));
-        holder.power.setText(StringFormatUtils.formatInt(courseOfDayList.get(position).getPower()," "+ context.getString(R.string.units_Wh)));
-        holder.energyCum.setText("\u03a3\u2009"+StringFormatUtils.formatEnergyCum(context, courseOfDayList.get(position).getEnergyCum()));
+        holder.power.setText(StringFormatUtils.formatInt(courseOfDayList.get(position).getPower(),context.getString(R.string.units_Wh)));
+        holder.energyCum.setText("\u03a3\u200a"+StringFormatUtils.formatEnergyCum(context, courseOfDayList.get(position).getEnergyCum()));
 
         updateRecyclerViewHeader();  //update header according to date in first visible item on the left
 
