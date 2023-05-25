@@ -1,4 +1,4 @@
-solXpect forecasts the output of your solar power plant
+solXpect forecasts the output of your photovolatic system (PV)
 
 This app takes direct and diffuse radiation data from Open-Meteo.com, calculates the position of the sun and projects the radiation on your solar panel.
 It shows the estimated energy production for the next hours and up to 16 days.
