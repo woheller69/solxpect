@@ -5,7 +5,7 @@
 
 solXpect is an app that forecasts the output of your solar power plant by using direct and diffuse radiation data from Open-Meteo.com, calculating the position of the sun, and projecting the radiation on your solar panel. 
 It shows the estimated energy production for the next 16 days, with hourly values calculated for the preceding hour. As an example, if there are 150 Wh shown at 11:00 this means you can expect 150 Wh between 10:00 and 11:00 from your photovoltaic system.
-The values starting with $\sum$ show the cumulated energy since midnight of the first day.
+The values starting with Σ show the cumulated energy since midnight of the first day.
 To use solXpect, you simply enter your latitude and longitude coordinates, as well as the azimuth and tilt of your solar panel. 
 You also enter information about the peak power, efficiency, temperature coefficient, and area of your solar panel, as well as the maximum power and efficiency of your inverter.
 Additionally, solXpect allows you to define shading on your solar panels by specifying the minimum elevation of the sun necessary for the sun to hit the solar panels, as well as the percentage of shading for elevations below this value.
