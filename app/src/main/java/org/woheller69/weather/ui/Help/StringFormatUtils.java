@@ -2,14 +2,12 @@ package org.woheller69.weather.ui.Help;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import androidx.preference.PreferenceManager;
 
-import androidx.core.content.res.ResourcesCompat;
 import org.woheller69.weather.R;
-import org.woheller69.weather.preferences.AppPreferencesManager;
 
 import java.math.RoundingMode;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,6 +55,12 @@ public final class StringFormatUtils {
             df = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
             df.setTimeZone(TimeZone.getTimeZone("GMT"));
         }
+        return df.format(time);
+    }
+
+    public static String formatDate(long time) {
+        java.text.DateFormat df = java.text.DateFormat.getDateInstance(DateFormat.SHORT);
+        df.setTimeZone(TimeZone.getTimeZone("GMT"));
         return df.format(time);
     }
 

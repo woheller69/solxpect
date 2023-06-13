@@ -10,6 +10,7 @@
     <string name="about_where_from">Woher kommen die Wetterinformationen?</string>
     <string name="about_where_from_answer">Die Wetterinformationen stammen von</string>
     <string name="activity_about">Über</string>
+    <string name="version_number">Version</string>
     <string name="activity_weather">Vorhersage</string>
     <string name="activity_manage">Orte verwalten</string>
     <string name="activity_settings">Einstellungen</string>
