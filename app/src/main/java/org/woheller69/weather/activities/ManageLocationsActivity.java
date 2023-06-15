@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.woheller69.weather.R;
+import org.woheller69.weather.SolarPowerPlant;
 import org.woheller69.weather.database.City;
 import org.woheller69.weather.database.CityToWatch;
 import org.woheller69.weather.database.SQLiteHelper;
@@ -240,7 +241,7 @@ public class ManageLocationsActivity extends NavigationActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 float tilt = Float.parseFloat(!editTilt.getText().toString().isEmpty() ? editTilt.getText().toString() : "0");
-                int diffuseEfficiency = (int) ( 50 + 50* Math.cos(tilt/180*Math.PI));
+                int diffuseEfficiency = SolarPowerPlant.calcDiffuseEfficiency(tilt);
                 editDiffuseEfficiency.setText(Float.toString((float) diffuseEfficiency));
             }
         });

@@ -89,6 +89,10 @@ public class SolarPowerPlant {
         return (float) acPower;
     }
 
+    public static int calcDiffuseEfficiency(float tilt){
+        return (int) ( 50 + 50* Math.cos(tilt/180*Math.PI));
+    }
+
     public static double calcCellTemperature(double ambientTemperature, double totalIrradiance){
         //models from here: https://www.scielo.br/j/babt/a/FBq5Pmm4gSFqsfh3V8MxfGN/  Photovoltaic Cell Temperature Estimation for a Grid-Connect Photovoltaic Systems in Curitiba
         //float cellTemperature =  30.006f + 0.0175f*(totalIrradiance-300f)+1.14f*(ambientTemperature-25f);  //Lasnier and Ang  Lasnier, F.; Ang, T. G. Photovoltaic engineering handbook, 1st ed.; IOP Publishing LTD: Lasnier, France, 1990; pp. 258.
