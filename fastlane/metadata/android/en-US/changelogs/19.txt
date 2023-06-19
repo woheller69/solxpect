@@ -1,0 +1,3 @@
+Upgrade for Android 13
+Support Dark Mode in Help Activity for Android 10+
+Slightly improve contrast in Dark Mode

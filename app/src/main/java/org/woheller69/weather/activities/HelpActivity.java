@@ -1,11 +1,14 @@
 package org.woheller69.weather.activities;
 
 import android.content.res.AssetManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.webkit.WebView;
 import org.woheller69.weather.R;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.webkit.WebSettingsCompat;
+import androidx.webkit.WebViewFeature;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,6 +21,12 @@ public class HelpActivity extends NavigationActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
         WebView view = findViewById(R.id.help);
+
+        if(WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                WebSettingsCompat.setAlgorithmicDarkeningAllowed(view.getSettings(), true);
+            }
+        }
 
         String language = getResources().getConfiguration().getLocales().get(0).getLanguage();
 

@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
 
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "org.woheller69.solxpect"
         minSdkVersion 26
-        targetSdkVersion 31
-        versionCode 18
-        versionName "1.8"
+        targetSdkVersion 33
+        versionCode 19
+        versionName "1.9"
 
         buildConfigField "String", "BASE_URL", "\"https://api.open-meteo.com/v1/\""
         buildConfigField "String", "GITHUB_URL","\"https://github.com/woheller69/solxpect/\""
@@ -38,4 +38,5 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1" //needed due to duplicate class error
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1" //needed due to duplicate class error
     implementation 'com.github.woheller69:CompassView:a63c67da90'
+    implementation 'androidx.webkit:webkit:1.5.0'
 }
