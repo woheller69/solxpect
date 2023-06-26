@@ -57,7 +57,7 @@
     <string name="sunday">Sonntag</string>
     <string name="chart">Diagramm</string>
     <string name="units_kWh">kWh</string>
-    <string name="dialog_edit_change_button">Ändern</string>
+    <string name="dialog_edit_change_button">Speichern</string>
     <string name="edit_location_hint_name">Name</string>
     <string name="settings_search">Suche</string>
     <string name="settings_darkmode">Android 10+ Dark Mode</string>
