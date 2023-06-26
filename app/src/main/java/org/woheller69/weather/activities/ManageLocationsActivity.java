@@ -23,6 +23,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.e175.klaus.solarpositioning.AzimuthZenithAngle;
+import net.e175.klaus.solarpositioning.DeltaT;
+import net.e175.klaus.solarpositioning.Grena3;
+
 import org.woheller69.weather.R;
 import org.woheller69.weather.SolarPowerPlant;
 import org.woheller69.weather.database.City;
@@ -30,10 +34,14 @@ import org.woheller69.weather.database.CityToWatch;
 import org.woheller69.weather.database.SQLiteHelper;
 import org.woheller69.weather.dialogs.AddLocationDialogOmGeocodingAPI;
 import org.woheller69.weather.ui.Help.InputFilterMinMax;
+import org.woheller69.weather.ui.Help.StringFormatUtils;
 import org.woheller69.weather.ui.RecycleList.RecyclerItemClickListener;
 import org.woheller69.weather.ui.RecycleList.RecyclerOverviewListAdapter;
 import org.woheller69.weather.ui.RecycleList.SimpleItemTouchHelperCallback;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -195,6 +203,19 @@ public class ManageLocationsActivity extends NavigationActivity {
         EditText editAlbedo = (EditText) dialogView.findViewById(R.id.EditLocation_Albedo);
         EditText editInverterPowerLimit = (EditText) dialogView.findViewById(R.id.EditLocation_Inverter_Power_Limit);
         EditText editInverterEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Inverter_Efficiency);
+        TextView currentAzimuth = (TextView) dialogView.findViewById(R.id.edit_current_azi_ele);
+
+        Long time = System.currentTimeMillis()/1000;
+        ZonedDateTime dateTime = ZonedDateTime.ofInstant(Instant.ofEpochSecond(time), ZoneId.of("GMT"));
+        AzimuthZenithAngle position = Grena3.calculateSolarPosition(
+                dateTime,
+                city.getLatitude(),
+                city.getLongitude(),
+                DeltaT.estimate(dateTime.toLocalDate()));
+
+        String solarAzimuth = StringFormatUtils.formatDecimal((float) position.getAzimuth(),"");
+        String solarElevation = StringFormatUtils.formatDecimal((float) (90 - position.getZenithAngle()),"");
+        currentAzimuth.setText(getString(R.string.edit_location_hint_azimuth)+": "+solarAzimuth + " " + getString(R.string.action_sun_elevation) + ": " + solarElevation);
 
         editCity.setText(city.getCityName());
         editLatitude.setText(Float.toString(city.getLatitude()));

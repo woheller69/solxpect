@@ -95,7 +95,7 @@
     <string name="edit_location_shading_opacity_heading">Shading below this elevation [%]</string>
     <string name="edit_location_shading_heading">Shading</string>
     <string name="activity_help">Instructions</string>
-    <string name="action_sun_position">Sun position</string>
+    <string name="action_sun_position">Current sun position</string>
     <string name="action_sun_elevation">Elevation [°]</string>
     <string name="edit_location_hint_cells_temp_coeff">Temperature coefficient [%/K]</string>
     <string name="activity_backuprestore">Backup/Restore</string>

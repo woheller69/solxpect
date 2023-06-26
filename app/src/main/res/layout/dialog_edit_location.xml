@@ -15,6 +15,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_name"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Name"
@@ -24,6 +25,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_latitude"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Lat"
@@ -34,6 +36,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_longitude"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Lon"
@@ -44,6 +47,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_azimuth"/>
 
     <com.redinput.compassview.CompassView
@@ -68,6 +72,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_tilt"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Tilt"
@@ -78,6 +83,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_cells_max_power"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Cell_Max_Power"
@@ -88,6 +94,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_cells_area"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Cells_Area"
@@ -98,6 +105,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_cells_efficiency"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Cell_Efficiency"
@@ -108,6 +116,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_cells_temp_coeff"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Cell_Temp_Coeff"
@@ -118,6 +127,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_diffuse_efficiency"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Diffuse_Efficiency"
@@ -125,10 +135,10 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:hint="@string/edit_location_hint_diffuse_efficiency"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_albedo"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Albedo"
@@ -136,12 +146,10 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:hint="@string/edit_location_hint_albedo"/>
-
-
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_inverter_power_limit"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Inverter_Power_Limit"
@@ -152,6 +160,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:hint="@string/edit_location_hint_inverter_efficiency"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Inverter_Efficiency"
@@ -169,8 +178,21 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="@string/edit_location_shading_heading"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:paddingLeft="5px"
+            android:text="@string/action_sun_position"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/edit_current_azi_ele"
+            android:paddingLeft="5px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"/>
 
     </LinearLayout>
