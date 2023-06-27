@@ -290,7 +290,7 @@ public class ManageLocationsActivity extends NavigationActivity {
                     shadingOpacity
                     );
         });
-        alert.setNegativeButton(getString(R.string.dialog_add_close_button), (dialog, whichButton) -> {
+        alert.setNegativeButton(getString(android.R.string.cancel), (dialog, whichButton) -> {
         });
 
         alert.setNeutralButton(getString(R.string.dialog_add_clone_button), (dialog, whichButton) -> {

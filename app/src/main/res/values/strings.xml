@@ -34,7 +34,6 @@
     <string name="abbreviation_sunday">Su.</string>
     <string name="dialog_add_label">Enter the location to add:</string>
     <string name="dialog_add_no_city_found">No location was found that matches your input. It is recommended to select one of the items from the dropdown list.  </string>
-    <string name="dialog_add_close_button">Close</string>
     <string name="dialog_add_add_button">Add</string>
     <string name="error_convert_to_json">The retrieved weather data was not well-formed. </string>
     <string name="error_no_internet">Your Device is not connected to the Internet</string>

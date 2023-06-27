@@ -167,7 +167,7 @@ public class AddLocationDialogOmGeocodingAPI extends DialogFragment {
             }
         });
 
-        builder.setNegativeButton(getActivity().getString(R.string.dialog_add_close_button), null);
+        builder.setNegativeButton(getActivity().getString(android.R.string.cancel), null);
 
         return builder.create();
 
