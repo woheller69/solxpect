@@ -3,6 +3,7 @@ package org.woheller69.weather.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +26,7 @@ import android.view.MenuItem;
 
 import org.woheller69.weather.BuildConfig;
 import org.woheller69.weather.R;
+import org.woheller69.weather.database.SQLiteHelper;
 import org.woheller69.weather.preferences.AppPreferencesManager;
 
 import static java.lang.Boolean.TRUE;
@@ -170,6 +172,9 @@ public class NavigationActivity extends AppCompatActivity implements OnNavigatio
             intent = new Intent(this, HelpActivity.class);
             startActivity(intent);
         }else if(itemId==R.id.nav_backuprestore) {
+            SQLiteHelper dbhelper = SQLiteHelper.getInstance(this);  //create a database if it does not yet exist
+            SQLiteDatabase database = dbhelper.getWritableDatabase();
+            database.close();
             intent = new Intent(this, BackupRestoreActivity.class);
             startActivity(intent);
         }else if (itemId==R.id.star_on_github){

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
@@ -16,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -25,7 +27,11 @@ public class Backup {
     public static boolean checkPermissionStorage (Context context) {
             int result = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE);
             int result1 = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                return true;
+            } else {
+                return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
+        }
     }
 
     public static void requestPermission(Activity activity) {
@@ -52,7 +58,7 @@ public class Backup {
                 try (ZipInputStream zipInputStream = new ZipInputStream(src)) {
                     while ((zipEntry = zipInputStream.getNextEntry()) != null) {
                         File extractedFile = new File(targetDir ,zipEntry.getName());
-                        try (OutputStream outputStream = new FileOutputStream(extractedFile)) {
+                        try (OutputStream outputStream = Files.newOutputStream(extractedFile.toPath())) {
                             while ((readLen = zipInputStream.read(readBuffer)) != -1) {
                                 outputStream.write(readBuffer, 0, readLen);
                             }
