@@ -61,8 +61,8 @@
    </g>
    <g class="com.sun.star.drawing.PolyPolygonShape">
     <g id="id7">
-     <rect class="BoundingBox" stroke="none" fill="none" x="4931" y="11438" width="4468" height="3564"/>
-     <path fill="rgb(25,32,114)" stroke="none" d="M 6741,15000 L 4931,11674 7588,11439 9398,14766 6741,15000 Z"/>
+     <rect class="BoundingBox" stroke="none" fill="none" x="5041" y="11516" width="4468" height="3564"/>
+     <path fill="rgb(25,32,114)" stroke="none" d="M 6851,15078 L 5041,11752 7698,11517 9508,14844 6851,15078 Z"/>
     </g>
    </g>
    <g class="com.sun.star.drawing.PolyPolygonShape">
