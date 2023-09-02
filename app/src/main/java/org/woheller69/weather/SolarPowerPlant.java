@@ -67,11 +67,38 @@ public class SolarPowerPlant {
             efficiency = Math.max(0, efficiency); //scalar product is negative if sun points to back of module. set 0 in this case
 
             if (efficiency > 0) {
-                //Calculate shading  in 10 degree ranges, total 36 ranges
-                int shadingIndex = ((((int) Math.round((solarAzimuth + 5) / 10)) - 1) % 36 + 36) % 36;
-                if (shadingElevation[shadingIndex] > solarElevation) {
-                    efficiency *= (double) (100 - shadingOpacity[shadingIndex])/100;
+                double shFactor=0;
+                Instant sh;
+                ZonedDateTime shDateTime;
+                AzimuthZenithAngle shPosition;
+                double shSolarAzimuth;
+                double shSolarElevation;
+
+                //Calculate shading in 6 intervals per hour -> 10min steps xx:05 / xx:15 / xx:25 / xx:35 / xx:45 / xx:55
+                int numSteps = 6;
+                long interval = 3600 / numSteps;
+                for (int j=0; j<numSteps;j++){
+                    sh = Instant.ofEpochSecond(epochTimeSeconds-(numSteps-1)*interval/2+j*interval);
+                    shDateTime = ZonedDateTime.ofInstant(sh, ZoneId.of("GMT"));  //currentTimeMillis is in GMT
+
+                    shPosition = Grena3.calculateSolarPosition(
+                            shDateTime,
+                            latitude,
+                            longitude,
+                            DeltaT.estimate(shDateTime.toLocalDate())); // delta T (s)
+
+                    shSolarAzimuth = shPosition.getAzimuth();
+                    shSolarElevation = 90 - shPosition.getZenithAngle();
+
+                    //shading values are provided in 10 degree ranges -> total of 36 ranges
+                    int shadingIndex = ((((int) Math.round((shSolarAzimuth + 5) / 10)) - 1) % 36 + 36) % 36;
+                    if (shadingElevation[shadingIndex] > shSolarElevation) {
+                        shFactor += (double) (100 - shadingOpacity[shadingIndex])/(numSteps*100);
+                    } else {
+                        shFactor += (double) 100/(numSteps*100);  //numSteps iterations with no shading give 100%
+                    }
                 }
+                efficiency *= shFactor;
             }
         }
 
