@@ -1,0 +1,65 @@
+<html>
+<body>
+<h2>Genel Bakış</h2>
+
+Bu uygulama, Open-Meteo.com'dan doğrudan ve dağınık radyasyon verilerini kullanarak, güneşin konumunu hesaplayarak ve radyasyonu güneş panelinize yansıtarak güneş enerjisi santralinizin çıktısını tahmin eder.
+Bir önceki saat için hesaplanan saatlik değerlerle birlikte önümüzdeki 16 gün için tahmini enerji üretimini gösterir. Örnek olarak, 11:00'de 150 Wh gösteriliyorsa bu, 10:00 ile 11:00 arasında 150 Wh bekleyebileceğiniz anlamına gelir.
+&#8721 ile başlayan değerler ilk günün gece yarısından itibaren biriken enerjiyi göstermektedir.
+solXpect'i kullanmak için enlem ve boylam koordinatlarınızın yanı sıra güneş panelinizin azimut ve eğimini girmeniz yeterlidir.
+Ayrıca güneş panelinizin tepe gücü, verimliliği, sıcaklık katsayısı ve alanı ile invertörünüzün maksimum gücü ve verimliliği hakkındaki bilgileri de girebilirsiniz.
+Öte yandan solXpect, güneşin güneş panellerine vurması için gereken minimum güneş yüksekliğini ve bu değerin altındaki yükseklikler için gölgeleme yüzdesini belirleyerek güneş panellerinizdeki gölgelemeyi tanımlamanıza olanak tanır.
+
+<h2>Parametreler</h2>
+
+<h3>İsim</h3>
+Konum için bir ad tanımlayın.
+Aynı enlem ve boylama sahip fakat farklı yönleri işaret eden birden fazla güneş paneliniz varsa, bunları ayrı konumlar olarak tanımlayabilir ve çıktılarını özetlemek için 'Toplamı göster' özelliğini kullanabilirsiniz.
+Bu durumda konum adlarınızı 'PVkaydım | part1', 'PVkaydım | part2' vb. olarak tanımlamalısınız. 'Toplamı göster' modunda konum daha sonra 'PVkaydım' olarak gösterilir ve bu durumda '|' sınırlayıcı olarak alınır.
+<h3>Enlem [°]</h3>
+Güney kutbunda -90° ile kuzey kutbunda 90° arasında değişen güneş enerjisi santralinizin kuzey-güney konumunu girin.
+
+<h3>Boylam [°]</h3>
+Güneş enerjisi santralinizin doğu-batı konumunu girin, 0° ana meridyen olarak tanımlanır. Pozitif boylamlar ana meridyenin doğusunda, negatif olanlar ise batısındadır.
+
+<h3>Azimut [°]</h3>
+Güneş enerjisi santralinizin yatay yönünü 0° Kuzeye, 90° Doğuya, 180° Güneye ve 270° Batıya karşılık gelecek şekilde belirtin.
+
+<h3>Eğim [°]</h3>
+Güneş enerjisi santralinizin dikey yönünü belirtin; 0° gökyüzüne doğru yukarı bakacak ve 90° ufka doğru dikey bir yön gösterecek şekilde.
+
+<h3>Hücrelerin tepe gücü [W]</h3>
+Güneş hücrelerinizin (tüm hücrelerin toplamı) sağlayabileceği maksimum gücü girin. Şu anda bu değer yalnızca hücre verimliliği veya hücre alanı için 0 değeri belirtilmişse kullanılmaktadır.
+Bu durumda, hücrelerin tepe gücünün 1000W/m2 ışınımda verildiği varsayılır.
+
+<h3>Hücre verimliliği  [%]</h3>
+Güneş ışığı formundaki enerjinin güneş pili tarafından elektriğe dönüştürülebilecek kısmını belirtin.
+
+<h3>Sıcaklık katsayısı  [%/K]</h3>
+Hücre gücünün sıcaklığa bağımlılığını girin, genellikle -%0,4/K aralığındadır. Hücre sıcaklığı, ortam sıcaklığı ve toplam ışınımdan tahmin edilir.
+
+<h3>Hücre alanı [m<sup>2</sup>]</h3>
+Güneş panellerinizin boyutunu girin. (tüm hücrelerin toplamı)
+
+<h3>Dağınık radyasyon verimliliği  [%]</h3>
+Dağınık radyasyon için güneş enerjisi santralinizin verimliliğini belirtin. Yukarı bakarken %100 civarında olmalıdır, ancak ufka doğru bakarken ortama bağlı olarak %50 veya daha az olabilir.
+Muhtemelen bu parametreyi optimize etmeniz gerekir.
+
+<h3>Yansıtabilirlik  [0..1]</h3>
+Yansımaları hesaba katmak için ortamınız için ortalama albedoyu belirtin. Değer 0 (tüm radyasyon emilir) ile 1 (tüm radyasyon yansıtılır) arasında değişir.
+Örnek: Taze kar: 0.8, yeşil ot: 0.25, asfalt: 0.1
+Muhtemelen bu parametreyi optimize etmeniz gerekir.
+
+<h3>İnvertör gücü  [W]</h3>
+İnvertörünüzün maksimum gücünü belirtin. Panellerinizin maksimum gücünden daha düşükse, sisteminizin çıkış gücü bu parametre ile sınırlandırılacaktır.
+
+<h3>İnvertör verimliliği  [%]</h3>
+İnvertörünüzün verimliliğini girin.
+
+<h3>Gölgelendirme</h3>
+Bu bölümde güneş panellerinizdeki gölgelendirmeyi tanımlayabilirsiniz.
+Her bir azimut açısı aralığı için, güneşin güneş panellerine çarpması için gerekli olan minimum güneş yüksekliğini belirleyebilirsiniz.
+Bu değerin altındaki yükseklikler için gölgeleme yüzdesini ayarlayabilirsiniz. Örneğin, bir bina radyasyonu %100 oranında azaltırken, bir ağaç sadece %60 oranında azaltabilir.
+Ana penceredeki güneş simgesi düğmesini kullanarak güneşin mevcut azimutu ve yüksekliği hakkında bilgi alabilir ve güneşin binaların veya ağaçların üzerinde hangi yükseklikte olduğunu belirleyebilirsiniz.
+
+</body>
+</html>
