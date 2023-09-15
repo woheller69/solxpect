@@ -1,0 +1,2 @@
+Add Turkish translation
+Improved calculation for shading
