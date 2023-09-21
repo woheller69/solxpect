@@ -108,6 +108,6 @@
     <string name="itemRemoved">ENTFERNT:\u0020\u0020%s</string>
     <string name="undo">WIEDERHERSTELLEN</string>
     <string name="edit_location_hint_albedo">Albedo [0..1]</string>
-
-
+    <string name="settings_server_urls">Server URLs</string>
+    <string name="settings_server_summary">Nur ändern, wenn Sie Ihre eigenen Server betreiben wollen</string>
 </resources>

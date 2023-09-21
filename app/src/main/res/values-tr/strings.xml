@@ -107,4 +107,6 @@
     <string name="itemRemoved">\u0020\u0020%s KALDIRILDI</string>
     <string name="undo">GERİ AL</string>
     <string name="edit_location_hint_albedo">Albedo [0..1]</string>
+    <string name="settings_server_urls">Sunucu URL\'leri</string>
+    <string name="settings_server_summary">Yalnızca kendi sunucularınızı barındırmak istiyorsanız değiştirin</string>
 </resources>

@@ -51,4 +51,22 @@
             android:title="@string/settings_update_interval" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/settings_server_urls" android:summary="@string/settings_server_summary">
+        <EditTextPreference
+            android:title="Open-Meteo API"
+            android:key="pref_OM_URL"
+            android:defaultValue="https://api.open-meteo.com/v1/"
+            />
+        <EditTextPreference
+            android:title="OpenStreetMap API"
+            android:key="pref_OsmTiles_URL"
+            android:defaultValue="https://tile.openstreetmap.org/"
+            />
+        <EditTextPreference
+            android:title="Open-Meteo Geocoding API"
+            android:key="pref_OMGEO_URL"
+            android:defaultValue="https://geocoding-api.open-meteo.com/"
+            />
+    </PreferenceCategory>
+
 </PreferenceScreen>

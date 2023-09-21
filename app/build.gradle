@@ -12,6 +12,8 @@ android {
         versionName "2.1"
 
         buildConfigField "String", "BASE_URL", "\"https://api.open-meteo.com/v1/\""
+        buildConfigField "String", "TILES_URL","\"https://tile.openstreetmap.org/\""
+        buildConfigField "String", "GEOCODING_URL","\"https://geocoding-api.open-meteo.com/\""
         buildConfigField "String", "GITHUB_URL","\"https://github.com/woheller69/solxpect/\""
     }
 

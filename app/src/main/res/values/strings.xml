@@ -111,4 +111,7 @@
     <string name="undo">UNDO</string>
     <string name="edit_location_hint_albedo">Albedo [0..1]</string>
     <string name="github" translatable="false">GitHub</string>
+    <string name="settings_server_urls">Server URLs</string>
+    <string name="settings_server_summary">Only change if you want to host your own servers</string>
+
 </resources>
