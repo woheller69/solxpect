@@ -1,0 +1,63 @@
+<html>
+<body>
+<h2>Introduzione</h2>
+
+Questa app fa previsioni sulla produzione del tuo impianto fotovoltaico usando i dati di radiazione luminosa diretta e indiretta prodotti da Open-Meteo.com, calcolando la posizione del sole e proiettando la radiazione sul tuo pannello solare.
+Viene mostrata la stima di produzione del tuo impianto fotovoltaico per i prossimi 16 giorni, con valori orari calcolati per l’ora precedente. Ad esempio: se alle 11:00 viene mostrato il dato 150 Wh significa che devi aspettarti 150 Wh tra le 10:00 e le 11:00.
+I valori con il simbolo &#8721 si riferiscono all’energia accumulata dalla mezzanotte del primo giorno.
+Per usare solXpect devi conoscere alcuni parametri del tuo impianto: la latitudine, la longitudine, l’azimuth (orientamento misurato in gradi rispetto alla direzione del nord), l’inclinazione, la potenza di picco e la potenza massima dell’inverter.
+Per migliorare la stima puoi anche personalizzare altri dati ad esempio l’efficienza di conversione dell’inverter, l’efficienza dei pannelli, il coefficiente di temperatura e l’area dell’impianto.
+Infine solXpect gestisce anche gli eventuali ombreggiamenti del tuo impianto, infatti è possibile specificare l’elevazione minima del sole necessaria per illuminare i pannelli e la percentuale di ombreggiamento per le elevazioni minori di questo valore.
+
+<h2>Parametri</h2>
+
+<h3>Nome</h3>
+Scegli un nome per l’impianto.
+Se hai pannelli dello stesso impianto con direzione, inclinazione o ombreggiamento diversi puoi inserirli come impianti diversi e poi usare la funzione 'Mostra totale' per mostrare la produzione complessiva.
+In questo caso devi scegliere i nomi degli impianti come "mioFV | sezione 1", "mioFV | sezione 2", ... 'Mostra totale' utilizzerà "mioFV" come nome dell’impianto in quanto il carattere '|' viene considerato come separatore tra le diverse parti.
+
+<h3>Latitudine [°]</h3>
+Indica la coordinata nord-sud del tuo impianto, può variare tra i valori -90° (polo sud) e 90° (polo nord).
+
+<h3>Longitudine [°]</h3>
+Indica La coordinata est-ovest del tuo impianto, 0° è il meridiano di Greenwich, valori positivi indicato posizioni a est di tale meridiano, negativi l’ovest.
+
+<h3>Azimuth [°]</h3>
+Indica come è orientato sul piano orizzontale il tuo impianto, 0° indicano il Nord, 90° l’Est, 180° il Sud e 270° l’Ovest.
+
+<h3>Inclinazione [°]</h3>
+Indica l’inclinazione sul piano verticale del tuo impianto, se l’impianto punta direttamente il cielo sarà 0°, invece sarà 90° per pannelli verticali.
+
+<h3>Potenza di picco [W]</h3>
+Indica la massima potenza del tuo impianto, spesso nel progetto dell’impianto è indicata con l’unità di misura Wp. Attualmente questo valore viene utilizzato solo se è il valore dell’efficienza delle celle o dell’area è 0.
+In questo caso si suppone che che le il valore di picco delle celle si raggiunga con un’irradianza di 1000W/mq.
+
+<h3>Efficienza dei pannelli [%]</h3>
+Indica la porzione di energia luminosa che viene convertita in elettricità dai pannelli.
+
+<h3>Coefficiente di temperatura [%/K]</h3>
+Indica la dipendenza della potenza dei pannelli dalla temperatura, tipicamente è un valore attorno a -0.4%/K. La temperatura dei pannelli viene stimata in base alla temperatura ambientale e all’irradianza totale.
+
+<h3>Area dei pannelli [m<sup>2</sup>]</h3>
+Indica l’area totale del tuo impianto.
+
+<h3>Efficienza della radiazione diffusa [%]</h3>
+Indica la capacità di catturare la radiazione diffusa. Per impianti poco inclinati si avvicina al 100%, per impianti molto inclinati potrebbe essere del 50% o meno, in base all’ambiente circostante.
+
+<h3>Albedo [0..1]</h3>
+Indica la capacità dell’ambiente circostante il tuo impianto di riflettere la luce solare. I valori variano da 0 (tutta la luce viene assorbita), a 1 (tutta la radiazione viene riflessa).
+Esempi: neve fresca: 0,8 ; erba verde: 0,25 ; asfalto: 0,1 .
+
+<h3>Potenza dell’inverter [W]</h3>
+Indica la potenza massima gestita dall’inverter. Se è minore della potenza massima dei pannelli, la produzione dell’impianto verrà limitata da questo parametro.
+
+<h3>Efficienza dell’inverter [%]</h3>
+Indica l’efficienza di conversione dell’inverter.
+
+<h3>Ombreggiamenti</h3>
+In questa sezione puoi definire gli ombreggiamenti dei pannelli.
+Per ogni intervallo di azimuth è possibile specificare a quale altezza minima il sole illumina i pannelli.
+Per altezze minori di questo valore è possibile impostare la percentuale di ombreggiamento. Ad esempio un edificio riduce la radiazione solare del 100%, un albero circa del 60%.
+Per impostare questi valori è possibile utilizzare i dati correnti di azimuth e altezza del sole che vengono mostrati premendo l’icona con il simbolo del sole che si trova nella schermata principale.
+</body>
+</html>
