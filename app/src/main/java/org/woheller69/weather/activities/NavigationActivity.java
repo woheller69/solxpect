@@ -81,7 +81,6 @@ public class NavigationActivity extends AppCompatActivity implements OnNavigatio
 
         }
 
-        overridePendingTransition(0, 0);
     }
 
     @Override
