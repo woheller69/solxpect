@@ -100,18 +100,26 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
         courseDayList = new ArrayList<>();
 
         float energyCumulated=0;
-            for (HourlyForecast f : hourlyForecasts) {
-                energyCumulated+=f.getPower();
-                f.setEnergyCum(energyCumulated);
-                if (sp.getBoolean("pref_debug",false)) {
-                    courseDayList.add(f);
-                } else {
-                    if (f.getForecastTime() >= System.currentTimeMillis()) {
-                        courseDayList.add(f);
-                    }
-                }
+        boolean isDebugMode = sp.getBoolean("pref_debug", false);
+        int stepCounter = 0; // Counter to track the number of steps taken in the loop
+
+        for (HourlyForecast f : hourlyForecasts) {
+            float power = f.getPower();
+            if (stepCounter > 0) energyCumulated += power;  //Ignore first value because power values are for preceding hour
+            f.setEnergyCum(energyCumulated);
+
+            // In debug mode show all values, otherwise only future values
+            if (isDebugMode || f.getForecastTime() >= System.currentTimeMillis()) {
+                courseDayList.add(f);
             }
-            notifyDataSetChanged();
+
+            stepCounter++;
+            //   if not in debug mode: Reset energyCumulated after every 24 hours if next step is 01:00 am because values are for previous hour
+            if (!isDebugMode && stepCounter % 24 == 1) {
+                energyCumulated = 0;
+            }
+        }
+        notifyDataSetChanged();
     }
 
     // function for week forecast list

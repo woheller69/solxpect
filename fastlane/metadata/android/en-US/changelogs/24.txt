@@ -1,0 +1,2 @@
+Reset cumulated values every 24h
+Bugfix

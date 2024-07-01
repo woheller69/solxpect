@@ -198,7 +198,7 @@ public class ProcessOMweatherAPIRequest implements IProcessHttpRequest {
             float totalEnergy = 0;
             Long timeNoon = weekForecast.getForecastTime();
             for (HourlyForecast hourlyForecast: hourlyforecasts){
-                if ((hourlyForecast.getForecastTime()>=timeNoon-12*3600*1000L) && (hourlyForecast.getForecastTime()< timeNoon + 12*3600*1000L)){
+                if ((hourlyForecast.getForecastTime()>=timeNoon-11*3600*1000L) && (hourlyForecast.getForecastTime()< timeNoon + 13*3600*1000L)){ //values are for preceding hour!
                    totalEnergy+=hourlyForecast.getPower();
                 }
             }
