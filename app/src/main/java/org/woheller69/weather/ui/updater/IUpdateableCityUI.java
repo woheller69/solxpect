@@ -12,7 +12,6 @@ import java.util.List;
 public interface IUpdateableCityUI {
     void processNewGeneralData(GeneralData data);
 
-    void processNewForecasts(List<HourlyForecast> hourlyForecasts);
+    void processNewForecasts(List<HourlyForecast> hourlyForecasts, List<WeekForecast> weekForecasts);
 
-    void processNewWeekForecasts(List<WeekForecast> forecasts);
 }

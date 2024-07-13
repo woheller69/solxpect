@@ -219,12 +219,7 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
     }
 
     @Override
-    public void processNewWeekForecasts(List<WeekForecast> forecasts) {
-        stopRefreshAnimation();
-    }
-
-    @Override
-    public void processNewForecasts(List<HourlyForecast> hourlyForecasts) {
+    public void processNewForecasts(List<HourlyForecast> hourlyForecasts, List<WeekForecast> weekForecasts) {
         stopRefreshAnimation();
     }
 

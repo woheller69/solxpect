@@ -168,7 +168,15 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:hint="@string/edit_location_hint_inverter_efficiency"/>
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="@string/edit_location_hint_central_inverter"/>
+    <CheckBox
+        android:id="@+id/EditLocation_Central_Inverter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <LinearLayout
         android:id="@+id/edit_Location_shading"
         android:layout_width="match_parent"

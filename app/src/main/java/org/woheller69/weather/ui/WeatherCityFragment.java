@@ -128,19 +128,10 @@ public class WeatherCityFragment extends Fragment implements IUpdateableCityUI {
     }
 
     @Override
-    public void processNewForecasts(List<HourlyForecast> hourlyForecasts) {
+    public void processNewForecasts(List<HourlyForecast> hourlyForecasts, List<WeekForecast> weekForecasts) {
         if (hourlyForecasts != null && hourlyForecasts.size() > 0 && hourlyForecasts.get(0).getCity_id() == mCityId) {
             if (mAdapter != null) {
-                mAdapter.updateForecastData(hourlyForecasts);
-            }
-        }
-    }
-
-    @Override
-    public void processNewWeekForecasts(List<WeekForecast> forecasts) {
-        if (forecasts != null && forecasts.size() > 0 && forecasts.get(0).getCity_id() == mCityId) {
-            if (mAdapter != null) {
-                mAdapter.updateWeekForecastData(forecasts);
+                mAdapter.updateForecastData(hourlyForecasts, weekForecasts);
             }
         }
     }

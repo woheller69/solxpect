@@ -118,14 +118,10 @@ public class WeatherPagerAdapter extends FragmentStateAdapter implements IUpdate
     }
 
     @Override
-    public void processNewForecasts(List<HourlyForecast> hourlyForecasts) {
+    public void processNewForecasts(List<HourlyForecast> hourlyForecasts, List<WeekForecast> weekForecasts) {
         //empty because Fragments are subscribers themselves
     }
 
-    @Override
-    public void processNewWeekForecasts(List<WeekForecast> forecasts) {
-        //empty because Fragments are subscribers themselves
-    }
 
     public int getCityIDForPos(int pos) {
             CityToWatch city = cities.get(pos);

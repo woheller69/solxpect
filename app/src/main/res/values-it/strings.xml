@@ -113,5 +113,6 @@
     <string name="github" translatable="false">GitHub</string>
     <string name="settings_server_urls">Server URLs</string>
     <string name="settings_server_summary">Cambia solo se vuoi ospitare un tuo server</string>
+    <string name="edit_location_hint_central_inverter">Invertitore centrale</string>
 
 </resources>

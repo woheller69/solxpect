@@ -141,8 +141,7 @@ public class ProcessOMweatherAPIRequest implements IProcessHttpRequest {
                 dbHelper.addWeekForecasts(weekforecasts);
 
                 if (c == CityIDList.size()-1) ViewUpdater.updateGeneralDataData(generalData); // Call Viewupdater if last (requested) city is updated
-                if (c == CityIDList.size()-1) ViewUpdater.updateWeekForecasts(weekforecasts);
-                if (c == CityIDList.size()-1) ViewUpdater.updateForecasts(hourlyforecasts);
+                if (c == CityIDList.size()-1) ViewUpdater.updateForecasts(hourlyforecasts, weekforecasts);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -192,17 +191,6 @@ public class ProcessOMweatherAPIRequest implements IProcessHttpRequest {
                 }
                 if (totalCount>0 && (float)sunCount/totalCount>0.2f)  weekForecast.setWeatherID(mappingTable.get(ID));
             }
-        }
-
-        for (WeekForecast weekForecast: weekforecasts){
-            float totalEnergy = 0;
-            Long timeNoon = weekForecast.getForecastTime();
-            for (HourlyForecast hourlyForecast: hourlyforecasts){
-                if ((hourlyForecast.getForecastTime()>=timeNoon-11*3600*1000L) && (hourlyForecast.getForecastTime()< timeNoon + 13*3600*1000L)){ //values are for preceding hour!
-                   totalEnergy+=hourlyForecast.getPower();
-                }
-            }
-            weekForecast.setEnergyDay(totalEnergy/1000);
         }
 
         return weekforecasts;

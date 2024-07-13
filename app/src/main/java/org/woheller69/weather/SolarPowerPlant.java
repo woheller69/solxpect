@@ -19,12 +19,13 @@ public class SolarPowerPlant {
     double diffuseEfficiency;
     double inverterPowerLimit;
     double inverterEfficiency;
+    boolean isCentralInverter;
     double azimuthAngle;
     double tiltAngle;
     private final int[] shadingElevation;
     private final int[] shadingOpacity;
 
-    public SolarPowerPlant(double latitude, double longitude, double cellsMaxPower, double cellsArea, double cellsEfficiency, double cellsTempCoeff, double diffuseEfficiency, double inverterPowerLimit, double inverterEfficiency, double azimuthAngle, double tiltAngle, int[] shadingElevation, int[] shadingOpacity, double albedo ) {
+    public SolarPowerPlant(double latitude, double longitude, double cellsMaxPower, double cellsArea, double cellsEfficiency, double cellsTempCoeff, double diffuseEfficiency, double inverterPowerLimit, double inverterEfficiency,boolean isCentralInverter, double azimuthAngle, double tiltAngle, int[] shadingElevation, int[] shadingOpacity, double albedo ) {
         this.albedo = albedo;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -39,6 +40,7 @@ public class SolarPowerPlant {
         this.shadingElevation = shadingElevation;
         this.shadingOpacity = shadingOpacity;
         this.cellsTempCoeff = cellsTempCoeff / 100;
+        this.isCentralInverter = isCentralInverter;
 
     }
 
@@ -111,7 +113,11 @@ public class SolarPowerPlant {
             dcPower = totalRadiationOnCell/1000 * (1+(cellTemperature - 25)*cellsTempCoeff) * cellsMaxPower;
         }
 
-        double acPower = Math.min(dcPower * inverterEfficiency, inverterPowerLimit);
+        double acPower;
+        if (!isCentralInverter)
+            acPower = Math.min(dcPower * inverterEfficiency, inverterPowerLimit);
+        else
+            acPower = dcPower * inverterEfficiency;  //do limiting on system level
 
         return (float) acPower;
     }

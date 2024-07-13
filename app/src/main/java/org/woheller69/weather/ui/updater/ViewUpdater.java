@@ -31,17 +31,11 @@ public class ViewUpdater {
         }
     }
 
-    public static void updateWeekForecasts(List<WeekForecast> forecasts) {
-        ArrayList<IUpdateableCityUI> subcopy = new ArrayList<>(subscribers);
-        for (IUpdateableCityUI sub : subcopy) {
-            sub.processNewWeekForecasts(forecasts);
-        }
-    }
 
-    public static void updateForecasts(List<HourlyForecast> hourlyForecasts) {
+    public static void updateForecasts(List<HourlyForecast> hourlyForecasts, List<WeekForecast> weekForecasts) {
         ArrayList<IUpdateableCityUI> subcopy = new ArrayList<>(subscribers);
         for (IUpdateableCityUI sub : subcopy) {
-            sub.processNewForecasts(hourlyForecasts);
+            sub.processNewForecasts(hourlyForecasts, weekForecasts);
         }
     }
 }

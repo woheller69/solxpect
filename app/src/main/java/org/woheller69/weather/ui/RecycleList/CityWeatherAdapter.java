@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.db.chart.Tools;
 import com.db.chart.model.BarSet;
@@ -62,27 +63,30 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
         List<HourlyForecast> hourlyForecasts = database.getForecastsByCityId(generalDataList.getCity_id());
         List<WeekForecast> weekforecasts = database.getWeekForecastsByCityId(generalDataList.getCity_id());
 
-        updateForecastData(hourlyForecasts);
-        updateWeekForecastData(weekforecasts);
+        updateForecastData(hourlyForecasts, weekforecasts);
 
     }
 
     // function update 3-hour or 1-hour forecast list
-    public void updateForecastData(List<HourlyForecast> hourlyForecasts) {
-        if (hourlyForecasts.isEmpty()) return;
+    public void updateForecastData(List<HourlyForecast> hourlyForecasts, List<WeekForecast> weekForecasts) {
+        if (hourlyForecasts.isEmpty() || weekForecasts.isEmpty()) return;
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        int cityId = hourlyForecasts.get(0).getCity_id();
+        SQLiteHelper dbHelper = SQLiteHelper.getInstance(context.getApplicationContext());
+        CityToWatch requestedCity = dbHelper.getCityToWatch(cityId);
+
+        Float centralInverterLimit = requestedCity.isCentralInverter() ? requestedCity.getInverterPowerLimit() : 0;
 
         if (sp.getBoolean("pref_summarize",false)){
-            int cityId = hourlyForecasts.get(0).getCity_id();
             ArrayList<Integer> CityIDList = new ArrayList<Integer>();
-            SQLiteHelper dbHelper = SQLiteHelper.getInstance(context.getApplicationContext());
             hourlyForecasts = dbHelper.getForecastsByCityId(cityId); //get fresh values from database to make sure we do add new values to sum values from last update
             List<CityToWatch> citiesToWatch = dbHelper.getAllCitiesToWatch();
-            CityToWatch requestedCity = dbHelper.getCityToWatch(cityId);
+
             for (int i = 0; i < citiesToWatch.size(); i++) {
                 CityToWatch city = citiesToWatch.get(i);
                 if (city.getCityId()!=requestedCity.getCityId() && city.getLatitude() == requestedCity.getLatitude() && city.getLongitude() == requestedCity.getLongitude()) {
                     CityIDList.add(city.getCityId());
+                    if (city.isCentralInverter()) centralInverterLimit += city.getInverterPowerLimit();
                 }
             }
             if (CityIDList.size()>0){
@@ -97,6 +101,7 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
             }
         }
 
+        Toast.makeText(context, "Central Inverter Limit: "+centralInverterLimit, Toast.LENGTH_SHORT).show();
         courseDayList = new ArrayList<>();
 
         float energyCumulated=0;
@@ -104,6 +109,7 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
         int stepCounter = 0; // Counter to track the number of steps taken in the loop
 
         for (HourlyForecast f : hourlyForecasts) {
+            if (centralInverterLimit>0) f.setPower(Math.min(f.getPower(),centralInverterLimit));  //apply central inverter limit if there is one
             float power = f.getPower();
             if (stepCounter > 0) energyCumulated += power;  //Ignore first value because power values are for preceding hour
             f.setEnergyCum(energyCumulated);
@@ -119,45 +125,23 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
                 energyCumulated = 0;
             }
         }
-        notifyDataSetChanged();
-    }
 
-    // function for week forecast list
-    public void updateWeekForecastData(List<WeekForecast> forecasts) {
-        if (forecasts.isEmpty()) return;
-        int cityId = forecasts.get(0).getCity_id();
-
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        if (sp.getBoolean("pref_summarize",false)){
-            ArrayList<Integer> CityIDList = new ArrayList<Integer>();
-            SQLiteHelper dbHelper = SQLiteHelper.getInstance(context.getApplicationContext());
-            forecasts = dbHelper.getWeekForecastsByCityId(cityId);  //get fresh values from database to make sure we do add new values to sum values from last update
-            List<CityToWatch> citiesToWatch = dbHelper.getAllCitiesToWatch();
-            CityToWatch requestedCity = dbHelper.getCityToWatch(cityId);
-            for (int i = 0; i < citiesToWatch.size(); i++) {
-                CityToWatch city = citiesToWatch.get(i);
-                if (city.getCityId()!=requestedCity.getCityId() && city.getLatitude() == requestedCity.getLatitude() && city.getLongitude() == requestedCity.getLongitude()) {
-                    CityIDList.add(city.getCityId());
+        //Now calculate weekForecasts from hourlyForecasts
+        for (WeekForecast weekForecast: weekForecasts){
+            float totalEnergy = 0;
+            long timeNoon = weekForecast.getForecastTime();
+            for (HourlyForecast hourlyForecast: hourlyForecasts){
+                if ((hourlyForecast.getForecastTime()>=timeNoon-11*3600*1000L) && (hourlyForecast.getForecastTime()< timeNoon + 13*3600*1000L)){ //values are for preceding hour!
+                    totalEnergy+=hourlyForecast.getPower();
                 }
             }
-            if (CityIDList.size()>0){
-                for (int c=0; c<CityIDList.size();c++) {
-                    int iteratorCityId = CityIDList.get(c);
-                    List<WeekForecast> wfc = dbHelper.getWeekForecastsByCityId(iteratorCityId);
-                    if (wfc.size() != forecasts.size()) break;  //maybe something went wrong during update or city is not yet updated
-                    for (int i=0;i<wfc.size();i++){
-                        forecasts.get(i).setEnergyDay(forecasts.get(i).getEnergyDay()+wfc.get(i).getEnergyDay());
-                    }
-                }
-            }
+            weekForecast.setEnergyDay(totalEnergy/1000);
         }
 
-        weekForecastList = forecasts;
-
+        weekForecastList = weekForecasts;
 
         notifyDataSetChanged();
     }
-
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {

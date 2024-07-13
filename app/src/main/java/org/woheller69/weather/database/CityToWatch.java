@@ -24,6 +24,7 @@ public class CityToWatch {
     private float azimuthAngle;
     private float tiltAngle;
     private float albedo;
+    private boolean isCentralInverter;
     private int rank;
     private int[] shadingElevation = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     private int[] shadingOpacity =   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -146,6 +147,11 @@ public class CityToWatch {
     public void setInverterPowerLimit(float inverterPowerLimit) {
         this.inverterPowerLimit = inverterPowerLimit;
     }
+
+    public void setIsCentralInverter(boolean isCentralInverter) {
+        this.isCentralInverter = isCentralInverter;
+    }
+    public boolean isCentralInverter() {return isCentralInverter;}
 
     public void setDiffuseEfficiency(float diffuseEfficiency) {
         this.diffuseEfficiency = diffuseEfficiency;

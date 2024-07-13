@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -202,6 +203,7 @@ public class ManageLocationsActivity extends NavigationActivity {
         EditText editAlbedo = (EditText) dialogView.findViewById(R.id.EditLocation_Albedo);
         EditText editInverterPowerLimit = (EditText) dialogView.findViewById(R.id.EditLocation_Inverter_Power_Limit);
         EditText editInverterEfficiency = (EditText) dialogView.findViewById(R.id.EditLocation_Inverter_Efficiency);
+        CheckBox editIsCentralInverter = (CheckBox) dialogView.findViewById(R.id.EditLocation_Central_Inverter);
         TextView currentAzimuth = (TextView) dialogView.findViewById(R.id.edit_current_azi_ele);
 
         Long time = System.currentTimeMillis()/1000;
@@ -251,6 +253,7 @@ public class ManageLocationsActivity extends NavigationActivity {
         editAlbedo.setFilters(new InputFilter[]{ new InputFilterMinMax(0,1)});
         editInverterPowerLimit.setText(Float.toString(city.getInverterPowerLimit()));
         editInverterEfficiency.setText(Float.toString(city.getInverterEfficiency()));
+        editIsCentralInverter.setChecked(city.isCentralInverter());
         editInverterEfficiency.setFilters(new InputFilter[]{ new InputFilterMinMax(0, 100)});
         editTilt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -285,6 +288,7 @@ public class ManageLocationsActivity extends NavigationActivity {
                     Float.parseFloat(editAlbedo.getText().toString().isEmpty() ? "0" : editAlbedo.getText().toString()),
                     Float.parseFloat(editInverterPowerLimit.getText().toString().isEmpty() ? "0" : editInverterPowerLimit.getText().toString()),
                     Float.parseFloat(editInverterEfficiency.getText().toString().isEmpty() ? "0" : editInverterEfficiency.getText().toString()),
+                    editIsCentralInverter.isChecked(),
                     shadingElevation,
                     shadingOpacity
                     );
@@ -321,6 +325,7 @@ public class ManageLocationsActivity extends NavigationActivity {
                     Float.parseFloat(editAlbedo.getText().toString().isEmpty() ? "0" : editAlbedo.getText().toString()),
                     Float.parseFloat(editInverterPowerLimit.getText().toString().isEmpty() ? "0" : editInverterPowerLimit.getText().toString()),
                     Float.parseFloat(editInverterEfficiency.getText().toString().isEmpty() ? "0" : editInverterEfficiency.getText().toString()),
+                    editIsCentralInverter.isChecked(),
                     shadingElevation,
                     shadingOpacity
             );

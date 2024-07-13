@@ -20,7 +20,7 @@ import static androidx.core.app.JobIntentService.enqueueWork;
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private Context context;
 
     private List<City> allCities = new ArrayList<>();
@@ -55,6 +55,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String CITIES_TO_WATCH_SHADING_OPACITY = "shading_opacity";
     private static final String CITIES_TO_WATCH_CELLS_TEMP_COEFF = "cells_temp_coeff";
     private static final String CITIES_TO_WATCH_ALBEDO = "albedo";
+    private static final String CITIES_TO_WATCH_IS_CENTRAL_INVERTER = "is_central_inverter";
 
     //Names of columns in TABLE_FORECAST
     private static final String FORECAST_ID = "forecast_id";
@@ -139,7 +140,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             CITIES_TO_WATCH_SHADING_ELEVATION + " VARCHAR(255) NOT NULL," +
             CITIES_TO_WATCH_SHADING_OPACITY + " VARCHAR(255) NOT NULL," +
             CITIES_TO_WATCH_CELLS_TEMP_COEFF + " REAL NOT NULL," +
-            CITIES_TO_WATCH_ALBEDO + " REAL NOT NULL)";
+            CITIES_TO_WATCH_ALBEDO + " REAL NOT NULL," +
+            CITIES_TO_WATCH_IS_CENTRAL_INVERTER + " INTEGER)";
 
     public static SQLiteHelper getInstance(Context context) {
         if (instance == null && context != null) {
@@ -170,6 +172,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 // we want both updates, so no break statement here...
             case 2:
                 db.execSQL("ALTER TABLE "+TABLE_CITIES_TO_WATCH+" ADD COLUMN "+CITIES_TO_WATCH_ALBEDO+" REAL DEFAULT 0");
+            case 3:
+                db.execSQL("ALTER TABLE "+TABLE_CITIES_TO_WATCH+" ADD COLUMN "+CITIES_TO_WATCH_IS_CENTRAL_INVERTER+" INTEGER DEFAULT 0");
         }
 
     }
@@ -199,6 +203,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(CITIES_TO_WATCH_SHADING_OPACITY,city.getShadingOpacityString());
         values.put(CITIES_TO_WATCH_CELLS_TEMP_COEFF,city.getCellsTempCoeff());
         values.put(CITIES_TO_WATCH_ALBEDO,city.getAlbedo());
+        values.put(CITIES_TO_WATCH_IS_CENTRAL_INVERTER,city.isCentralInverter() ? 1 : 0);
 
         long id=database.insert(TABLE_CITIES_TO_WATCH, null, values);
 
@@ -234,6 +239,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                         ", " + CITIES_TO_WATCH_SHADING_OPACITY +
                         ", " + CITIES_TO_WATCH_CELLS_TEMP_COEFF +
                         ", " + CITIES_TO_WATCH_ALBEDO +
+                        ", " + CITIES_TO_WATCH_IS_CENTRAL_INVERTER +
                         ", " + CITIES_TO_WATCH_COLUMN_RANK +
                         " FROM " + TABLE_CITIES_TO_WATCH +
                         " WHERE " + CITIES_TO_WATCH_CITY_ID + " = ?", arguments);
@@ -258,7 +264,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             cityToWatch.setShadingOpacity(cursor.getString(14));
             cityToWatch.setCellsTempCoeff(Float.parseFloat(cursor.getString(15)));
             cityToWatch.setAlbedo(Float.parseFloat(cursor.getString(16)));
-            cityToWatch.setRank(Integer.parseInt(cursor.getString(17)));
+            cityToWatch.setIsCentralInverter(Integer.parseInt(cursor.getString(17)) == 1);
+            cityToWatch.setRank(Integer.parseInt(cursor.getString(18)));
 
             cursor.close();
         }
@@ -291,6 +298,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                         ", " + CITIES_TO_WATCH_SHADING_OPACITY +
                         ", " + CITIES_TO_WATCH_CELLS_TEMP_COEFF +
                         ", " + CITIES_TO_WATCH_ALBEDO +
+                        ", " + CITIES_TO_WATCH_IS_CENTRAL_INVERTER +
                         ", " + CITIES_TO_WATCH_COLUMN_RANK +
                         " FROM " + TABLE_CITIES_TO_WATCH
                 , new String[]{});
@@ -317,7 +325,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 cityToWatch.setShadingOpacity(cursor.getString(14));
                 cityToWatch.setCellsTempCoeff(Float.parseFloat(cursor.getString(15)));
                 cityToWatch.setAlbedo(Float.parseFloat(cursor.getString(16)));
-                cityToWatch.setRank(Integer.parseInt(cursor.getString(17)));
+                cityToWatch.setIsCentralInverter(Integer.parseInt(cursor.getString(17)) == 1);
+                cityToWatch.setRank(Integer.parseInt(cursor.getString(18)));
 
                 cityToWatchList.add(cityToWatch);
             } while (cursor.moveToNext());
@@ -349,6 +358,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(CITIES_TO_WATCH_SHADING_OPACITY,cityToWatch.getShadingOpacityString());
         values.put(CITIES_TO_WATCH_CELLS_TEMP_COEFF,cityToWatch.getCellsTempCoeff());
         values.put(CITIES_TO_WATCH_ALBEDO,cityToWatch.getAlbedo());
+        values.put(CITIES_TO_WATCH_IS_CENTRAL_INVERTER,cityToWatch.isCentralInverter() ? 1 : 0);
 
         database.update(TABLE_CITIES_TO_WATCH, values, CITIES_TO_WATCH_ID + " = ?",
                 new String[]{String.valueOf(cityToWatch.getId())});
