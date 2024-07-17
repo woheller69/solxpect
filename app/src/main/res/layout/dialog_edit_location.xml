@@ -150,17 +150,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:hint="@string/edit_location_hint_inverter_power_limit"/>
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/EditLocation_Inverter_Power_Limit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:hint="@string/edit_location_hint_inverter_power_limit"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:hint="@string/edit_location_hint_inverter_efficiency"/>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/EditLocation_Inverter_Efficiency"
@@ -168,6 +157,17 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:hint="@string/edit_location_hint_inverter_efficiency"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="@string/edit_location_hint_inverter_power_limit"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/EditLocation_Inverter_Power_Limit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="@string/edit_location_hint_inverter_power_limit"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

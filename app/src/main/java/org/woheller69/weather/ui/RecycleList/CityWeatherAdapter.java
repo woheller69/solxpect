@@ -101,7 +101,6 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
             }
         }
 
-        Toast.makeText(context, "Central Inverter Limit: "+centralInverterLimit, Toast.LENGTH_SHORT).show();
         courseDayList = new ArrayList<>();
 
         float energyCumulated=0;

@@ -72,11 +72,14 @@ Specify the average albedo for your environment to take reflections into account
 Examples: Fresh snow: 0.8, green gras: 0.25, asphalt: 0.1
 You probably need to optimize this parameter.
 
+#### Inverter efficiency  [%]
+Enter the efficiency of your inverter.
+
 #### Inverter power  [W]
 Specify the maximum power of your inverter. If it is lower than the maximum power of your panels, the output power of your system will be limited by this parameter.
 
-#### Inverter efficiency  [%] 
-Enter the efficiency of your inverter.
+#### Central inverter
+Select this checkbox to apply the inverter limit to the entire system. When in 'show sum' mode, the power limits of all inverters with this checkbox enabled will be aggregated and used as the system-wide power limit.
 
 #### Shading
 In this section you can define the shading on your solar panels.
