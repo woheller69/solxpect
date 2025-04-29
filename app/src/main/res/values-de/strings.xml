@@ -111,4 +111,7 @@
     <string name="settings_server_urls">Server URLs</string>
     <string name="settings_server_summary">Nur ändern, wenn Sie Ihre eigenen Server betreiben wollen</string>
     <string name="edit_location_hint_central_inverter">Zentralwechselrichter</string>
+    <string name="card_today_heading">Heute</string>
+    <string name="card_today_produced">Produziert:</string>
+    <string name="card_today_remaining">Verbleibend:</string>
 </resources>

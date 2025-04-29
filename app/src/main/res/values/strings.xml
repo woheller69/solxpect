@@ -114,5 +114,7 @@
     <string name="settings_server_urls">Server URLs</string>
     <string name="settings_server_summary">Only change if you want to host your own servers</string>
     <string name="edit_location_hint_central_inverter">Central Inverter</string>
-
+    <string name="card_today_heading">Today</string>
+    <string name="card_today_produced">Produced:</string>
+    <string name="card_today_remaining">Remaining:</string>
 </resources>

@@ -5,40 +5,38 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/card_margin">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#fafafa"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="7dp"
-        android:textSize="12dp"
-        android:text="Weather data by Open-Meteo.com" />
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical">
-
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@color/backgroundBlue">
 
         <TextView
-            android:id="@+id/card_overview_temperature"
-            android:layout_width="wrap_content"
+            android:id="@+id/card_overview_header"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/rounded_corner"
-            android:paddingLeft="7dp"
-            android:paddingRight="7dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="@string/card_today_heading"
+            android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="45dp" />
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/card_overview_header_spacer"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/card_overview_header"
+            android:background="@color/white" />
 
         <TextView
             android:id="@+id/card_overview_update_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_alignBaseline="@id/card_overview_header"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:paddingLeft="7dp"
@@ -46,18 +44,77 @@
             android:textColor="#fafafa"
             android:textSize="18dp" />
 
+
+        <TextView
+            android:id="@+id/card_overview_sunrise_sunset"
+            android:layout_alignBaseline="@id/card_overview_remaining_today"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginEnd="10dp"
+            android:paddingRight="7dp"
+            android:paddingLeft="7dp" />
+
+        <TextView
+            android:id="@+id/card_overview_credits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_overview_sunrise_sunset"
+            android:layout_centerHorizontal="true"
+            android:textColor="#fafafa"
+            android:layout_marginStart="7dp"
+            android:textSize="12dp"
+            android:text="Weather data by Open-Meteo.com" />
+
+
+        <TextView
+            android:id="@+id/card_overview_produced_today_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_overview_header_spacer"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="7dp"
+            android:text="@string/card_today_produced" />
+
+        <TextView
+            android:id="@+id/card_overview_produced_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_overview_header_spacer"
+            android:layout_toEndOf="@id/card_overview_produced_today_header"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="7dp"
+            android:text="1500 Wh" />
+
+        <TextView
+            android:id="@+id/card_overview_remaining_today_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_overview_produced_today"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="7dp"
+            android:text="@string/card_today_remaining" />
+
+        <TextView
+            android:id="@+id/card_overview_remaining_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_overview_produced_today"
+            android:layout_toEndOf="@id/card_overview_remaining_today_header"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="7dp"
+            android:text="1500 Wh" />
+
     </RelativeLayout>
-    <TextView
-        android:id="@+id/card_overview_sunrise_sunset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:textSize="15dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:background="@drawable/rounded_corner"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="5dp"
-        android:paddingRight="7dp"
-        android:paddingLeft="7dp" />
 
 </androidx.cardview.widget.CardView>

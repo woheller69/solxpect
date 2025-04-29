@@ -38,6 +38,8 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
     private int[] dataSetTypes;
     private List<HourlyForecast> courseDayList;
     private List<WeekForecast> weekForecastList;
+    private float producedToday;
+    private float remainingToday;
 
     private Context context;
     private ViewGroup mParent;
@@ -118,6 +120,13 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
                 courseDayList.add(f);
             }
 
+            if (f.getForecastTime() < System.currentTimeMillis() && stepCounter <= 24) producedToday = f.getEnergyCum();
+            if (f.getForecastTime() > System.currentTimeMillis() && f.getForecastTime() < System.currentTimeMillis() + 3600000 && stepCounter <= 24) {
+                long millisRemainingThisHour = f.getForecastTime() - System.currentTimeMillis();
+                long millisSoFarThisHour = 3600000 - millisRemainingThisHour;
+                producedToday = producedToday + (f.getEnergyCum()-producedToday) * millisSoFarThisHour/3600000;
+            }
+
             stepCounter++;
             //   if not in debug mode: Reset energyCumulated after every 24 hours if next step is 01:00 am because values are for previous hour
             if (!isDebugMode && stepCounter % 24 == 1) {
@@ -136,7 +145,7 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
             }
             weekForecast.setEnergyDay(totalEnergy/1000);
         }
-
+        remainingToday = weekForecasts.get(0).getEnergyDay()*1000 - producedToday;
         weekForecastList = weekForecasts;
 
         notifyDataSetChanged();
@@ -150,15 +159,17 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
     }
 
     public class OverViewHolder extends ViewHolder {
-        TextView temperature;
+        TextView produced;
+        TextView remaining;
         TextView updatetime;
         TextView sun;
 
         OverViewHolder(View v) {
             super(v);
-            this.temperature = v.findViewById(R.id.card_overview_temperature);
             this.sun=v.findViewById(R.id.card_overview_sunrise_sunset);
             this.updatetime=v.findViewById(R.id.card_overview_update_time);
+            this.produced=v.findViewById(R.id.card_overview_produced_today);
+            this.remaining=v.findViewById(R.id.card_overview_remaining_today);
         }
     }
 
@@ -276,6 +287,8 @@ public class CityWeatherAdapter extends RecyclerView.Adapter<CityWeatherAdapter.
 
             holder.updatetime.setText("("+StringFormatUtils.formatTimeWithoutZone(context, updateTime)+")");
 
+            holder.produced.setText(StringFormatUtils.formatEnergyCum(context, producedToday));
+            holder.remaining.setText(StringFormatUtils.formatEnergyCum(context, remainingToday));
 
         } else if (viewHolder.getItemViewType() == WEEK) {
 
