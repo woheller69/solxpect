@@ -1,0 +1,2 @@
+Show produced / remaining information for current day
+Bugfix

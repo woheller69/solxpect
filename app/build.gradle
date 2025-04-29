@@ -19,8 +19,8 @@ android {
         applicationId "org.woheller69.solxpect"
         minSdkVersion 26
         targetSdk 34
-        versionCode 25
-        versionName "2.5"
+        versionCode 26
+        versionName "2.6"
 
         buildConfigField "String", "BASE_URL", "\"https://api.open-meteo.com/v1/\""
         buildConfigField "String", "TILES_URL","\"https://tile.openstreetmap.org/\""
