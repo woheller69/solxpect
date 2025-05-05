@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">solXpect</string>
     <string name="about">Über</string>
     <string name="about_privacy_heading">Privatsphäre-Informationen</string>
     <string name="about_more_info">Mehr Informationen können gefunden werden auf:</string>

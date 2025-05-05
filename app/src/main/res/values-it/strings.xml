@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">solXpect</string>
     <string name="activity_about">Info</string>
     <string name="activity_settings">Impostazioni</string>
     <string name="activity_weather">Previsione</string>
