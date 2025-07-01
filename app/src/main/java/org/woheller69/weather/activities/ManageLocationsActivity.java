@@ -1,6 +1,7 @@
 package org.woheller69.weather.activities;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.redinput.compassview.CompassView;
@@ -17,6 +18,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -62,6 +64,13 @@ public class ManageLocationsActivity extends NavigationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_locations);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            getWindow().getInsetsController().setSystemBarsAppearance(
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            );
+        }
+
         context=this;
         database = SQLiteHelper.getInstance(getApplicationContext());
 

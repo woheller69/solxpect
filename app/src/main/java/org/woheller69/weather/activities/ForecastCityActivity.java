@@ -3,6 +3,7 @@ package org.woheller69.weather.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -16,6 +17,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowInsetsController;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -93,6 +95,12 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
         super.onCreate(savedInstanceState);
         context=this;
         setContentView(R.layout.activity_forecast_city);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            getWindow().getInsetsController().setSystemBarsAppearance(
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            );
+        }
 
         initResources();
 

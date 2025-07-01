@@ -10,7 +10,6 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
     <style name="SplashTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">

@@ -3,6 +3,7 @@ package org.woheller69.weather.activities;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.WindowInsetsController;
 import android.webkit.WebView;
 import org.woheller69.weather.R;
 
@@ -20,6 +21,13 @@ public class HelpActivity extends NavigationActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            getWindow().getInsetsController().setSystemBarsAppearance(
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            );
+        }
+
         WebView view = findViewById(R.id.help);
 
         if(WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
