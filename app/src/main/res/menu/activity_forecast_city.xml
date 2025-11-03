@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/menu_summarize"
+        android:orderInCategory="70"
+        android:visible="true"
+        android:icon="@drawable/ic_sum_24dp"
+        app:showAsAction="always"
+        android:title="@string/settings_summarize" />
+    <item
         android:id="@+id/menu_sun_position"
         android:orderInCategory="80"
         android:visible="true"

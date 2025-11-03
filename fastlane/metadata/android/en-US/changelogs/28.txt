@@ -1,0 +1,2 @@
+Toggle button for sum
+Add warning with link to Keep Android Open

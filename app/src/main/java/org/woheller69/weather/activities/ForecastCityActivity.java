@@ -174,6 +174,14 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
         refreshActionButton.getActionView().setOnClickListener(v -> m.performIdentifierAction(refreshActionButton.getItemId(), 0));
         if (isRefreshing) startRefreshAnimation();
 
+        SharedPreferences prefManager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        boolean modeSum = prefManager.getBoolean("pref_summarize",false);
+        if (modeSum) {
+            menu.findItem(R.id.menu_summarize).getIcon().setAlpha(255);
+        } else {
+            menu.findItem(R.id.menu_summarize).getIcon().setAlpha(50);
+        }
+
         return true;
     }
 
@@ -210,6 +218,11 @@ public class ForecastCityActivity extends NavigationActivity implements IUpdatea
             alertDialogBuilder.setPositiveButton(getString(android.R.string.ok), (dialog, which) -> { });
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
+        } else if (id==R.id.menu_summarize){
+            SharedPreferences prefManager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            boolean modeSum = prefManager.getBoolean("pref_summarize",false);
+            prefManager.edit().putBoolean("pref_summarize",!modeSum).commit();
+            recreate();
         }
 
         return super.onOptionsItemSelected(item);

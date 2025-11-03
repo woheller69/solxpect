@@ -21,8 +21,8 @@ android {
         applicationId "org.woheller69.solxpect"
         minSdkVersion 26
         targetSdk 35
-        versionCode 27
-        versionName "2.7"
+        versionCode 28
+        versionName "2.8"
 
         buildConfigField "String", "BASE_URL", "\"https://api.open-meteo.com/v1/\""
         buildConfigField "String", "TILES_URL","\"https://tile.openstreetmap.org/\""
@@ -52,4 +52,5 @@ dependencies {
     implementation 'net.lingala.zip4j:zip4j:2.9.1'
     implementation 'com.github.woheller69:CompassView:948f3db329'
     implementation 'androidx.webkit:webkit:1.5.0'
+    implementation 'com.github.woheller69:FreeDroidWarn:V1.6'
 }
