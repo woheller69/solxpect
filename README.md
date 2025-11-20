@@ -112,6 +112,9 @@ The app uses:
 - Solar positioning library (https://github.com/klausbrunner/solarpositioning) which is licensed under <a href='https://github.com/klausbrunner/solarpositioning/blob/master/LICENSE.txt'>MIT License</a>
 - Zip4j (https://github.com/srikanth-lingala/zip4j) which is licensed under Apache License Version 2.0
 - CompassView (https://github.com/kix2902/CompassView) which is published under Apache License 2.0
+## Python
+
+If you need the fuctionality in Python have a look at [solXpect_meets_python](https://github.com/blablubbbb/solXpect_meets_python)
 
 ## Contributing
 
