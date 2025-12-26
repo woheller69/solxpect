@@ -114,7 +114,7 @@ The app uses:
 - CompassView (https://github.com/kix2902/CompassView) which is published under Apache License 2.0
 ## Python
 
-If you need the fuctionality in Python have a look at [solXpect_meets_python](https://github.com/blablubbbb/solXpect_meets_python)
+If you need the functionality in Python have a look at [solXpect_meets_python](https://github.com/blablubbbb/solXpect_meets_python)
 
 ## Contributing
 
